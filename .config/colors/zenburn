@@ -1,0 +1,32 @@
+! Zenburn color-scheme                                                                                                         
+! URxvt*background: #3F3F3F                                                                                                      
+URxvt*background: #0C0D0E
+! URxvt*foreground: #DCDCCC                                                                                                      
+URxvt*foreground: #B2B2B2
+
+URxvt*colorUL: #8CD0D3                                                                                                         
+
+!! black dark/light                                                                                                            
+URxvt*color0: #3F3F3F                                                                                                          
+URxvt*color8: #5F5F5F                                                                                                          
+!! red dark/light                                                                                                              
+URxvt*color1: #BC8383                                                                                                          
+URxvt*color9: #CC9393                                                                                                          
+!! green dark/light                                                                                                            
+URxvt*color2: #5F7F5F                                                                                                          
+URxvt*color10: #7F9F7F                                                                                                         
+!! yellow dark/light                                                                                                           
+URxvt*color3: #E0CF9F                                                                                                          
+URxvt*color11: #F0DFAF                                                                                                         
+!! blue dark/light                                                                                                             
+URxvt*color4: #7CB8BB                                                                                                          
+URxvt*color12: #8CD0D3                                                                                                         
+!! magenta dark/light                                                                                                          
+URxvt*color5: #DC8CC3                                                                                                          
+URxvt*color13: #DC8CC3                                                                                                         
+!! cyan dark/light                                                                                                             
+URxvt*color6: #93E0E3                                                                                                          
+URxvt*color14: #93E0E3                                                                                                         
+!! white dark/light                                                                                                            
+URxvt*color7: #DCDCCC                                                                                                          
+URxvt*color15: #FFFFFF

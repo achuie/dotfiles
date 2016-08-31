@@ -1,0 +1,34 @@
+!scheme: pnevma
+! URxvt*foreground: #696969
+! URxvt*background: #282626
+URxvt*background:                     [95]#2E3436
+URxvt*foreground:                     #FFFFFF
+! URxvt*foreground: #6F6767
+! URxvt*background: #3A3636
+
+! black
+URxvt*color0:                         #363636
+URxvt*color8:                         #424242
+! red
+URxvt*color1:                         #C37561
+URxvt*color9:                         #D19485
+! green
+URxvt*color2:                         #A0A57E
+URxvt*color10:                        #B6B99D
+! yellow
+URxvt*color3:                         #D1A375
+URxvt*color11:                        #DEBC9C
+! blue
+URxvt*color4:                         #7985A3
+URxvt*color12:                        #98A1B9
+! magenta
+! original URxvt*color5:                         #AB6D85
+URxvt*color5:                         #AB6D7E
+! original URxvt*color13:                        #BE918E
+URxvt*color13:                        #C0909D
+! cyan
+URxvt*color6:                         #98B9B1
+URxvt*color14:                        #CBE6CB
+! white
+URxvt*color7:                         #D0D0D0
+URxvt*color15:                        #E6E6E6

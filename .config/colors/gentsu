@@ -1,0 +1,38 @@
+! special
+URxvt*.foreground:   #ffffff
+URxvt*.background:   #1a253b
+! URxvt*.background: #ffffff
+
+! gentsu and the nigger boys
+
+! black
+URxvt*.color0:       #1a253b
+URxvt*.color8:       #65737e
+
+! red
+URxvt*.color1:       #fa70a5
+URxvt*.color9:       #fa70a5
+
+! green
+URxvt*.color2:       #cce366
+URxvt*.color10:      #cce366
+
+! yellow
+URxvt*.color3:       #ffbe73
+URxvt*.color11:      #ffbe73
+
+! blue
+URxvt*.color4:       #33ccff
+URxvt*.color12:      #33ccff
+
+! magenta
+URxvt*.color5:       #9c67e6
+URxvt*.color13:      #9c67e6
+
+! cyan
+URxvt*.color6:       #67e6e6
+URxvt*.color14:      #67e6e6
+
+! white
+URxvt*.color7:       #ffffff
+URxvt*.color15:      #fffffe
