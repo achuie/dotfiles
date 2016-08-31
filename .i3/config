@@ -210,9 +210,14 @@ mode "music" {
         bindsym Return       exec mpc play
         bindsym s            exec mpc stop
         bindsym p            exec mpc toggle
+
         bindsym Shift+period exec mpc next
         bindsym Shift+comma  exec mpc prev
+
         bindsym z            exec mpc random
+        bindsym y            exec mpc single
+        bindsym r            exec mpc repeat
+
         bindsym plus         exec mpc volume +5
         bindsym minus        exec mpc volume -5
 
