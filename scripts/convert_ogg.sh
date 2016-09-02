@@ -18,11 +18,12 @@ while read -r -u 10 LINE || [[ -n "$LINE" ]]; do
     DIR=$(dirname "$LINE")
     SONG=$(basename "$LINE")
 
-    if [[ ! -d "$2/$DIR" ]]; then
+    if [[ ! -e "$2/$DIR" ]]; then
         mkdir -p $2/$DIR
     fi
 
-    if [[ -a "$2/$DIR/${SONG%.*}.ogg" ]]; then
+    if test -n "$(find $2/$DIR -name "$( printf %q "${SONG%.*}" )*" -print -quit)";
+    then
         echo "    Redundant $LINE"
         continue;
     fi
