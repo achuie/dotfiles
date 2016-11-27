@@ -47,6 +47,12 @@ qk_tap_dance_action_t tap_dance_actions[] = {
     [TD_SCLN_QUOT] = ACTION_TAP_DANCE_DOUBLE(KC_SCLN, KC_QUOT)
 };
 
+// Macros
+#define LGUI_CBR 0
+#define RGUI_CBR 1
+#define LALT_ABK 2
+#define RALT_ABK 3
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* Qwerty
@@ -64,8 +70,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_QWERTY] = {
   {KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC},
   {MT(MOD_LCTL, KC_ESC), KC_A, KC_S, KC_D, KC_F, KC_G, KC_H, KC_J, KC_K, KC_L,   TD(TD_SCLN_QUOT), MT(MOD_LCTL, KC_ENT)},
-  {MT(MOD_LSFT, KC_LPRN), KC_Z, KC_X, KC_C, KC_V, KC_B, KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, MT(MOD_LSFT, KC_RPRN)},
-  {LT(MOUSEC, KC_LBRC), MT(MOD_LGUI, KC_LCBR), MT(MOD_LALT, KC_LABK), DIRECT, LOWER, KC_SPC, KC_SPC, RAISE, DIRECT, MT(MOD_LALT, KC_RABK), MT(MOD_LGUI, KC_RCBR), LT(MOUSEC, KC_RBRC)}
+  {KC_LSPO, KC_Z, KC_X, KC_C, KC_V, KC_B, KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, KC_RSPC},
+  {F(0), F(2), F(4), DIRECT, LOWER, KC_SPC, KC_SPC, RAISE, DIRECT, F(5), F(3), F(1)}
 },
 
 /* Colemak
@@ -82,9 +88,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_COLEMAK] = {
   {KC_TAB,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,    KC_J,    KC_L,    KC_U,    KC_Y,    TD(TD_SCLN_QUOT), KC_BSPC},
-  {MT(MOD_LCTL, KC_ESC),  KC_A,    KC_R,    KC_S,    KC_T,    KC_D,    KC_H,    KC_N,    KC_E,    KC_I,    KC_O,    MT(MOD_LCTL, KC_ENT)},
-  {MT(MOD_LSFT, KC_LPRN),  KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, MT(MOD_LSFT, KC_RPRN)},
-  {LT(MOUSEC, KC_LBRC), MT(MOD_LGUI, KC_LCBR), MT(MOD_LALT, KC_LABK), DIRECT, LOWER, KC_SPC, KC_SPC, RAISE, DIRECT, MT(MOD_LALT, KC_RABK), MT(MOD_LGUI, KC_RCBR), LT(MOUSEC, KC_RBRC)}
+  {_______,  KC_A,    KC_R,    KC_S,    KC_T,    KC_D,    KC_H,    KC_N,    KC_E,    KC_I,    KC_O,    _______},
+  {_______,  KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, _______},
+  {_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______}
 },
 
 /* Dvorak
@@ -101,9 +107,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_DVORAK] = {
   {KC_TAB,  KC_SLSH, KC_COMM, KC_DOT,  KC_P,    KC_Y,    KC_F,    KC_G,    KC_C,    KC_R,    KC_L,    KC_BSPC},
-  {MT(MOD_LCTL, KC_ESC),  KC_A,    KC_O,    KC_E,    KC_U,    KC_I,    KC_D,    KC_H,    KC_T,    KC_N,    KC_S,    MT(MOD_LCTL, KC_ENT)},
-  {MT(MOD_LSFT, KC_LPRN), TD(TD_SCLN_QUOT), KC_Q,    KC_J,    KC_K,    KC_X,    KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,    MT(MOD_LSFT, KC_RPRN)},
-  {LT(MOUSEC, KC_LBRC), MT(MOD_LGUI, KC_LCBR), MT(MOD_LALT, KC_LABK), DIRECT, LOWER, KC_SPC, KC_SPC, RAISE, DIRECT, MT(MOD_LALT, KC_RABK), MT(MOD_LGUI, KC_RCBR), LT(MOUSEC, KC_RBRC)}
+  {_______,  KC_A,    KC_O,    KC_E,    KC_U,    KC_I,    KC_D,    KC_H,    KC_T,    KC_N,    KC_S,    _______},
+  {_______, TD(TD_SCLN_QUOT),  KC_Q,    KC_J,    KC_K,    KC_X,    KC_B,    KC_M,    KC_W,    KC_V,    KC_Z,    _______},
+  {_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______}
 },
 
 /* Lower
@@ -187,18 +193,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *          ,-----------------------------------------------------------------------------------.
  *          |Reset |      |      | Hue- | Hue+ |RGBTog|      |Qwerty|Colemk|Dvorak|      |      |
  *          |------+------+------+------+------+------+------+------+------+------+------+------|
- *   Esc ---|      |      |      | Sat- | Sat+ |RGBStp|      |      |      |      |      |Enter |
+ *   Esc ---| Ctrl |      |      | Sat- | Sat+ |RGBStp|      |      |      |      |      |Enter |
  *          |------+------+------+------+------+------+------+------+------+------+------+------|
- *     ( ---|      |      |      | Val- | Val+ |      |      |      |      |      |      |Shift |--- )
+ *     ( ---|Shift |      |      | Val- | Val+ |      |      |      |      |      |      |Shift |--- )
  *          |------+------+------+------+------+------+------+------+------+------+------+------|
  *          |MouseC| GUI  | Alt  |Direct|Lower |    Space    |Raise |Direct| Alt  | GUI  |MouseC|
  *          `-----------------------------------------------------------------------------------'
  *              [      {      <                                                >      }      ]
  */
 [_ADJUST] = {
-  {RESET,   XXXXXXX, XXXXXXX, F(3),    F(2),    F(0),    XXXXXXX, QWERTY,  COLEMAK, DVORAK,  XXXXXXX, XXXXXXX},
-  {_______, XXXXXXX, XXXXXXX, F(5),    F(4),    F(1),    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______},
-  {_______, XXXXXXX, XXXXXXX, F(7),    F(6),    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______},
+  {RESET,   XXXXXXX, XXXXXXX, F(9),    F(8),    F(6),    XXXXXXX, QWERTY,  COLEMAK, DVORAK,  XXXXXXX, XXXXXXX},
+  {_______, XXXXXXX, XXXXXXX, F(11),    F(10),    F(7),    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______},
+  {_______, XXXXXXX, XXXXXXX, F(13),    F(12),    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______},
   {_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______}
 }
 
@@ -216,14 +222,22 @@ enum function_id {
 };
 
 const uint16_t PROGMEM fn_actions[] = {
-   	[0]  = ACTION_FUNCTION(RGBLED_TOGGLE),
-   	[1]  = ACTION_FUNCTION(RGBLED_STEP_MODE),
-   	[2]  = ACTION_FUNCTION(RGBLED_INCREASE_HUE),
-   	[3]  = ACTION_FUNCTION(RGBLED_DECREASE_HUE),
-   	[4]  = ACTION_FUNCTION(RGBLED_INCREASE_SAT),
-   	[5]  = ACTION_FUNCTION(RGBLED_DECREASE_SAT),
-   	[6]  = ACTION_FUNCTION(RGBLED_INCREASE_VAL),
-   	[7]  = ACTION_FUNCTION(RGBLED_DECREASE_VAL),
+    [0] = ACTION_LAYER_TAP_KEY(_MOUSEC, KC_LBRC),
+    [1] = ACTION_LAYER_TAP_KEY(_MOUSEC, KC_RBRC),
+
+    [2] = ACTION_MACRO_TAP(LGUI_CBR),
+    [3] = ACTION_MACRO_TAP(RGUI_CBR),
+    [4] = ACTION_MACRO_TAP(LALT_ABK),
+    [5] = ACTION_MACRO_TAP(RALT_ABK),
+
+   	[6] = ACTION_FUNCTION(RGBLED_TOGGLE),
+   	[7] = ACTION_FUNCTION(RGBLED_STEP_MODE),
+   	[8] = ACTION_FUNCTION(RGBLED_INCREASE_HUE),
+   	[9] = ACTION_FUNCTION(RGBLED_DECREASE_HUE),
+   	[10] = ACTION_FUNCTION(RGBLED_INCREASE_SAT),
+   	[11] = ACTION_FUNCTION(RGBLED_DECREASE_SAT),
+   	[12] = ACTION_FUNCTION(RGBLED_INCREASE_VAL),
+   	[13] = ACTION_FUNCTION(RGBLED_DECREASE_VAL),
 };
 
 void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
@@ -271,6 +285,76 @@ void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
    			}
    			break;
    	}
+}
+
+const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
+    switch(id) {
+        case LGUI_CBR:
+            if (record->event.pressed) {
+                register_code(KC_LGUI);
+            } else {
+                unregister_code(KC_LGUI);
+
+                if (record->tap.count && !record->tap.interrupted) {
+                    register_code(KC_LSFT);
+                    register_code(KC_LBRC);
+                    unregister_code(KC_LBRC);
+                    unregister_code(KC_LSFT);
+                }
+
+                record->tap.count = 0;
+            }
+            break;
+        case RGUI_CBR:
+            if (record->event.pressed) {
+                register_code(KC_RGUI);
+            } else {
+                unregister_code(KC_RGUI);
+
+                if (record->tap.count && !record->tap.interrupted) {
+                    register_code(KC_LSFT);
+                    register_code(KC_RBRC);
+                    unregister_code(KC_RBRC);
+                    unregister_code(KC_LSFT);
+                }
+
+                record->tap.count = 0;
+            }
+            break;
+        case LALT_ABK:
+            if (record->event.pressed) {
+                register_code(KC_LALT);
+            } else {
+                unregister_code(KC_LALT);
+
+                if (record->tap.count && !record->tap.interrupted) {
+                    register_code(KC_LSFT);
+                    register_code(KC_COMM);
+                    unregister_code(KC_COMM);
+                    unregister_code(KC_LSFT);
+                }
+
+                record->tap.count = 0;
+            }
+            break;
+        case RALT_ABK:
+            if (record->event.pressed) {
+                register_code(KC_RALT);
+            } else {
+                unregister_code(KC_RALT);
+
+                if (record->tap.count && !record->tap.interrupted) {
+                    register_code(KC_LSFT);
+                    register_code(KC_DOT);
+                    unregister_code(KC_DOT);
+                    unregister_code(KC_LSFT);
+                }
+
+                record->tap.count = 0;
+            }
+            break;
+    }
+    return MACRO_NONE;
 }
 
 #ifdef AUDIO_ENABLE
