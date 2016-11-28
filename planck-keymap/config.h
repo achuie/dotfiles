@@ -4,7 +4,7 @@
 #include "../../config.h"
 
 /* N-key rollover */
-#define FORCE_NKRO
+#define FORCE_NKRO 1
 
 /* Tap functionality */
 #define TAPPING_TERM 200
