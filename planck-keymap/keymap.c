@@ -29,7 +29,7 @@ enum planck_keycodes {
 
 // Fillers to make layering more clear
 #define _______ KC_TRNS
-#define ___X___ KC_NO
+#define XXXXXXX KC_NO
 
 // Tap Dance declarations
 enum {
@@ -120,7 +120,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_LOWER] = {
   {KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_DEL},
-  {_______,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6, ___X___, KC_MINS, KC_EQL, KC_BSLS, _______},
+  {_______,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6, XXXXXXX, KC_MINS, KC_EQL, KC_BSLS, _______},
   {_______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_LEFT, KC_DOWN, KC_UP, KC_RGHT, _______},
   {_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______}
 },
@@ -138,8 +138,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                     {      <      [                                  ]      >      }       
  */
 [_RAISE] = {
-  {KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_BSPC},
-  {_______,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   ___X___, KC_UNDS, KC_PLUS, KC_PIPE, _______},
+  {KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_DEL},
+  {_______,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   XXXXXXX, KC_UNDS, KC_PLUS, KC_PIPE, _______},
   {_______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12, KC_LEFT, KC_DOWN, KC_UP, KC_RGHT, _______},
   {_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______}
 },
@@ -158,9 +158,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
 [_MOUSEC] = {
-  {___X___, KC_BTN2, KC_MS_U, KC_BTN1, KC_WH_U, ___X___, LGUI(LALT(KC_1)), LGUI(LALT(KC_2)), LGUI(LALT(KC_3)), LGUI(LALT(KC_4)), LGUI(LALT(KC_5)), ___X___},
-  {_______, KC_MS_L, KC_MS_D, KC_MS_R, KC_WH_D, ___X___, LGUI(LALT(KC_6)), LGUI(LALT(KC_7)), LGUI(LALT(KC_8)), LGUI(LALT(KC_9)), LGUI(LALT(KC_0)), _______},
-  {_______, KC_WH_L, KC_BTN3, KC_WH_R, ___X___, ___X___, ___X___, LGUI(LCTL(LALT(KC_LEFT))), LGUI(LCTL(LALT(KC_RGHT))), ___X___, ___X___, _______},
+  {XXXXXXX, KC_BTN2, KC_MS_U, KC_BTN1, KC_WH_U, XXXXXXX, LGUI(LALT(KC_1)), LGUI(LALT(KC_2)), LGUI(LALT(KC_3)), LGUI(LALT(KC_4)), LGUI(LALT(KC_5)), XXXXXXX},
+  {_______, KC_MS_L, KC_MS_D, KC_MS_R, KC_WH_D, XXXXXXX, LGUI(LALT(KC_6)), LGUI(LALT(KC_7)), LGUI(LALT(KC_8)), LGUI(LALT(KC_9)), LGUI(LALT(KC_0)), _______},
+  {_______, KC_WH_L, KC_BTN3, KC_WH_R, XXXXXXX, XXXXXXX, XXXXXXX, LGUI(LCTL(LALT(KC_LEFT))), LGUI(LCTL(LALT(KC_RGHT))), XXXXXXX, XXXXXXX, _______},
   {_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______}
 },
 
@@ -177,9 +177,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                     {      <      [                                  ]      >      }       
  */
 [_DIRECT] = {
-  {___X___, ___X___, ___X___, ___X___, ___X___, ___X___, ___X___, ___X___, ___X___, ___X___, ___X___, ___X___},
-  {_______, KC_HOME, KC_PGDN, KC_PGUP, KC_END,  ___X___, ___X___, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______},
-  {_______, ___X___, ___X___, ___X___, ___X___, ___X___, ___X___, ___X___, ___X___, ___X___, ___X___, _______},
+  {XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX},
+  {_______, KC_HOME, KC_PGDN, KC_PGUP, KC_END,  XXXXXXX, XXXXXXX, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, _______},
+  {_______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______},
   {_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______}
 },
 
@@ -196,9 +196,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                     {      <      [                                  ]      >      }       
  */
 [_ADJUST] = {
-  {RESET,   ___X___, ___X___, F(9),     F(8),     F(6),    ___X___, QWERTY,  COLEMAK, DVORAK,  ___X___, ___X___},
-  {_______, ___X___, ___X___, F(11),    F(10),    F(7),    ___X___, MAGIC_TOGGLE_NKRO, ___X___, ___X___, ___X___, _______},
-  {_______, ___X___, ___X___, F(13),    F(12),    ___X___, ___X___, ___X___, ___X___, ___X___, ___X___, _______},
+  {RESET,   XXXXXXX, XXXXXXX, F(9),     F(8),     F(6),    XXXXXXX, QWERTY,  COLEMAK, DVORAK,  XXXXXXX, XXXXXXX},
+  {_______, XXXXXXX, XXXXXXX, F(11),    F(10),    F(7),    XXXXXXX, MAGIC_TOGGLE_NKRO, XXXXXXX, XXXXXXX, XXXXXXX, _______},
+  {_______, XXXXXXX, XXXXXXX, F(13),    F(12),    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______},
   {_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______}
 }
 
