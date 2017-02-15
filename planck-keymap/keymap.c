@@ -46,6 +46,8 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define RGUI_CBR 1
 #define LALT_ABK 2
 #define RALT_ABK 3
+#define LSHFT_PO 4
+#define RSHFT_PC 5
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -64,8 +66,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_QWERTY] = {
   {KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC},
   {MT(MOD_LCTL, KC_ESC), KC_A, KC_S, KC_D, KC_F, KC_G, KC_H, KC_J, KC_K, KC_L,   TD(TD_SCLN_QUOT), MT(MOD_LCTL, KC_ENT)},
-  {KC_LSPO, KC_Z, KC_X, KC_C, KC_V, KC_B, KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, KC_RSPC},
-  {MOUSEC, F(2), F(4), F(0), LOWER, KC_SPC, KC_SPC, RAISE, F(1), F(5), F(3), MOUSEC}
+  {F(7), KC_Z, KC_X, KC_C, KC_V, KC_B, KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, F(8)},
+  {F(2), F(3), F(5), F(0), LOWER, KC_SPC, KC_SPC, RAISE, F(1), F(6), F(4), MOUSEC}
 },
 
 /* Colemak
@@ -196,9 +198,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                     {      <      [                                  ]      >      }       
  */
 [_ADJUST] = {
-  {RESET,   XXXXXXX, XXXXXXX, F(9),     F(8),     F(6),    XXXXXXX, QWERTY,  COLEMAK, DVORAK,  XXXXXXX, XXXXXXX},
-  {_______, XXXXXXX, XXXXXXX, F(11),    F(10),    F(7),    XXXXXXX, MAGIC_TOGGLE_NKRO, XXXXXXX, XXXXXXX, XXXXXXX, _______},
-  {_______, XXXXXXX, XXXXXXX, F(13),    F(12),    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______},
+  {RESET,   XXXXXXX, XXXXXXX, F(12),     F(11),     F(9),    XXXXXXX, QWERTY,  COLEMAK, DVORAK,  XXXXXXX, XXXXXXX},
+  {_______, XXXXXXX, XXXXXXX, F(14),    F(13),    F(10),    XXXXXXX, MAGIC_TOGGLE_NKRO, XXXXXXX, XXXXXXX, XXXXXXX, _______},
+  {_______, XXXXXXX, XXXXXXX, F(16),    F(15),    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______},
   {_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______}
 }
 
@@ -218,20 +220,23 @@ enum function_id {
 const uint16_t PROGMEM fn_actions[] = {
     [0] = ACTION_LAYER_TAP_KEY(_DIRECT, KC_LBRC),
     [1] = ACTION_LAYER_TAP_KEY(_DIRECT, KC_RBRC),
+    [2] = ACTION_LAYER_TAP_KEY(_MOUSEC, KC_CAPS),
 
-    [2] = ACTION_MACRO_TAP(LGUI_CBR),
-    [3] = ACTION_MACRO_TAP(RGUI_CBR),
-    [4] = ACTION_MACRO_TAP(LALT_ABK),
-    [5] = ACTION_MACRO_TAP(RALT_ABK),
+    [3] = ACTION_MACRO_TAP(LGUI_CBR),
+    [4] = ACTION_MACRO_TAP(RGUI_CBR),
+    [5] = ACTION_MACRO_TAP(LALT_ABK),
+    [6] = ACTION_MACRO_TAP(RALT_ABK),
+    [7] = ACTION_MACRO_TAP(LSHFT_PO),
+    [8] = ACTION_MACRO_TAP(RSHFT_PC),
 
-   	[6] = ACTION_FUNCTION(RGBLED_TOGGLE),
-   	[7] = ACTION_FUNCTION(RGBLED_STEP_MODE),
-   	[8] = ACTION_FUNCTION(RGBLED_INCREASE_HUE),
-   	[9] = ACTION_FUNCTION(RGBLED_DECREASE_HUE),
-   	[10] = ACTION_FUNCTION(RGBLED_INCREASE_SAT),
-   	[11] = ACTION_FUNCTION(RGBLED_DECREASE_SAT),
-   	[12] = ACTION_FUNCTION(RGBLED_INCREASE_VAL),
-   	[13] = ACTION_FUNCTION(RGBLED_DECREASE_VAL),
+   	[9] = ACTION_FUNCTION(RGBLED_TOGGLE),
+   	[10] = ACTION_FUNCTION(RGBLED_STEP_MODE),
+   	[11] = ACTION_FUNCTION(RGBLED_INCREASE_HUE),
+   	[12] = ACTION_FUNCTION(RGBLED_DECREASE_HUE),
+   	[13] = ACTION_FUNCTION(RGBLED_INCREASE_SAT),
+   	[14] = ACTION_FUNCTION(RGBLED_DECREASE_SAT),
+   	[15] = ACTION_FUNCTION(RGBLED_INCREASE_VAL),
+   	[16] = ACTION_FUNCTION(RGBLED_DECREASE_VAL),
 };
 
 void action_function(keyrecord_t *record, uint8_t id, uint8_t opt) {
@@ -341,6 +346,38 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
                     register_code(KC_LSFT);
                     register_code(KC_DOT);
                     unregister_code(KC_DOT);
+                    unregister_code(KC_LSFT);
+                }
+
+                record->tap.count = 0;
+            }
+            break;
+        case LSHFT_PO:
+            if (record->event.pressed) {
+                register_code(KC_LSFT);
+            } else {
+                unregister_code(KC_LSFT);
+
+                if (record->tap.count && !record->tap.interrupted) {
+                    register_code(KC_LSFT);
+                    register_code(KC_9);
+                    unregister_code(KC_9);
+                    unregister_code(KC_LSFT);
+                }
+
+                record->tap.count = 0;
+            }
+            break;
+        case RSHFT_PC:
+            if (record->event.pressed) {
+                register_code(KC_RSFT);
+            } else {
+                unregister_code(KC_RSFT);
+
+                if (record->tap.count && !record->tap.interrupted) {
+                    register_code(KC_LSFT);
+                    register_code(KC_0);
+                    unregister_code(KC_0);
                     unregister_code(KC_LSFT);
                 }
 
