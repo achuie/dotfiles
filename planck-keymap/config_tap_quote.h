@@ -6,6 +6,9 @@
 /* N-key rollover */
 #define FORCE_NKRO 1
 
+/* Tap functionality */
+#define TAPPING_TERM 200
+
 /* For underglow */
 #define RGB_DI_PIN B2     // The pin your RGB strip is wired to
 #define RGBLIGHT_TIMER
