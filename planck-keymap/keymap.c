@@ -31,6 +31,26 @@ enum planck_keycodes {
 #define _______ KC_TRNS
 #define XXXXXXX KC_NO
 
+// Tap Dance declarations
+enum {
+    TD_MC_CAPS = 0
+};
+
+void mc_caps(qk_tap_dance_state_t *state, void *user_data) {
+    if (state->count == 1) {
+        layer_invert(_MOUSEC);
+    } else if (state->count > 1) {
+        register_code(KC_CAPS);
+        unregister_code(KC_CAPS);
+    }
+    reset_tap_dance(state);
+}
+
+qk_tap_dance_action_t tap_dance_actions[] = {
+    // Tap once for MOUSEC, twice for capslock
+    [TD_MC_CAPS] = ACTION_TAP_DANCE_FN(mc_caps)
+};
+
 // Macros
 #define LGUI_CBR 0
 #define RGUI_CBR 1
@@ -51,13 +71,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *          |------+------+------+------+------+------+------+------+------+------+------+------|
  *          |MouseC| GUI  | Alt  |Direct|Lower |    Space    |Raise |Direct| Alt  | GUI  |MouseC|
  *          `-----------------------------------------------------------------------------------'
- *                     {      <      [                                  ]      >      }       
+ *                     {      <      [                                  ]      >      }    Caps
  */
 [_QWERTY] = {
   {KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC},
   {MT(MOD_LCTL, KC_ESC), KC_A, KC_S, KC_D, KC_F, KC_G, KC_H, KC_J, KC_K, KC_L,   KC_SCLN, MT(MOD_LCTL, KC_ENT)},
   {F(7), KC_Z, KC_X, KC_C, KC_V, KC_B, KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, F(8)},
-  {F(2), F(3), F(5), F(0), LOWER, KC_SPC, KC_SPC, RAISE, F(1), F(6), F(4), MOUSEC}
+  {MOUSEC, F(3), F(5), F(0), LOWER, KC_SPC, KC_SPC, RAISE, F(1), F(6), F(4), TD(TD_MC_CAPS)}
 },
 
 /* Colemak
@@ -70,7 +90,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *          |------+------+------+------+------+------+------+------+------+------+------+------|
  *          |MouseC| GUI  | Alt  |Direct|Lower |    Space    |Raise |Direct| Alt  | GUI  |MouseC|
  *          `-----------------------------------------------------------------------------------'
- *                     {      <      [                                  ]      >      }       
+ *                     {      <      [                                  ]      >      }    Caps
  */
 [_COLEMAK] = {
   {KC_TAB,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,    KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_BSPC},
@@ -89,7 +109,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *          |------+------+------+------+------+------+------+------+------+------+------+------|
  *          |MouseC| GUI  | Alt  |Direct|Lower |    Space    |Raise |Direct| Alt  | GUI  |MouseC|
  *          `-----------------------------------------------------------------------------------'
- *                     {      <      [                                  ]      >      }       
+ *                     {      <      [                                  ]      >      }    Caps
  */
 [_DVORAK] = {
   {KC_TAB,  KC_SLSH, KC_COMM, KC_DOT,  KC_P,    KC_Y,    KC_F,    KC_G,    KC_C,    KC_R,    KC_L,    KC_BSPC},
@@ -108,7 +128,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *          |------+------+------+------+------+------+------+------+------+------+------+------|
  *          |MouseC| GUI  | Alt  |Direct|Lower |    Space    |Raise |Direct| Alt  | GUI  |MouseC|
  *          `-----------------------------------------------------------------------------------'
- *                     {      <      [                                  ]      >      }       
+ *                     {      <      [                                  ]      >      }    Caps
  */
 [_LOWER] = {
   {KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_DEL},
@@ -127,7 +147,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *          |------+------+------+------+------+------+------+------+------+------+------+------|
  *          |MouseC| GUI  | Alt  |Direct|Lower |    Space    |Raise |Direct| Alt  | GUI  |MouseC|
  *          `-----------------------------------------------------------------------------------'
- *                     {      <      [                                  ]      >      }       
+ *                     {      <      [                                  ]      >      }    Caps
  */
 [_RAISE] = {
   {KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_DEL},
@@ -146,7 +166,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *          |------+------+------+------+------+------+------+------+------+------+------+------|
  *          |MouseC| GUI  | Alt  |Direct|Lower |    Space    |Raise |Direct| Alt  | GUI  |MouseC|
  *          `-----------------------------------------------------------------------------------'
- *                     {      <      [                                  ]      >      }       
+ *                     {      <      [                                  ]      >      }    Caps
  */
 
 [_MOUSEC] = {
@@ -166,7 +186,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *          |------+------+------+------+------+------+------+------+------+------+------+------|
  *          |MouseC| GUI  | Alt  |Direct|Lower |    Space    |Raise |Direct| Alt  | GUI  |MouseC|
  *          `-----------------------------------------------------------------------------------'
- *                     {      <      [                                  ]      >      }       
+ *                     {      <      [                                  ]      >      }    Caps
  */
 [_DIRECT] = {
   {XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX},
@@ -185,7 +205,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *          |------+------+------+------+------+------+------+------+------+------+------+------|
  *          |MouseC| GUI  | Alt  |Direct|Lower |    Space    |Raise |Direct| Alt  | GUI  |MouseC|
  *          `-----------------------------------------------------------------------------------'
- *                     {      <      [                                  ]      >      }       
+ *                     {      <      [                                  ]      >      }    Caps
  */
 [_ADJUST] = {
   {RESET,   XXXXXXX, XXXXXXX, F(12),     F(11),     F(9),    XXXXXXX, QWERTY,  COLEMAK, DVORAK,  XXXXXXX, XXXXXXX},
@@ -210,7 +230,7 @@ enum function_id {
 const uint16_t PROGMEM fn_actions[] = {
     [0] = ACTION_LAYER_TAP_KEY(_DIRECT, KC_LBRC),
     [1] = ACTION_LAYER_TAP_KEY(_DIRECT, KC_RBRC),
-    [2] = ACTION_LAYER_TAP_KEY(_MOUSEC, KC_CAPS),
+    //[2] = ACTION_LAYER_TAP_KEY(_MOUSEC, KC_CAPS),
 
     [3] = ACTION_MACRO_TAP(LGUI_CBR),
     [4] = ACTION_MACRO_TAP(RGUI_CBR),
