@@ -1,8 +1,10 @@
-#!/bin/bash
+#!/bin/sh
 
-xset +dpms
-slock
-xset -dpms
-xset s off
+revert() {
+    xset dpms 0 0 0
+}
 
-exit 0
+trap revert HUP INT TERM
+xset +dpms dpms 15 15 15
+i3lock -n -e -i /home/achuie/.lockscreen.png
+revert
