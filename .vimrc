@@ -35,7 +35,7 @@ set smarttab        " When on, a <Tab> in front of a line inserts blanks
 set showcmd         " Show (partial) command in status line.
 
 set number          " Show absolute line numbers.
-" set relativenumber  " Show line numbers as distance from current line.
+set relativenumber  " Show line numbers as distance from current line.
 
 set showmatch       " When a bracket is inserted, briefly jump to the matching
                     " one. The jump is only done if the match can be seen on
@@ -89,8 +89,32 @@ set background=light " When set to "dark", Vim will try to use colors that look
 " set mouse=a         " Enable the use of the mouse.
 set mouse=nih       " Don't use the mouse in visual mode.
 
+set hidden          " For hidden modified buffers
+
 filetype plugin indent on
 syntax on
 
-highlight OverLength ctermbg=black
-match OverLength /\%80v.\+/
+" Tab mappings
+nnoremap th :tabfirst<CR>
+nnoremap tj :tabprev<CR>
+nnoremap tk :tabnext<CR>
+nnoremap tl :tablast<CR>
+nnoremap tt :tabedit<Space>
+nnoremap tn :tabnew<CR>
+nnoremap tm :tabm<Space>
+nnoremap td :tabclose<CR>
+
+" Toggle error highlighting for overlength lines
+nnoremap <silent> <Leader>l
+    \ :if exists('w:long_line_match') <Bar>
+    \   silent! call matchdelete(w:long_line_match) <Bar>
+    \   unlet w:long_line_match <Bar>
+    \ elseif &textwidth > 0 <Bar>
+    \   let w:long_line_match = matchadd('ErrorMsg','\%>'.&tw.'v.\+',-1) <Bar>
+    \ else <Bar>
+    \   let w:long_line_match = matchadd('ErrorMsg','\%>80v.\+',-1) <Bar>
+    \ endif<CR>
+
+" ctags mappings
+set tags=./tags;/
+inoremap <c-x><c-]> <c-]>

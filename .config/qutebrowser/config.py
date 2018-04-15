@@ -16,7 +16,15 @@ c.auto_save.session = True
 c.downloads.location.directory = '~/downloads'
 
 # Bindings for normal mode
-config.bind('<ctrl+pgdown>', 'tab-prev')
-config.bind('<ctrl+pgup>', 'tab-focus')
-config.bind('J', 'tab-prev')
-config.bind('K', 'tab-focus')
+#config.bind('<ctrl+pgdown>', 'tab-prev')
+#config.bind('<ctrl+pgup>', 'tab-focus')
+#config.bind('J', 'tab-prev')
+#config.bind('K', 'tab-focus')
+
+c.fonts.hints = "bold 7pt monospace"
+
+c.tabs.background = True
+c.tabs.position = "left"
+c.tabs.width = "12%"
+
+c.url.default_page = "about:blank"

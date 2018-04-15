@@ -38,10 +38,10 @@ enum {
 
 void mc_caps(qk_tap_dance_state_t *state, void *user_data) {
     if (state->count == 1) {
-        layer_invert(_MOUSEC);
-    } else if (state->count > 1) {
         register_code(KC_CAPS);
         unregister_code(KC_CAPS);
+    } else if (state->count > 1) {
+        layer_invert(_MOUSEC);
     }
     reset_tap_dance(state);
 }
