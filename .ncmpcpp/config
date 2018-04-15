@@ -101,9 +101,6 @@ visualizer_look = ●│
 #visualizer color
 visualizer_color = magenta
 #
-#visualizer sample multiplier
-visualizer_sample_multiplier = 1.0
-#
 ##### system encoding #####
 ##
 ## ncmpcpp should detect your charset encoding
@@ -202,9 +199,9 @@ song_status_format = {{%a{ "%b"} - }{%t}}|{%f}
 ## and "noop".
 ##
 #
-#browser_sort_mode = name
+browser_sort_mode = format
 #
-#browser_sort_format = {%a - }{%t}|{%f} {(%l)}
+browser_sort_format = {%a - }{%t}|{%f} {(%l)}
 #
 ##
 ## Note: Below variables are for alternative version of user's interface.
@@ -242,6 +239,14 @@ alternative_header_second_line_format = {{$4$b%a$/b$9}{ - $7%b$9}}|{%D}
 #selected_item_suffix = $9
 #
 #modified_item_prefix = $3> $9
+#
+current_item_prefix = $r$2
+#
+current_item_suffix = $/r$9
+#
+current_item_inactive_column_prefix = $r$4
+#
+current_item_inactive_column_suffix = $/r$9
 #
 ## Note: colors are not supported for below variable.
 ##
@@ -329,7 +334,7 @@ playlist_editor_display_mode = columns
 ## Note: You can specify third character which will
 ## be used to build 'empty' part of progressbar.
 ##
-progressbar_look = ◾◾◽
+progressbar_look = "=>-"
 #
 #progressbar_boldness = yes
 #
@@ -425,7 +430,7 @@ startup_screen = playlist
 #
 #ask_before_clearing_playlists = yes
 #
-#clock_display_seconds = no
+clock_display_seconds = yes
 #
 #display_volume_level = yes
 #
@@ -500,7 +505,7 @@ main_window_color = yellow
 #
 #color2 = green
 #
-#main_window_highlight_color = yellow
+#main_window_highlight_color = red
 #
 progressbar_color = blue
 #

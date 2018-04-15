@@ -2,7 +2,7 @@
 ! URxvt*foreground: #696969
 ! URxvt*background: #282626
 ! URxvt*background:                     #202426
-URxvt*background:                     [95]#131617
+URxvt*background:                     [90]#131617
 URxvt*foreground:                     #C5C8C6
 ! URxvt*foreground: #6F6767
 ! URxvt*background: #3A3636
