@@ -71,3 +71,4 @@ c.fonts.hints = 'bold 7pt monospace'
 
 # Bindings
 config.bind("\m", "hint links spawn mpv {hint-url}")
+config.bind("\M", "spawn mpv {url}")
