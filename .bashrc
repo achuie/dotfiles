@@ -6,7 +6,7 @@
 [[ $- != *i* ]] && return
 
 alias ls='ls --color=auto -N'
-PS1='[\u@\h \W]\$ '
+PS1='[\u\[\e[34m\]@\[\e[m\]\h \W]\$ '
 alias clock='while true; do tput clear; date +"%H : %M : %S" | toilet -tf future ; sleep 1; done'
 PATH=$PATH:/home/achuie/scripts/
 
