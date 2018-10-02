@@ -102,10 +102,11 @@ URxvt*depth:                          32
 ! URxvt*secondaryScroll:                boolean
 ! URxvt*perl-lib:                       string
 ! URxvt*perl-eval:                      perl-eval
-URxvt*perl-ext-common:                default,resize-font,url-select,keyboard-select
+URxvt*perl-ext-common:                default,clipboard,resize-font,url-select,keyboard-select
 !! url-select
 URxvt.keysym.M-u:                     perl:url-select:select_next
 URxvt.url-select.underline:           true
+URxvt.url-select.launcher:            qutebrowser
 !! keyboard-select
 URxvt.keysym.M-Escape:                perl:keyboard-select:activate
 URxvt.keyboard-select.clipboard:      true
