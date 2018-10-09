@@ -1,4 +1,4 @@
-#include ".config/colors/pnevma-dark"
+#include ".config/colors/journeyman"
 
 
 URxvt*termName:                       rxvt
