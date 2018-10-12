@@ -115,6 +115,14 @@ nnoremap <silent> <Leader>l
     \   let w:long_line_match = matchadd('ErrorMsg','\%>80v.\+',-1) <Bar>
     \ endif<CR>
 
+" Fill line with char
+function! FillLine(str)
+    let reps = (&textwidth - col("$") + 1) / len(a:str)
+    if reps > 0
+        .s/$/\=(''.repeat(a:str, reps))/
+    endif
+endfunction
+
 " ctags mappings
 set tags=./tags;/
 inoremap <c-x><c-]> <c-]>
