@@ -5,8 +5,12 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+parse_git_branch() {
+    git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
+
 alias ls='ls --color=auto -N'
-PS1='[\[\e[34m\]\u@\h\[\e[m\] \W]\$ '
+PS1="[\[\e[34m\]\u@\h\[\e[m\] \W\[\e[32m\]\$(parse_git_branch)\[\e[m\]]\$ "
 alias clock='while true; do tput clear; date +"%H : %M : %S" | toilet -tf future ; sleep 1; done'
 PATH=$PATH:/home/achuie/scripts/
 
