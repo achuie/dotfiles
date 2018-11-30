@@ -126,3 +126,8 @@ endfunction
 " ctags mappings
 set tags=./tags;/
 inoremap <c-x><c-]> <c-]>
+nnoremap <Leader>t :TagbarToggle<CR>
+
+" clang-format mappings
+autocmd FileType c,cpp,objc,h,hpp nnoremap <buffer> <Leader>cf :<C-u>ClangFormat<CR>
+autocmd FileType c,cpp,objc,h,hpp vnoremap <buffer> <Leader>cf :ClangFormat<CR>
