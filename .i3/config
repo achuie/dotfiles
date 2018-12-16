@@ -95,8 +95,8 @@ bindsym $mod+a focus parent
 bindsym $mod+d focus child
 
 # dynamic tagging
-bindsym $mod+x exec --no-startup-id ~/.i3/get_workspace_options.py | dmenu | ~/.i3/go_to_workspace.py
-bindsym $mod+Shift+x exec --no-startup-id ~/.i3/get_workspace_options.py | dmenu | ~/.i3/move_to_workspace.py
+bindsym $mod+x exec --no-startup-id $HOME/.i3/dyn_tags.sh
+bindsym $mod+Shift+x exec --no-startup-id $HOME/.i3/dyn_tags_mv.sh
 # bindsym $mod+Shift+t exec i3-input -F 'rename workspace to %s' -P 'New name: '
 # bindsym $mod+t exec i3-input -F 'workspace %s' -P 'Navigate to: '
 
@@ -227,7 +227,11 @@ mode "music" {
 
 bindsym $mod+m mode "music"
 
-# Window tags
+# Window rules
+for_window [class="MPlayer"] floating enable, resize set 20 ppt 20 ppt, \
+exec --no-startup-id $HOME/.i3/move_screen_ppt.sh 79 77
+for_window [class="mpv"] floating enable, resize set 20 ppt 20 ppt, \
+exec --no-startup-id $HOME/.i3/move_screen_ppt.sh 79 77
 
 # Handle urgency hints from urxvt
 client.urgent #2f343a #900000 #ffffff #900000
