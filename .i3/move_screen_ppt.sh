@@ -6,7 +6,13 @@
 I3MSG=$(command -v i3-msg) || exit 1
 JQ=$(command -v jq) || exit 2
 
+ACTIVE=$($I3MSG -t get_workspaces | $JQ -M '.[] | {f: .focused, out: .output}
+    | select(.f == true) | .out')
+
+echo $ACTIVE
+
 $I3MSG -t command move position $($I3MSG -t get_outputs \
-    | $JQ -M '.[] | {active: .active, w: .rect.width, h: .rect.height}
-    | select(.active == true) | [.w, .h] | [.[0]*.'"$1"', .[1]*.'"$2"']
+    | $JQ -M '.[] | {out: .name, r: .rect} | select(.out == '"$ACTIVE"')
+    | [.r.width, .r.height, .r.x, .r.y]
+    | [.[0]*.'"$1"'+.[2], .[1]*.'"$2"'+.[3]]
     | map(floor) | join(" ")' | tr -d '"')
