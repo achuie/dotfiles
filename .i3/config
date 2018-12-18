@@ -202,6 +202,10 @@ mode "resize" {
         bindsym Up resize shrink height 5 px or 5 ppt
         bindsym Right resize grow width 5 px or 5 ppt
 
+        # Resize and move to corner
+        bindsym c floating enable, resize set 20 ppt 20 ppt, \
+        exec --no-startup-id $HOME/.i3/move_screen_ppt.sh 79 77
+
         # back to normal: Enter or Escape
         bindsym Return mode "default"
         bindsym Escape mode "default"
@@ -228,10 +232,6 @@ mode "music" {
 bindsym $mod+m mode "music"
 
 # Window rules
-for_window [class="MPlayer"] floating enable, resize set 20 ppt 20 ppt, \
-exec --no-startup-id $HOME/.i3/move_screen_ppt.sh 79 77
-for_window [class="mpv"] floating enable, resize set 20 ppt 20 ppt, \
-exec --no-startup-id $HOME/.i3/move_screen_ppt.sh 79 77
 
 # Handle urgency hints from urxvt
 client.urgent #2f343a #900000 #ffffff #900000
