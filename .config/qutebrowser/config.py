@@ -59,7 +59,7 @@ c.url.default_page = 'about:blank'
 # used by prepending the search engine name to the search term, e.g.
 # `:open google qutebrowser`.
 # Type: Dict
-c.url.searchengines = {'DEFAULT': 'https://searx.me/?q={}&categories=general&language=en-US'}
+#c.url.searchengines = {'DEFAULT': 'https://searx.me/?q={}&categories=general&language=en-US'}
 
 # Page(s) to open at the start.
 # Type: List of FuzzyUrl, or FuzzyUrl
