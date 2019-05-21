@@ -6,6 +6,10 @@
 # Uncomment this to still load settings configured via autoconfig.yml
 # config.load_autoconfig()
 
+# Load a restored tab as soon as it takes focus.
+# Type: Bool
+c.session.lazy_restore = True
+
 # Always restore open sites when qutebrowser is reopened.
 # Type: Bool
 c.auto_save.session = True
@@ -50,25 +54,14 @@ c.tabs.width = '12%'
 # Type: FuzzyUrl
 c.url.default_page = 'about:blank'
 
-# Search engines which can be used via the address bar. Maps a search
-# engine name (such as `DEFAULT`, or `ddg`) to a URL with a `{}`
-# placeholder. The placeholder will be replaced by the search term, use
-# `{{` and `}}` for literal `{`/`}` signs. The search engine named
-# `DEFAULT` is used when `url.auto_search` is turned on and something
-# else than a URL was entered to be opened. Other search engines can be
-# used by prepending the search engine name to the search term, e.g.
-# `:open google qutebrowser`.
-# Type: Dict
-#c.url.searchengines = {'DEFAULT': 'https://searx.me/?q={}&categories=general&language=en-US'}
-
 # Page(s) to open at the start.
 # Type: List of FuzzyUrl, or FuzzyUrl
-c.url.start_pages = 'https://searx.me'
+c.url.start_pages = 'https://ddg.gg'
 
 # Font used for the hints.
 # Type: Font
 c.fonts.hints = 'bold 7pt monospace'
 
-# Bindings
-config.bind("\m", "hint links spawn mpv {hint-url}")
-config.bind("\M", "spawn mpv {url}")
+# Bindings for normal mode
+config.bind('\\M', 'spawn mpv {url}')
+config.bind('\\m', 'hint links spawn mpv {hint-url}')
