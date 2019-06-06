@@ -8,7 +8,7 @@
 
 # Load a restored tab as soon as it takes focus.
 # Type: Bool
-c.session.lazy_restore = True
+c.session.lazy_restore = False
 
 # Always restore open sites when qutebrowser is reopened.
 # Type: Bool
