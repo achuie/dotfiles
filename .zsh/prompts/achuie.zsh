@@ -1,5 +1,5 @@
 function prompt_achuie_precmd() {
-    export PS1=$'[\e[0;34m%n@%m\e[m %1~]%# '
+    export PS1="[%{%F{blue}%}%n@%m%{%f%} %1~]%# "
 }
 
 function prompt_achuie_setup() {
