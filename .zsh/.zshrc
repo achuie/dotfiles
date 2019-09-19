@@ -18,15 +18,10 @@ autoload -Uz promptinit
 promptinit
 prompt achuie
 
-## Completion
-autoload -Uz compinit
-compinit
-
-zstyle ':completion:*' completer _expand _complete _ignored _approximate
-zstyle ':completion:*' max-errors 1 numeric
-zstyle ':completion:*' prompt 'errors: %e'
-zstyle ':completion:*' menu select
-zstyle :compinstall filename '/home/achuie/.zshrc'
+## Aliases
+alias ls='ls --color=auto -N'
+alias git-log='git log --graph --pretty='\''%Cred%h%Creset -%C(auto)%d%Creset %Cgreen(%cr) %C(bold blue)<%an>%Creset %<(50,trunc)%s'\'' --all'
+alias git-vlog='git log --graph --pretty='\''%Cred%h%Creset -%C(auto)%d%Creset %Cgreen%aD%Creset%n''          %C(bold blue)<%an>%Creset %<(80,trunc)%s'\'' --all'
 
 ## History
 HISTFILE=~/.histfile
@@ -38,6 +33,16 @@ export HISTSIZE SAVEHIST HISTFILE
 export EDITOR="vim"
 export VISUAL="$EDITOR"
 bindkey -v
+
+## Completion
+autoload -Uz compinit
+compinit
+
+zstyle ':completion:*' completer _expand _complete _ignored _approximate
+zstyle ':completion:*' max-errors 1 numeric
+zstyle ':completion:*' prompt 'errors: %e'
+zstyle ':completion:*' menu select
+zstyle :compinstall filename '/home/achuie/.zshrc'
 
 ## Keys
 autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
