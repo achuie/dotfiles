@@ -1,9 +1,18 @@
 ## Set window title
-precmd () { print -Pn "\e]2;%n@%m:%~\a" }
+function win_title() { print -Pn "\e]2;%n@%m:%~\a" }
+precmd_functions+=(win_title)
 
 ## Shell Options
-setopt appendhistory extendedglob nomatch hist_ignore_all_dups hist_ignore_space
-unsetopt autocd beep notify
+setopt appendhistory
+setopt extendedglob
+setopt nomatch
+setopt hist_ignore_all_dups
+setopt hist_ignore_space
+setopt prompt_subst
+
+unsetopt autocd
+unsetopt beep
+unsetopt notify
 
 ## Path
 typeset -U PATH path FPATH fpath
