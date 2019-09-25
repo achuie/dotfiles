@@ -33,8 +33,8 @@ alias git-log='git log --graph --pretty='\''%Cred%h%Creset -%C(auto)%d%Creset %C
 alias git-vlog='git log --graph --pretty='\''%Cred%h%Creset -%C(auto)%d%Creset %Cgreen%aD%Creset%n''          %C(bold blue)<%an>%Creset %<(80,trunc)%s'\'' --all'
 
 ## History
-HISTFILE=~/.histfile
-HISTSIZE=2000
+HISTFILE=${ZDOTDIR}/histfile
+HISTSIZE=5000
 SAVEHIST=${HISTSIZE}
 export HISTSIZE SAVEHIST HISTFILE
 
@@ -42,6 +42,11 @@ export HISTSIZE SAVEHIST HISTFILE
 export EDITOR="vim"
 export VISUAL="$EDITOR"
 bindkey -v
+export KEYTIMEOUT=1
+
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey "^e" edit-command-line
 
 ## Completion
 autoload -Uz compinit
@@ -51,14 +56,14 @@ zstyle ':completion:*' completer _expand _complete _ignored _approximate
 zstyle ':completion:*' max-errors 1 numeric
 zstyle ':completion:*' prompt 'errors: %e'
 zstyle ':completion:*' menu select
-zstyle :compinstall filename '/home/achuie/.zshrc'
+zstyle :compinstall filename "$ZDOTDIR/.zshrc"
 
 ## Keys
 autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
 zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 
-bindkey "^R" history-incremental-pattern-search-backward
+bindkey "^r" history-incremental-pattern-search-backward
 
 # Make sure the terminal is in application mode, when zle is
 # active. Only then are the values from $terminfo valid.
