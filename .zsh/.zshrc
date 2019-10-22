@@ -9,6 +9,7 @@ setopt nomatch
 setopt hist_ignore_all_dups
 setopt hist_ignore_space
 setopt prompt_subst
+setopt interactivecomments
 
 unsetopt autocd
 unsetopt beep
