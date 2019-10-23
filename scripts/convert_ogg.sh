@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Converts lossless music files to 320kbps .ogg files.
+# Converts lossless music files to 80kbps .ogg files using Opus.
 #
 # Must be run in the top-level music directory, if MPD isn't configured to use
 # absolute paths.
@@ -24,7 +24,7 @@ while read -r -u 10 LINE || [[ -n "$LINE" ]]; do
 
     if test -n "$(find $2/$DIR -name "$( printf %q "${SONG%.*}" )*" -print -quit)";
     then
-        echo "    Redundant $LINE"
+        echo " Redundant $LINE"
         continue;
     fi
 
@@ -32,11 +32,11 @@ while read -r -u 10 LINE || [[ -n "$LINE" ]]; do
     if [[ $(ffprobe -v error -select_streams a -show_entries \
             stream=codec_name -of default=nokey=1:noprint_wrappers=1 $LINE) \
             =~ .*?(flac|alac) ]]; then
-        echo "    Converting $LINE"
-        ffmpeg -loglevel warning -i "$LINE" -map 0:a -c:a libvorbis -b:a 320k \
+        echo " Converting $LINE"
+        ffmpeg -loglevel warning -i "$LINE" -map 0:a -c:a libopus -b:a 80k \
                 "$2/$DIR/${SONG%.*}.ogg"
     else
-        echo "    Copying $LINE"
+        echo " Copying $LINE"
         cp $LINE "$2/$DIR/$SONG"
     fi
 
