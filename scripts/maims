@@ -1,0 +1,3 @@
+#!/usr/bin/zsh
+
+maim $1 ~/$(date +%s).png
