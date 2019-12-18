@@ -8,6 +8,10 @@ function set_prompt {
         (*) PS1=$achuie ;;
     esac
 
+    if [[ -v VIRTUAL_ENV ]]; then
+        PS1='%F{cyan}%B(venv)%b%f '$PS1
+    fi
+
     RPS1='%F{red}%(?..(%?%))%f'
 }
 
