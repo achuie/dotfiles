@@ -1,0 +1,11 @@
+max-items 100
+browser "firefox --new-tab %u"
+
+bind-key j down
+bind-key k up
+
+color info yellow black
+color listnormal default default
+color listnormal_unread white default bold
+color listfocus default blue
+color listfocus_unread white blue bold
