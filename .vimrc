@@ -98,6 +98,7 @@ highlight Statement ctermfg=DarkYellow
 highlight LineNr ctermfg=DarkYellow
 highlight Visual cterm=reverse ctermbg=NONE
 highlight Search ctermfg=Black ctermbg=DarkYellow
+highlight DiffText ctermfg=Black
 
 " Tab mappings
 nnoremap th :tabfirst<CR>
