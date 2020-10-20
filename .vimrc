@@ -94,10 +94,9 @@ set hidden          " For hidden modified buffers
 filetype plugin indent on
 syntax on
 
-highlight Statement ctermfg=DarkYellow
-highlight LineNr ctermfg=DarkYellow
+highlight Statement ctermfg=Yellow
 highlight Visual cterm=reverse ctermbg=NONE
-highlight Search ctermfg=Black ctermbg=DarkYellow
+highlight Search ctermfg=Black ctermbg=Yellow
 highlight DiffText ctermfg=Black
 
 " Tab mappings
