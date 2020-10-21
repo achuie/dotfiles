@@ -560,7 +560,7 @@ schemes:
             white:      '#FFFFFF'
     terminal: &terminal
         primary:
-            background: '0x1d1f21'
+            background: '0x22262a'
             foreground: '0xc5c8c6'
         cursor:
             cursor: '0xc5c8c6'
