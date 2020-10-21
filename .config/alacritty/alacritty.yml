@@ -560,28 +560,28 @@ schemes:
             white:      '#FFFFFF'
     terminal: &terminal
         primary:
-            background: '0x22262a'
-            foreground: '0xc5c8c6'
+            background: '#22262a'
+            foreground: '#c5c8c6'
         cursor:
-            cursor: '0xc5c8c6'
+            cursor:     '#c5c8c6'
         normal:
-            black:   '0x282a2e'
-            red:     '0xa66363'
-            green:   '0x829468'
-            yellow:  '0xbfa06b'
-            blue:    '0x64879e'
-            magenta: '0x85728f'
-            cyan:    '0x5e8b8d'
-            white:   '0x707880'
+            black:      '#282a2e'
+            red:        '#a66363'
+            green:      '#829468'
+            yellow:     '#bfa06b'
+            blue:       '#64879e'
+            magenta:    '#85728f'
+            cyan:       '#5e8b8d'
+            white:      '#707880'
         bright:
-            black:   '0x373b41'
-            red:     '0xff5600'
-            green:   '0xb3bd84'
-            yellow:  '0xdebd7a'
-            blue:    '0x81a2be'
-            magenta: '0xba9eba'
-            cyan:    '0x8ababe'
-            white:   '0xc5c8c6'
+            black:      '#373b41'
+            red:        '#ff5600'
+            green:      '#b3bd84'
+            yellow:     '#debd7a'
+            blue:       '#81a2be'
+            magenta:    '#ba9eba'
+            cyan:       '#8ababe'
+            white:      '#c5c8c6'
 
 colors: *terminal
 
