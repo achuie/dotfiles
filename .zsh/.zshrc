@@ -3,7 +3,8 @@ function win_title() { print -Pn "\e]2;%n@%m:%~\a" }
 precmd_functions+=(win_title)
 
 ## Shell Options
-setopt appendhistory
+setopt incappendhistorytime
+setopt extendedhistory
 setopt extendedglob
 setopt nomatch
 setopt hist_ignore_all_dups
