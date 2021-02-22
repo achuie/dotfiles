@@ -109,10 +109,6 @@ nnoremap tn :tabnew<CR>
 nnoremap tm :tabm<Space>
 nnoremap td :tabclose<CR>
 
-" Buffer mappings
-nnoremap bn :bnext<CR>
-nnoremap bp :bprevious<CR>
-
 " Toggle error highlighting for overlength lines
 nnoremap <silent> <Leader>l
     \ :if exists('w:long_line_match') <Bar>
