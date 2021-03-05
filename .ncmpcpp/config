@@ -96,12 +96,15 @@ visualizer_type = spectrum
 #
 #visualizer_look = ●▮
 #visualizer_look = *|
+visualizer_autoscale = no
+visualizer_fps = 30
 visualizer_look = ●│
 visualizer_spectrum_smooth_look = yes
 visualizer_spectrum_dft_size = 1
 #
 #visualizer color
-visualizer_color = magenta
+#visualizer_color = magenta
+visualizer_color = 47, 83, 119, 155, 191, 227, 221, 215, 209, 203, 197, 161
 #
 ##### system encoding #####
 ##
