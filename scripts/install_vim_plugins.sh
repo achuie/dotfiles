@@ -16,3 +16,6 @@ git clone git@github.com:preservim/tagbar.git ${STARTDIR}/tagbar
 vim -u NONE -c "helptags ${STARTDIR}/tagbar/doc" -c q
 
 git clone git@github.com:wlangstroth/vim-racket ${STARTDIR}/racket
+
+git clone git@github.com:chaoren/vim-wordmotion ${STARTDIR}/wordmotion
+vim -u NONE -c "helptags ${STARTDIR}/wordmotion/doc" -c q
