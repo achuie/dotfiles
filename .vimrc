@@ -100,10 +100,14 @@ highlight DiffText ctermfg=Black
 " search
 nnoremap <C-L> :nohl<CR><C-L>
 
+" Buffer mappings
+nnoremap [b :bprev<CR>
+nnoremap ]b :bnext<CR>
+
 " Tab mappings
 nnoremap th :tabfirst<CR>
-nnoremap tj :tabprev<CR>
-nnoremap tk :tabnext<CR>
+nnoremap [t :tabprev<CR>
+nnoremap ]t :tabnext<CR>
 nnoremap tl :tablast<CR>
 nnoremap tt :tabedit<Space>
 nnoremap tn :tabnew<CR>
