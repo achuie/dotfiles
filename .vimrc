@@ -60,8 +60,11 @@ set number relativenumber
 " Quickly time out on keycodes, but not on mappings
 set notimeout ttimeout ttimeoutlen=200
 
-" Use <F11> to toggle Paste Insert mode
-set pastetoggle=<F11>
+" Use <F11> to toggle Paste Insert mode and numbers
+function! TogglePaste()
+    setlocal invnumber invrelativenumber invpaste
+endfunction
+nnoremap <F11> :call TogglePaste()<CR>
 
 " Use 4 spaces instead of tabs
 set expandtab
