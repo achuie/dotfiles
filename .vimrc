@@ -97,7 +97,12 @@ set background=light
 highlight Statement ctermfg=Yellow
 highlight Visual cterm=reverse ctermbg=NONE
 highlight Search ctermfg=Black ctermbg=Yellow
-highlight DiffText ctermfg=Black
+"highlight DiffText ctermfg=Black
+
+highlight DiffAdd ctermbg=black ctermfg=green cterm=reverse
+highlight DiffChange ctermbg=black ctermfg=blue cterm=reverse
+highlight DiffDelete ctermbg=black ctermfg=darkred cterm=reverse
+highlight DiffText ctermbg=black ctermfg=red cterm=reverse
 
 " Map redraw screen command to also turn off search highlighting until the next
 " search
@@ -116,6 +121,9 @@ nnoremap tt :tabedit<Space>
 nnoremap tn :tabnew<CR>
 nnoremap tm :tabm<Space>
 nnoremap td :tabclose<CR>
+
+" Search for visually selected text
+vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 
 " Toggle error highlighting for overlength lines
 nnoremap <silent> <Leader>l
