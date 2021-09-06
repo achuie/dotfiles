@@ -7,21 +7,17 @@
 
 # i3 config file (v4)
 #
-# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+# Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
+font pango:monospace 8
+
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:DejaVu Sans Mono 8
-# Before i3 v4.8, we used to recommend this one as the default:
-# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-# The font above is very space-efficient, that is, it looks good, sharp and
-# clear in small sizes. However, its unicode glyph coverage is limited, the old
-# X core fonts rendering does not support right-to-left and this being a bitmap
-# font, it doesn’t scale on retina/hidpi displays.
+#font pango:DejaVu Sans Mono 8
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -33,13 +29,7 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+p exec --no-startup-id dmenu_run
-# There also is the (new) i3-dmenu-desktop which only displays applications
-# shipping a .desktop file. It is a wrapper around dmenu, so you need that
-# installed.
-# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
-
-exec --no-startup-id /usr/bin/dunst
+bindsym $mod+d exec --no-startup-id dmenu_run
 
 # change focus
 bindsym $mod+h focus left
@@ -75,7 +65,7 @@ bindsym $mod+b split h
 bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen
+bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
@@ -92,37 +82,49 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 
 # focus the child container
-bindsym $mod+d focus child
-
+bindsym $mod+c focus child
 # dynamic tagging
-bindsym $mod+x exec --no-startup-id $HOME/.i3/dyn_tags.sh
-bindsym $mod+Shift+x exec --no-startup-id $HOME/.i3/dyn_tags_mv.sh
+bindsym $mod+x exec --no-startup-id $HOME/.config/i3/dyn_tags.sh
+bindsym $mod+Shift+x exec --no-startup-id $HOME/.config/i3/dyn_tags_mv.sh
 # bindsym $mod+Shift+t exec i3-input -F 'rename workspace to %s' -P 'New name: '
 # bindsym $mod+t exec i3-input -F 'workspace %s' -P 'Navigate to: '
 
+# Define names for default workspaces for which we configure key bindings later on.
+# We use variables to avoid repeating the names in multiple places.
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
 # switch to workspace
-bindsym $mod+1 workspace number 1
-bindsym $mod+2 workspace number 2
-bindsym $mod+3 workspace number 3
-bindsym $mod+4 workspace number 4
-bindsym $mod+5 workspace number 5
-bindsym $mod+6 workspace number 6
-bindsym $mod+7 workspace number 7
-bindsym $mod+8 workspace number 8
-bindsym $mod+9 workspace number 9
-bindsym $mod+0 workspace number 10
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace number 1
-bindsym $mod+Shift+2 move container to workspace number 2
-bindsym $mod+Shift+3 move container to workspace number 3
-bindsym $mod+Shift+4 move container to workspace number 4
-bindsym $mod+Shift+5 move container to workspace number 5
-bindsym $mod+Shift+6 move container to workspace number 6
-bindsym $mod+Shift+7 move container to workspace number 7
-bindsym $mod+Shift+8 move container to workspace number 8
-bindsym $mod+Shift+9 move container to workspace number 9
-bindsym $mod+Shift+0 move container to workspace number 10
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
 
 # move focused container to scratchpad
 bindsym $mod+Mod1+Shift+1 mark "alpha", move scratchpad
@@ -181,7 +183,7 @@ shortcut. Do you really want to exit i3? This will end your X session.' -b \
 'Yes, exit i3' 'i3-msg exit'"
 
 # lock the screen
-bindsym --release $mod+o exec ~/scripts/lock.sh
+bindsym --release $mod+o exec $HOME/.config/i3/lock.sh
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -204,11 +206,12 @@ mode "resize" {
 
         # Resize and move to corner
         bindsym c floating enable, resize set 20 ppt 20 ppt, \
-        exec --no-startup-id $HOME/.i3/move_screen_ppt.sh 79 77
+        exec --no-startup-id $HOME/.config/i3/move_screen_ppt.sh 79 77
 
         # back to normal: Enter or Escape
         bindsym Return mode "default"
         bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
 }
 
 bindsym $mod+r mode "resize"
@@ -239,8 +242,8 @@ client.urgent #2f343a #900000 #ffffff #900000
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3status --config /home/achuie/.i3/i3status.conf
-        font pango:DejaVu Sans Mono, Icons 8.5
+        font pango:DejaVu Sans Mono, Font Awesome 5 Free 9
+        status_command i3status-rs $HOME/.config/i3status-rs/config.toml
 
         # Handle urgency hints from urxvt
         colors {
