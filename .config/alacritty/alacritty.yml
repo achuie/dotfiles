@@ -582,8 +582,47 @@ schemes:
             magenta:    '#BA9EBA'
             cyan:       '#8ABABE'
             white:      '#C5C8C6'
+    nordish: &nordish
+        primary:
+            background:     '#2e3440'
+            foreground:     '#d8dee9'
+            dim_foreground: '#a5abb6'
+        cursor:
+            text:   '#2e3440'
+            cursor: '#d8dee9'
+        vi_mode_cursor:
+            text:   '#2e3440'
+            cursor: '#d8dee9'
+        selection:
+            text:       CellForeground
+            background: '#4c566a'
+        search:
+            matches:
+                foreground: CellBackground
+                background: '#88c0d0'
+            bar:
+                background: '#434c5e'
+                foreground: '#d8dee9'
+        normal:
+            black:   '#3b4252'
+            red:     '#bf616a'
+            green:   '#a3be8c'
+            yellow:  '#ebcb8b'
+            blue:    '#81a1c1'
+            magenta: '#b48ead'
+            cyan:    '#88c0d0'
+            white:   '#e5e9f0'
+        bright:
+            black:   '#4c566a'
+            red:     '#ff8700'
+            green:   '#b5d39b'
+            yellow:  '#ffdc97'
+            blue:    '#95badf'
+            magenta: '#cba0c3'
+            cyan:    '#a2d4d3'
+            white:   '#eceff4'
 
-colors: *master
+colors: *nordish
 
 # Bell
 #
@@ -630,7 +669,7 @@ colors: *master
 #
 # Window opacity as a floating point number from `0.0` to `1.0`.
 # The value `0.0` is completely transparent and `1.0` is opaque.
-background_opacity: 0.9
+background_opacity: 0.95
 
 #selection:
   # This string contains all characters that are used as separators for "semantic words" in Alacritty.
