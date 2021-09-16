@@ -3,19 +3,23 @@
 STARTDIR=~/.vim/pack/achuie/start
 mkdir -p ${STARTDIR}
 
-git clone git@github.com:tpope/vim-sleuth.git ${STARTDIR}/sleuth
-vim -u NONE -c "helptags ${STARTDIR}/sleuth/doc" -c q
-
-git clone git@github.com:tpope/vim-surround.git ${STARTDIR}/surround
+git clone https://github.com/tpope/vim-surround.git ${STARTDIR}/surround
 vim -u NONE -c "helptags ${STARTDIR}/surround/doc" -c q
 
-git clone git@github.com:tomtom/tcomment_vim.git ${STARTDIR}/tcomment
+git clone https://github.com/tomtom/tcomment_vim.git ${STARTDIR}/tcomment
 vim -u NONE -c "helptags ${STARTDIR}/tcomment/doc" -c q
 
-git clone git@github.com:preservim/tagbar.git ${STARTDIR}/tagbar
+git clone https://github.com/preservim/tagbar.git ${STARTDIR}/tagbar
 vim -u NONE -c "helptags ${STARTDIR}/tagbar/doc" -c q
 
-git clone git@github.com:wlangstroth/vim-racket ${STARTDIR}/racket
+git clone https://github.com/sheerun/vim-polyglot.git ${STARTDIR}/polyglot
+vim -u NONE -c "helptags ${STARTDIR}/polyglot/doc" -c q
 
-git clone git@github.com:chaoren/vim-wordmotion ${STARTDIR}/wordmotion
+git clone https://github.com/chaoren/vim-wordmotion ${STARTDIR}/wordmotion
 vim -u NONE -c "helptags ${STARTDIR}/wordmotion/doc" -c q
+
+git clone https://github.com/justinmk/vim-dirvish.git ${STARTDIR}/dirvish
+vim -u NONE -c "helptags ${STARTDIR}/dirvish/doc" -c q
+
+git clone https://github.com/nathanaelkane/vim-indent-guides.git ${STARTDIR}/indent-guides
+vim -u NONE -c "helptags ${STARTDIR}/indent-guides/doc" -c q
