@@ -100,7 +100,7 @@ highlight Search ctermfg=Black ctermbg=Yellow
 "highlight DiffText ctermfg=Black
 
 highlight DiffAdd ctermbg=black ctermfg=green cterm=reverse
-highlight DiffChange ctermbg=black ctermfg=blue cterm=reverse
+highlight DiffChange ctermbg=black ctermfg=yellow cterm=reverse
 highlight DiffDelete ctermbg=black ctermfg=darkred cterm=reverse
 highlight DiffText ctermbg=black ctermfg=red cterm=reverse
 
@@ -152,3 +152,9 @@ nnoremap <Leader>t :TagbarToggle<CR>
 " clang-format mappings
 autocmd FileType c,cpp,objc,h,hpp nnoremap <buffer> <Leader>cf :<C-u>ClangFormat<CR>
 autocmd FileType c,cpp,objc,h,hpp vnoremap <buffer> <Leader>cf :ClangFormat<CR>
+
+" Indent guides colors
+let g:indent_guides_auto_colors = 0
+highlight Normal ctermbg=NONE
+highlight IndentGuidesOdd ctermbg=0
+highlight IndentGuidesEven ctermbg=8
