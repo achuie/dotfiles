@@ -1,14 +1,34 @@
-theme = "plain"
+theme = "native"
 icons = "awesome5"
+
+[[block]]
+block = "net"
+device = "enp0s31f6"
+format = "{ip} {speed_down;K*b} {graph_down;K*b}"
+interval = 5
+[block.theme_overrides]
+idle_fg = "#00FF00"
 
 [[block]]
 block = "disk_space"
 path = "/"
 alias = "/"
 info_type = "available"
+format = "{icon} os: {available}"
 unit = "GB"
 interval = 20
-warning = 20.0
+warning = 10.0
+alert = 5.0
+
+[[block]]
+block = "disk_space"
+path = "/home"
+alias = "/home"
+info_type = "available"
+format = "{icon} home: {available}"
+unit = "GB"
+interval = 20
+warning = 50.0
 alert = 10.0
 
 [[block]]
@@ -16,10 +36,20 @@ block = "memory"
 display_type = "memory"
 format_mem = "{mem_used_percents}"
 format_swap = "{swap_used_percents}"
+icons = true
+clickable = true
+interval = 5
+warning_mem = 80
+warning_swap = 80
+critical_mem = 95
+critical_swap = 95
 
 [[block]]
 block = "cpu"
 interval = 5
+[block.format]
+full = "{barchart} {utilization} {frequency}"
+short = "{utilization}"
 
 [[block]]
 block = "load"
@@ -28,8 +58,11 @@ format = "{1m}"
 
 [[block]]
 block = "sound"
+[block.format]
+full = "{volume:5#100} {volume}"
+short = "{volume}"
 
 [[block]]
 block = "time"
 interval = 1
-format = "%a %d/%m %R"
+format = "%a %Y-%m-%d %H:%M:%S"
