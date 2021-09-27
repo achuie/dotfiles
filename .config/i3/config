@@ -136,7 +136,7 @@ bindsym $mod+Mod1+Shift+6 mark "zeta", move scratchpad
 bindsym $mod+Mod1+Shift+7 mark "eta", move scratchpad
 bindsym $mod+Mod1+Shift+8 mark "theta", move scratchpad
 bindsym $mod+Mod1+Shift+9 mark "iota", move scratchpad
-bindsym $mod+Mod1+Shift+10 mark "kappa", move scratchpad
+bindsym $mod+Mod1+Shift+0 mark "kappa", move scratchpad
 
 # toggle show container from scratchpad
 bindsym $mod+Mod1+1 [con_mark="alpha"] scratchpad show
@@ -148,7 +148,7 @@ bindsym $mod+Mod1+6 [con_mark="zeta"] scratchpad show
 bindsym $mod+Mod1+7 [con_mark="eta"] scratchpad show
 bindsym $mod+Mod1+8 [con_mark="theta"] scratchpad show
 bindsym $mod+Mod1+9 [con_mark="iota"] scratchpad show
-bindsym $mod+Mod1+10 [con_mark="kappa"] scratchpad show
+bindsym $mod+Mod1+0 [con_mark="kappa"] scratchpad show
 
 # move workspace between outputs
 bindsym $mod+Control+Mod1+Right move workspace to output right
