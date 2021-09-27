@@ -158,3 +158,6 @@ let g:indent_guides_auto_colors = 0
 highlight Normal ctermbg=NONE
 highlight IndentGuidesOdd ctermbg=0
 highlight IndentGuidesEven ctermbg=8
+
+" Force Vim to let Dirvish take precedence
+let g:loaded_netrwPlugin = 1
