@@ -59,8 +59,13 @@ format = "{1m}"
 [[block]]
 block = "sound"
 [block.format]
-full = "{volume:5#100} {volume}"
+full = "{volume:3#100} {volume}"
 short = "{volume}"
+
+[[block]]
+block = "battery"
+driver = "upower"
+format = "{percentage} {time}"
 
 [[block]]
 block = "time"
