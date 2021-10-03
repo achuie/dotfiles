@@ -27,8 +27,8 @@ bindsym $mod+Return exec alacritty
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-set $menu dmenu_run | xargs swaymsg exec --
-bindsym $mod+d exec --no-startup-id dmenu_run
+set $menu kickoff | xargs swaymsg exec --
+bindsym $mod+d exec --no-startup-id $menu
 
 # change focus
 bindsym $mod+h focus left
