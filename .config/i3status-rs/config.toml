@@ -2,12 +2,19 @@ theme = "native"
 icons = "awesome5"
 
 [[block]]
+block = "networkmanager"
+on_click = "alacritty -e nmtui"
+interface_name_exclude = ["br\\-[0-9a-f]{12}", "docker\\d+"]
+interface_name_include = []
+connection_format = "{devices}"
+device_format = "{icon} {ap} {ips}"
+ap_format = "{ssid^10} {strength}"
+
+[[block]]
 block = "net"
 device = "enp0s31f6"
 format = "{ip} {speed_down;K*b} {graph_down;K*b}"
 interval = 5
-[block.theme_overrides]
-idle_fg = "#00FF00"
 
 [[block]]
 block = "disk_space"
