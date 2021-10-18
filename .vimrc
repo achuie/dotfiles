@@ -94,15 +94,20 @@ set formatoptions=c,q,r,t
  
 " Color preferences
 set background=light
-highlight Statement ctermfg=Yellow
+highlight Statement ctermfg=yellow
 highlight Visual cterm=reverse ctermbg=NONE
-highlight Search ctermfg=Black ctermbg=Yellow
-"highlight DiffText ctermfg=Black
+highlight Search ctermfg=black ctermbg=yellow
+"highlight DiffText ctermfg=black
 
 highlight DiffAdd ctermbg=black ctermfg=green cterm=reverse
 highlight DiffChange ctermbg=black ctermfg=yellow cterm=reverse
 highlight DiffDelete ctermbg=black ctermfg=darkred cterm=reverse
 highlight DiffText ctermbg=black ctermfg=red cterm=reverse
+
+highlight Folded ctermfg=black
+highlight FoldColumn ctermfg=black
+
+highlight Comment cterm=italic
 
 " Map redraw screen command to also turn off search highlighting until the next
 " search
