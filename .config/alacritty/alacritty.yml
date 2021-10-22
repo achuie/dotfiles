@@ -621,6 +621,44 @@ schemes:
             magenta: '#cba0c3'
             cyan:    '#a2d4d3'
             white:   '#eceff4'
+    everforest: &everforest
+        primary:
+            background: '#2f383e'
+            foreground: '#d3c6aa'
+        cursor:
+            text:   '#2f383e'
+            cursor: '#d3c6aa'
+        vi_mode_cursor:
+            text:   '#2f383e'
+            cursor: '#d3c6aa'
+        selection:
+            text:       CellForeground
+            background: '#573e4c'
+        search:
+            matches:
+                foreground: CellBackground
+                background: '#8dce9d'
+            bar:
+                background: '#3c4e59'
+                foreground: '#d3c6aa'
+        normal:
+            black:   '#2f383e'
+            red:     '#e67e80'
+            green:   '#a7c080'
+            yellow:  '#dbbc7f'
+            blue:    '#7fbbb3'
+            magenta: '#d699b6'
+            cyan:    '#83c092'
+            white:   '#d3cec3'
+        bright:
+            black:   '#4a555b'
+            red:     '#ff8700'
+            green:   '#b3ce89'
+            yellow:  '#ebc988'
+            blue:    '#89cac1'
+            magenta: '#e4a3c2'
+            cyan:    '#8dce9d'
+            white:   '#e4ded2'
 
 colors: *nordish
 
