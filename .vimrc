@@ -116,6 +116,10 @@ nnoremap <C-L> :nohl<CR><C-L>
 nnoremap [b :bprev<CR>
 nnoremap ]b :bnext<CR>
 
+" Window splits
+set splitbelow
+set splitright
+
 " Tab mappings
 nnoremap th :tabfirst<CR>
 nnoremap [t :tabprev<CR>
