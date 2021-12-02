@@ -97,7 +97,6 @@ set background=light
 highlight Statement ctermfg=yellow
 highlight Visual cterm=reverse ctermbg=NONE
 highlight Search ctermfg=black ctermbg=yellow
-"highlight DiffText ctermfg=black
 
 highlight DiffAdd ctermbg=black ctermfg=green cterm=reverse
 highlight DiffChange ctermbg=black ctermfg=yellow cterm=reverse
@@ -129,6 +128,11 @@ nnoremap td :tabclose<CR>
 
 " Search for visually selected text
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
+
+" Fold lines not matching previous search; `zr` for more context, `zm` for less
+nnoremap <Leader>z :setlocal
+    \ foldexpr=(getline(v:lnum)=~@/)?0:(getline(v:lnum-1)=~@/)\\|\\|(getline(v:lnum+1)=~@/)?1:2
+    \ foldmethod=expr foldlevel=0 foldcolumn=2<CR>
 
 " Toggle error highlighting for overlength lines
 nnoremap <silent> <Leader>l
