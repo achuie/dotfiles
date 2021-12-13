@@ -680,7 +680,7 @@ schemes:
                 background: '#343955'
                 foreground: '#c0caf5'
         normal:
-            black:   '#1D202F'
+            black:   '#000000'
             red:     '#f7768e'
             green:   '#9ece6a'
             yellow:  '#e0af68'
@@ -703,13 +703,13 @@ schemes:
     tokyonight: &tokyonight
         primary:
             background: '#1a1b26'
-            foreground: '#c0caf5'
+            foreground: '#a9b1d6'
         cursor:
             text:   '#1a1b26'
-            cursor: '#c0caf5'
+            cursor: '#a9b1d6'
         vi_mode_cursor:
             text:   '#1a1b26'
-            cursor: '#c0caf5'
+            cursor: '#a9b1d6'
         selection:
             text:       CellForeground
             background: '#363c59'
@@ -719,30 +719,30 @@ schemes:
                 background: '#abe0ff'
             bar:
                 background: '#343955'
-                foreground: '#c0caf5'
+                foreground: '#a9b1d6'
         normal:
-            black:   '#15161E'
+            black:   '#32344a'
             red:     '#f7768e'
             green:   '#9ece6a'
             yellow:  '#e0af68'
             blue:    '#7aa2f7'
             magenta: '#bb9af7'
             cyan:    '#7dcfff'
-            white:   '#a9b1d6'
+            white:   '#787c99'
         bright:
-            black:   '#414868'
+            black:   '#444b6a'
             red:     '#ff8700'
             green:   '#c0dd9f'
             yellow:  '#eaca9b'
             blue:    '#abc6ff'
             magenta: '#d8c2ff'
             cyan:    '#abe0ff'
-            white:   '#dae1ff'
+            white:   '#acb0d0'
         indexed_colors:
             - { index: 16, color: '#ff9e64' }
             - { index: 17, color: '#db4b4b' }
 
-colors: *tokyostorm
+colors: *tokyonight
 
 # Bell
 #
