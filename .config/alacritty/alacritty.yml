@@ -671,7 +671,7 @@ schemes:
             cursor: '#c0caf5'
         selection:
             text:       CellForeground
-            background: '#454d72'
+            background: '#2d4370'
         search:
             matches:
                 foreground: CellBackground
@@ -712,7 +712,7 @@ schemes:
             cursor: '#a9b1d6'
         selection:
             text:       CellForeground
-            background: '#363c59'
+            background: '#2d4370'
         search:
             matches:
                 foreground: CellBackground
