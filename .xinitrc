@@ -7,7 +7,10 @@ picom -b --experimental-backends --config /home/achuie/.config/picom/picom.conf
 xset -dpms
 xset s off
 
-export TERMINAL=st
+export GDK_DPI_SCALE=1.5
+export QT_SCALE_FACTOR=1.5
+
+export TERMINAL=alacritty
 
 export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
@@ -16,5 +19,7 @@ fcitx
 
 bash /home/achuie/.screenlayout/default.sh
 bash /home/achuie/.fehbg
+
+dunst &
 
 exec i3
