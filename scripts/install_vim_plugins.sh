@@ -23,3 +23,6 @@ vim -u NONE -c "helptags ${STARTDIR}/dirvish/doc" -c q
 
 git clone https://github.com/nathanaelkane/vim-indent-guides.git ${STARTDIR}/indent-guides
 vim -u NONE -c "helptags ${STARTDIR}/indent-guides/doc" -c q
+
+git clone https://github.com/jeetsukumaran/vim-indentwise.git ${STARTDIR}/indentwise
+vim -u NONE -c "helptags ${STARTDIR}/indentwise/doc" -c q
