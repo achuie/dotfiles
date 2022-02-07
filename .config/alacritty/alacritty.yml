@@ -2,16 +2,14 @@
 
 # Import additional configuration files
 #
-# These configuration files will be loaded in order, replacing values in files
-# loaded earlier with those loaded later in the chain. The file itself will
-# always be loaded last.
+# Imports are loaded in order, skipping all missing files, with the importing
+# file being loaded last. If a field is already present in a previous import, it
+# will be replaced.
+#
+# All imports must either be absolute paths starting with `/`, or paths relative
+# to the user's home directory starting with `~/`.
 #import:
 #  - /path/to/alacritty.yml
-
-
-# This value is used to decide whether to show FPS in title bar or not.
-# By default, it's set to false
-#fps: false
 
 # Any items in the `env` entry below will be added as
 # environment variables. Some entries may override variables
@@ -62,8 +60,14 @@
   #
   # Values for `decorations` (macOS only):
   #     - transparent: Title bar, transparent background and title bar buttons
-  #     - buttonless: Title bar, transparent background, but no title bar buttons
+  #     - buttonless: Title bar, transparent background and no title bar buttons
   #decorations: full
+
+  # Background opacity
+  #
+  # Window opacity as a floating point number from `0.0` to `1.0`.
+  # The value `0.0` is completely transparent and `1.0` is opaque.
+  opacity: 0.95
 
   # Startup Mode (changes require restart)
   #
@@ -91,8 +95,8 @@
 
   # GTK theme variant (Linux/BSD only)
   #
-  # Override the variant of the GTK theme. Commonly supported values are `dark` and `light`.
-  # Set this to `None` to use the default theme variant.
+  # Override the variant of the GTK theme. Commonly supported values are `dark`
+  # and `light`. Set this to `None` to use the default theme variant.
   #gtk_theme_variant: None
 
 #scrolling:
@@ -154,15 +158,16 @@ font:
   # Point size
   size: 11.0
 
-  # Offset is the extra space around each character. `offset.y` can be thought of
-  # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
+  # Offset is the extra space around each character. `offset.y` can be thought
+  # of as modifying the line spacing, and `offset.x` as modifying the letter
+  # spacing.
   #offset:
   #  x: 0
   #  y: 0
 
   # Glyph offset determines the locations of the glyphs within their cells with
-  # the default being at the bottom. Increasing `x` moves the glyph to the right,
-  # increasing `y` moves the glyph upward.
+  # the default being at the bottom. Increasing `x` moves the glyph to the
+  # right, increasing `y` moves the glyph upward.
   #glyph_offset:
   #  x: 0
   #  y: 0
@@ -173,9 +178,12 @@ font:
   # it is recommended to set `use_thin_strokes` to `false`.
   #use_thin_strokes: true
 
-  # Choose whether to enable ligature (Currently only in Linux, may work in macOS)
-  # by default it's true (enabled)
-  #ligature: true
+  # Use built-in font for box drawing characters.
+  #
+  # If `true`, Alacritty will use a custom built-in font for box drawing
+  # characters (Unicode points 2500 - 259f).
+  #
+  #builtin_box_drawing: true
 
 # If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: true
@@ -189,9 +197,10 @@ draw_bold_text_with_bright_colors: true
 
     # Bright and dim foreground colors
     #
-    # The dimmed foreground color is calculated automatically if it is not present.
-    # If the bright foreground color is not set, or `draw_bold_text_with_bright_colors`
-    # is `false`, the normal foreground color will be used.
+    # The dimmed foreground color is calculated automatically if it is not
+    # present. If the bright foreground color is not set, or
+    # `draw_bold_text_with_bright_colors` is `false`, the normal foreground
+    # color will be used.
     #dim_foreground: '#828482'
     #bright_foreground: '#eaeaea'
 
@@ -199,7 +208,7 @@ draw_bold_text_with_bright_colors: true
   #
   # Colors which should be used to draw the terminal cursor.
   #
-  # Allowed values are CellForeground and CellBackground, which reference the
+  # Allowed values are CellForeground/CellBackground, which reference the
   # affected cell, or hexadecimal colors like #ff00ff.
   #cursor:
   #  text: CellBackground
@@ -209,35 +218,66 @@ draw_bold_text_with_bright_colors: true
   #
   # Colors for the cursor when the vi mode is active.
   #
-  # Allowed values are CellForeground and CellBackground, which reference the
+  # Allowed values are CellForeground/CellBackground, which reference the
   # affected cell, or hexadecimal colors like #ff00ff.
   #vi_mode_cursor:
   #  text: CellBackground
   #  cursor: CellForeground
 
-  # Selection colors
-  #
-  # Colors which should be used to draw the selection area.
-  #
-  # Allowed values are CellForeground and CellBackground, which reference the
-  # affected cell, or hexadecimal colors like #ff00ff.
-  #selection:
-  #  text: CellBackground
-  #  background: CellForeground
-
   # Search colors
   #
   # Colors used for the search bar and match highlighting.
   #search:
-    # Allowed values are CellForeground and CellBackground, which reference the
+    # Allowed values are CellForeground/CellBackground, which reference the
     # affected cell, or hexadecimal colors like #ff00ff.
     #matches:
     #  foreground: '#000000'
     #  background: '#ffffff'
+    #focused_match:
+    #  foreground: '#ffffff'
+    #  background: '#000000'
 
     #bar:
     #  background: '#c5c8c6'
     #  foreground: '#1d1f21'
+
+  # Keyboard regex hints
+  #hints:
+    # First character in the hint label
+    #
+    # Allowed values are CellForeground/CellBackground, which reference the
+    # affected cell, or hexadecimal colors like #ff00ff.
+    #start:
+    #  foreground: '#1d1f21'
+    #  background: '#e9ff5e'
+
+    # All characters after the first one in the hint label
+    #
+    # Allowed values are CellForeground/CellBackground, which reference the
+    # affected cell, or hexadecimal colors like #ff00ff.
+    #end:
+    #  foreground: '#e9ff5e'
+    #  background: '#1d1f21'
+
+  # Line indicator
+  #
+  # Color used for the indicator displaying the position in history during
+  # search and vi mode.
+  #
+  # By default, these will use the opposing primary color.
+  #line_indicator:
+  #  foreground: None
+  #  background: None
+
+  # Selection colors
+  #
+  # Colors which should be used to draw the selection area.
+  #
+  # Allowed values are CellForeground/CellBackground, which reference the
+  # affected cell, or hexadecimal colors like #ff00ff.
+  #selection:
+  #  text: CellBackground
+  #  background: CellForeground
 
   # Normal colors
   #normal:
@@ -285,484 +325,491 @@ draw_bold_text_with_bright_colors: true
   #
   #indexed_colors: []
 
+  # Transparent cell backgrounds
+  #
+  # Whether or not `window.opacity` applies to all cell backgrounds or only to
+  # the default background. When set to `true` all cells will be transparent
+  # regardless of their background color.
+  #transparent_background_colors: false
+
 schemes:
-    red_planet: &redplanet
-        primary:
-            background: '#222222'
-            foreground: '#C2B790'
-        cursor:
-            cursor:     '#C2B790'
-        normal:
-            black:      '#202020'
-            red:        '#8C3432'
-            green:      '#728271'
-            yellow:     '#E8BF6A'
-            blue:       '#69819E'
-            magenta:    '#896492'
-            cyan:       '#5B8390'
-            white:      '#B9AA99'
-        bright:
-            black:      '#676767'
-            red:        '#B55242'
-            green:      '#869985'
-            yellow:     '#EBEB91'
-            blue:       '#60827E'
-            magenta:    '#DE4974'
-            cyan:       '#38ADD8'
-            white:      '#D6BFB8'
-    relaxed: &relaxed
-        primary:
-            background: '#353A44'
-            foreground: '#D9D9D9'
-        cursor:
-            cursor:     '#D9D9D9'
-        normal:
-            black:      '#151515'
-            red:        '#BC5653'
-            green:      '#909D63'
-            yellow:     '#EBC17A'
-            blue:       '#6A8799'
-            magenta:    '#B06699'
-            cyan:       '#C9DFFF'
-            white:      '#D9D9D9'
-        bright:
-            black:      '#636363'
-            red:        '#BC5653'
-            green:      '#A0AC77'
-            yellow:     '#EBC17A'
-            blue:       '#7EAAC7'
-            magenta:    '#B06698'
-            cyan:       '#ACBBD0'
-            white:      '#F7F7F7'
-    ryuuko: &ryuuko
-        primary:
-            background: '#2C3941'
-            foreground: '#ECECEC'
-        cursor:
-            cursor:     '#ECECEC'
-        normal:
-            black:      '#2C3941'
-            red:        '#865F5B'
-            green:      '#66907D'
-            yellow:     '#B1A990'
-            blue:       '#6A8E95'
-            magenta:    '#B18A73'
-            cyan:       '#88B2AC'
-            white:      '#ECECEC'
-        bright:
-            black:      '#5D7079'
-            red:        '#865F5B'
-            green:      '#66907D'
-            yellow:     '#B1A990'
-            blue:       '#6A8E95'
-            magenta:    '#B18A73'
-            cyan:       '#88B2AC'
-            white:      '#ECECEC'
-    paraisoDark: &paraisodark
-        primary:
-            background: '#2F1E2E'
-            foreground: '#A39E9B'
-        cursor:
-            cursor:     '#A39E9B'
-        normal:
-            black:      '#2F1E2E'
-            red:        '#EF6155'
-            green:      '#48B685'
-            yellow:     '#FEC418'
-            blue:       '#06B6EF'
-            magenta:    '#815BA4'
-            cyan:       '#5BC4BF'
-            white:      '#A39E9B'
-        bright:
-            black:      '#776E71'
-            red:        '#EF6155'
-            green:      '#48B685'
-            yellow:     '#FEC418'
-            blue:       '#06B6EF'
-            magenta:    '#815BA4'
-            cyan:       '#5BC4BF'
-            white:      '#E7E9DB'
-    espresso: &espresso
-        primary:
-            background: '#323232'
-            foreground: '#FFFFFF'
-        cursor:
-            cursor:     '#D6D6D6'
-        normal:
-            black:      '#353535'
-            red:        '#D25252'
-            green:      '#A5C261'
-            yellow:     '#FFC66D'
-            blue:       '#6C99BB'
-            magenta:    '#D197D9'
-            cyan:       '#BED6FF'
-            white:      '#EEEEEC'
-        bright:
-            black:      '#535353'
-            red:        '#F00C0C'
-            green:      '#C2E075'
-            yellow:     '#E1E48B'
-            blue:       '#8AB7D9'
-            magenta:    '#EFB5F7'
-            cyan:       '#DCF4FF'
-            white:      '#FFFFFF'
-    hybrid: &hybrid
-        primary:
-            background: '#161719'
-            foreground: '#B7BCBA'
-        cursor:
-            cursor:     '#B7BCBA'
-        normal:
-            black:      '#2A2E33'
-            red:        '#B84D51'
-            green:      '#B3BF5A'
-            yellow:     '#E4B55E'
-            blue:       '#6E90B0'
-            magenta:    '#A17EAC'
-            cyan:       '#7FBFB4'
-            white:      '#B5B9B6'
-        bright:
-            black:      '#1D1F22'
-            red:        '#8D2E32'
-            green:      '#798431'
-            yellow:     '#E58A50'
-            blue:       '#4B6B88'
-            magenta:    '#6E5079'
-            cyan:       '#4D7B74'
-            white:      '#5A626A'
-    gruvbox_dark_soft: &gruvbox
-        primary:
-            background: '#32302f'
-            foreground: '#d5c4a1'
-        cursor:
-            text:       '#32302f'
-            cursor:     '#d5c4a1'
-        normal:
-            black:      '#32302f'
-            red:        '#fb4934'
-            green:      '#b8bb26'
-            yellow:     '#fabd2f'
-            blue:       '#83a598'
-            magenta:    '#d3869b'
-            cyan:       '#8ec07c'
-            white:      '#d5c4a1'
-        bright:
-            black:      '#665c54'
-            red:        '#fb4934'
-            green:      '#b8bb26'
-            yellow:     '#fabd2f'
-            blue:       '#83a598'
-            magenta:    '#d3869b'
-            cyan:       '#8ec07c'
-            white:      '#fbf1c7'
-        indexed_colors:
-            - { index: 16, color: '#fe8019' }
-            - { index: 17, color: '#d65d0e' }
-            - { index: 18, color: '#3c3836' }
-            - { index: 19, color: '#504945' }
-            - { index: 20, color: '#bdae93' }
-            - { index: 21, color: '#ebdbb2' }
-    seashells: &seashells
-        primary:
-            background: '#09141B'
-            foreground: '#DEB88D'
-        cursor:
-            cursor:     '#FCA02F'
-        normal:
-            black:      '#17384C'
-            red:        '#D15123'
-            green:      '#027C9B'
-            yellow:     '#FCA02F'
-            blue:       '#1E4950'
-            magenta:    '#68D4F1'
-            cyan:       '#50A3B5'
-            white:      '#DEB88D'
-        bright:
-            black:      '#434B53'
-            red:        '#D48678'
-            green:      '#628D98'
-            yellow:     '#FDD39F'
-            blue:       '#1BBCDD'
-            magenta:    '#BBE3EE'
-            cyan:       '#87ACB4'
-            white:      '#FEE4CE'
-    spacedust: &spacedust
-        primary:
-            background: '#0A1E24'
-            foreground: '#ECF0C1'
-        cursor:
-            cursor:     '#708284'
-        normal:
-            black:      '#6E5346'
-            red:        '#E35B00'
-            green:      '#5CAB96'
-            yellow:     '#E3CD7B'
-            blue:       '#0F548B'
-            magenta:    '#E35B00'
-            cyan:       '#06AFC7'
-            white:      '#F0F1CE'
-        bright:
-            black:      '#684C31'
-            red:        '#FF8A3A'
-            green:      '#AECAB8'
-            yellow:     '#FFC878'
-            blue:       '#67A0CE'
-            magenta:    '#FF8A3A'
-            cyan:       '#83A7B4'
-            white:      '#FEFFF1'
-    pnevma: &pnevma
-        primary:
-            background: '#1C1C1C'
-            foreground: '#D0D0D0'
-        cursor:
-            cursor:     '#E4C9AF'
-        normal:
-            black:      '#2F2E2D'
-            red:        '#A36666'
-            green:      '#90A57D'
-            yellow:     '#D7AF87'
-            blue:       '#7FA5BD'
-            magenta:    '#C79EC4'
-            cyan:       '#8ADBB4'
-            white:      '#D0D0D0'
-        bright:
-            black:      '#4A4845'
-            red:        '#D78787'
-            green:      '#AFBEA2'
-            yellow:     '#E4C9AF'
-            blue:       '#A1BDCE'
-            magenta:    '#D7BEDA'
-            cyan:       '#B1E7DD'
-            white:      '#EFEFEF'
-    journeyman: &journeyman
-        primary:
-            background: '#2F3537'
-            foreground: '#CCCCCC'
-        cursor:
-            cursor:     '#CCCCCC'
-        normal:
-            black:      '#1C1C1C'
-            red:        '#AF5F5F'
-            green:      '#5F875F'
-            yellow:     '#D1A375'
-            blue:       '#5F87AF'
-            magenta:    '#7A6B99'
-            cyan:       '#5F8787'
-            white:      '#BFBFBF'
-        bright:
-            black:      '#444444'
-            red:        '#FF8700'
-            green:      '#87AF87'
-            yellow:     '#DCB48C'
-            blue:       '#8FAFD7'
-            magenta:    '#A699BF'
-            cyan:       '#5FAFAF'
-            white:      '#FFFFFF'
-    master: &master
-        primary:
-            background: '#1E2226'
-            foreground: '#C5C8C6'
-        cursor:
-            cursor:     '#C5C8C6'
-        normal:
-            black:      '#282A2E'
-            red:        '#A66363'
-            green:      '#5f875f'
-            yellow:     '#D1A375'
-            blue:       '#64879E'
-            magenta:    '#85728F'
-            cyan:       '#5E8B8D'
-            white:      '#707880'
-        bright:
-            black:      '#464B53'
-            red:        '#FF8700'
-            green:      '#87af87'
-            yellow:     '#DCB48C'
-            blue:       '#81A2BE'
-            magenta:    '#BA9EBA'
-            cyan:       '#8ABABE'
-            white:      '#C5C8C6'
-    nordish: &nordish
-        primary:
-            background:     '#2e3440'
-            foreground:     '#d8dee9'
-            dim_foreground: '#a5abb6'
-        cursor:
-            text:   '#2e3440'
-            cursor: '#d8dee9'
-        vi_mode_cursor:
-            text:   '#2e3440'
-            cursor: '#d8dee9'
-        selection:
-            text:       CellForeground
-            background: '#4c566a'
-        search:
-            matches:
-                foreground: CellBackground
-                background: '#88c0d0'
-            bar:
-                background: '#434c5e'
-                foreground: '#d8dee9'
-        normal:
-            black:   '#3b4252'
-            red:     '#bf616a'
-            green:   '#a3be8c'
-            yellow:  '#ebcb8b'
-            blue:    '#81a1c1'
-            magenta: '#b48ead'
-            cyan:    '#88c0d0'
-            white:   '#e5e9f0'
-        bright:
-            black:   '#4c566a'
-            red:     '#ff8700'
-            green:   '#b5d39b'
-            yellow:  '#ffdc97'
-            blue:    '#95badf'
-            magenta: '#cba0c3'
-            cyan:    '#a2d4d3'
-            white:   '#eceff4'
-    everforest: &everforest
-        primary:
-            background: '#2f383e'
-            foreground: '#d3c6aa'
-        cursor:
-            text:   '#2f383e'
-            cursor: '#d3c6aa'
-        vi_mode_cursor:
-            text:   '#2f383e'
-            cursor: '#d3c6aa'
-        selection:
-            text:       CellForeground
-            background: '#573e4c'
-        search:
-            matches:
-                foreground: CellBackground
-                background: '#8dce9d'
-            bar:
-                background: '#3c4e59'
-                foreground: '#d3c6aa'
-        normal:
-            black:   '#2f383e'
-            red:     '#e67e80'
-            green:   '#a7c080'
-            yellow:  '#dbbc7f'
-            blue:    '#7fbbb3'
-            magenta: '#d699b6'
-            cyan:    '#83c092'
-            white:   '#d3cec3'
-        bright:
-            black:   '#4a555b'
-            red:     '#ff8700'
-            green:   '#b3ce89'
-            yellow:  '#ebc988'
-            blue:    '#89cac1'
-            magenta: '#e4a3c2'
-            cyan:    '#8dce9d'
-            white:   '#e4ded2'
-    tokyostorm: &tokyostorm
-        primary:
-            background: '#24283b'
-            foreground: '#c0caf5'
-        cursor:
-            text:   '#24283b'
-            cursor: '#c0caf5'
-        vi_mode_cursor:
-            text:   '#24283b'
-            cursor: '#c0caf5'
-        selection:
-            text:       CellForeground
-            background: '#2d4370'
-        search:
-            matches:
-                foreground: CellBackground
-                background: '#abe0ff'
-            bar:
-                background: '#343955'
-                foreground: '#c0caf5'
-        normal:
-            black:   '#000000'
-            red:     '#f7768e'
-            green:   '#9ece6a'
-            yellow:  '#e0af68'
-            blue:    '#7aa2f7'
-            magenta: '#bb9af7'
-            cyan:    '#7dcfff'
-            white:   '#a9b1d6'
-        bright:
-            black:   '#414868'
-            red:     '#ff8700'
-            green:   '#c0dd9f'
-            yellow:  '#eaca9b'
-            blue:    '#abc6ff'
-            magenta: '#d8c2ff'
-            cyan:    '#abe0ff'
-            white:   '#dae1ff'
-        indexed_colors:
-            - { index: 16, color: '#ff9e64' }
-            - { index: 17, color: '#db4b4b' }
-    tokyonight: &tokyonight
-        primary:
-            background: '#1a1b26'
-            foreground: '#a9b1d6'
-        cursor:
-            text:   '#1a1b26'
-            cursor: '#a9b1d6'
-        vi_mode_cursor:
-            text:   '#1a1b26'
-            cursor: '#a9b1d6'
-        selection:
-            text:       CellForeground
-            background: '#2d4370'
-        search:
-            matches:
-                foreground: CellBackground
-                background: '#abe0ff'
-            bar:
-                background: '#343955'
-                foreground: '#a9b1d6'
-        normal:
-            black:   '#32344a'
-            red:     '#f7768e'
-            green:   '#9ece6a'
-            yellow:  '#e0af68'
-            blue:    '#7aa2f7'
-            magenta: '#bb9af7'
-            cyan:    '#7dcfff'
-            white:   '#787c99'
-        bright:
-            black:   '#444b6a'
-            red:     '#ff8700'
-            green:   '#c0dd9f'
-            yellow:  '#eaca9b'
-            blue:    '#abc6ff'
-            magenta: '#d8c2ff'
-            cyan:    '#abe0ff'
-            white:   '#acb0d0'
-        indexed_colors:
-            - { index: 16, color: '#ff9e64' }
-            - { index: 17, color: '#db4b4b' }
-    default: &default
-        primary:
-            background: '0x1d1f21'
-            foreground: '0xc5c8c6'
-        normal:
-            black:   '0x282a2e'
-            red:     '0xa54242'
-            green:   '0x8c9440'
-            yellow:  '0xde935f'
-            blue:    '0x5f819d'
-            magenta: '0x85678f'
-            cyan:    '0x5e8d87'
-            white:   '0x707880'
-        bright:
-            black:   '0x373b41'
-            red:     '0xcc6666'
-            green:   '0xb5bd68'
-            yellow:  '0xf0c674'
-            blue:    '0x81a2be'
-            magenta: '0xb294bb'
-            cyan:    '0x8abeb7'
-            white:   '0xc5c8c6'
+  red_planet: &redplanet
+    primary:
+      background: '#222222'
+      foreground: '#C2B790'
+    cursor:
+      cursor:     '#C2B790'
+    normal:
+      black:      '#202020'
+      red:        '#8C3432'
+      green:      '#728271'
+      yellow:     '#E8BF6A'
+      blue:       '#69819E'
+      magenta:    '#896492'
+      cyan:       '#5B8390'
+      white:      '#B9AA99'
+    bright:
+      black:      '#676767'
+      red:        '#B55242'
+      green:      '#869985'
+      yellow:     '#EBEB91'
+      blue:       '#60827E'
+      magenta:    '#DE4974'
+      cyan:       '#38ADD8'
+      white:      '#D6BFB8'
+  relaxed: &relaxed
+    primary:
+      background: '#353A44'
+      foreground: '#D9D9D9'
+    cursor:
+      cursor:     '#D9D9D9'
+    normal:
+      black:      '#151515'
+      red:        '#BC5653'
+      green:      '#909D63'
+      yellow:     '#EBC17A'
+      blue:       '#6A8799'
+      magenta:    '#B06699'
+      cyan:       '#C9DFFF'
+      white:      '#D9D9D9'
+    bright:
+      black:      '#636363'
+      red:        '#BC5653'
+      green:      '#A0AC77'
+      yellow:     '#EBC17A'
+      blue:       '#7EAAC7'
+      magenta:    '#B06698'
+      cyan:       '#ACBBD0'
+      white:      '#F7F7F7'
+  ryuuko: &ryuuko
+    primary:
+      background: '#2C3941'
+      foreground: '#ECECEC'
+    cursor:
+      cursor:     '#ECECEC'
+    normal:
+      black:      '#2C3941'
+      red:        '#865F5B'
+      green:      '#66907D'
+      yellow:     '#B1A990'
+      blue:       '#6A8E95'
+      magenta:    '#B18A73'
+      cyan:       '#88B2AC'
+      white:      '#ECECEC'
+    bright:
+      black:      '#5D7079'
+      red:        '#865F5B'
+      green:      '#66907D'
+      yellow:     '#B1A990'
+      blue:       '#6A8E95'
+      magenta:    '#B18A73'
+      cyan:       '#88B2AC'
+      white:      '#ECECEC'
+  paraisoDark: &paraisodark
+    primary:
+      background: '#2F1E2E'
+      foreground: '#A39E9B'
+    cursor:
+      cursor:     '#A39E9B'
+    normal:
+      black:      '#2F1E2E'
+      red:        '#EF6155'
+      green:      '#48B685'
+      yellow:     '#FEC418'
+      blue:       '#06B6EF'
+      magenta:    '#815BA4'
+      cyan:       '#5BC4BF'
+      white:      '#A39E9B'
+    bright:
+      black:      '#776E71'
+      red:        '#EF6155'
+      green:      '#48B685'
+      yellow:     '#FEC418'
+      blue:       '#06B6EF'
+      magenta:    '#815BA4'
+      cyan:       '#5BC4BF'
+      white:      '#E7E9DB'
+  espresso: &espresso
+    primary:
+      background: '#323232'
+      foreground: '#FFFFFF'
+    cursor:
+      cursor:     '#D6D6D6'
+    normal:
+      black:      '#353535'
+      red:        '#D25252'
+      green:      '#A5C261'
+      yellow:     '#FFC66D'
+      blue:       '#6C99BB'
+      magenta:    '#D197D9'
+      cyan:       '#BED6FF'
+      white:      '#EEEEEC'
+    bright:
+      black:      '#535353'
+      red:        '#F00C0C'
+      green:      '#C2E075'
+      yellow:     '#E1E48B'
+      blue:       '#8AB7D9'
+      magenta:    '#EFB5F7'
+      cyan:       '#DCF4FF'
+      white:      '#FFFFFF'
+  hybrid: &hybrid
+    primary:
+      background: '#161719'
+      foreground: '#B7BCBA'
+    cursor:
+      cursor:     '#B7BCBA'
+    normal:
+      black:      '#2A2E33'
+      red:        '#B84D51'
+      green:      '#B3BF5A'
+      yellow:     '#E4B55E'
+      blue:       '#6E90B0'
+      magenta:    '#A17EAC'
+      cyan:       '#7FBFB4'
+      white:      '#B5B9B6'
+    bright:
+      black:      '#1D1F22'
+      red:        '#8D2E32'
+      green:      '#798431'
+      yellow:     '#E58A50'
+      blue:       '#4B6B88'
+      magenta:    '#6E5079'
+      cyan:       '#4D7B74'
+      white:      '#5A626A'
+  gruvbox_dark_soft: &gruvbox
+    primary:
+      background: '#32302f'
+      foreground: '#d5c4a1'
+    cursor:
+      text:       '#32302f'
+      cursor:     '#d5c4a1'
+    normal:
+      black:      '#32302f'
+      red:        '#fb4934'
+      green:      '#b8bb26'
+      yellow:     '#fabd2f'
+      blue:       '#83a598'
+      magenta:    '#d3869b'
+      cyan:       '#8ec07c'
+      white:      '#d5c4a1'
+    bright:
+      black:      '#665c54'
+      red:        '#fb4934'
+      green:      '#b8bb26'
+      yellow:     '#fabd2f'
+      blue:       '#83a598'
+      magenta:    '#d3869b'
+      cyan:       '#8ec07c'
+      white:      '#fbf1c7'
+    indexed_colors:
+      - { index: 16, color: '#fe8019' }
+      - { index: 17, color: '#d65d0e' }
+      - { index: 18, color: '#3c3836' }
+      - { index: 19, color: '#504945' }
+      - { index: 20, color: '#bdae93' }
+      - { index: 21, color: '#ebdbb2' }
+  seashells: &seashells
+    primary:
+      background: '#09141B'
+      foreground: '#DEB88D'
+    cursor:
+      cursor:     '#FCA02F'
+    normal:
+      black:      '#17384C'
+      red:        '#D15123'
+      green:      '#027C9B'
+      yellow:     '#FCA02F'
+      blue:       '#1E4950'
+      magenta:    '#68D4F1'
+      cyan:       '#50A3B5'
+      white:      '#DEB88D'
+    bright:
+      black:      '#434B53'
+      red:        '#D48678'
+      green:      '#628D98'
+      yellow:     '#FDD39F'
+      blue:       '#1BBCDD'
+      magenta:    '#BBE3EE'
+      cyan:       '#87ACB4'
+      white:      '#FEE4CE'
+  spacedust: &spacedust
+    primary:
+      background: '#0A1E24'
+      foreground: '#ECF0C1'
+    cursor:
+      cursor:     '#708284'
+    normal:
+      black:      '#6E5346'
+      red:        '#E35B00'
+      green:      '#5CAB96'
+      yellow:     '#E3CD7B'
+      blue:       '#0F548B'
+      magenta:    '#E35B00'
+      cyan:       '#06AFC7'
+      white:      '#F0F1CE'
+    bright:
+      black:      '#684C31'
+      red:        '#FF8A3A'
+      green:      '#AECAB8'
+      yellow:     '#FFC878'
+      blue:       '#67A0CE'
+      magenta:    '#FF8A3A'
+      cyan:       '#83A7B4'
+      white:      '#FEFFF1'
+  pnevma: &pnevma
+    primary:
+      background: '#1C1C1C'
+      foreground: '#D0D0D0'
+    cursor:
+      cursor:     '#E4C9AF'
+    normal:
+      black:      '#2F2E2D'
+      red:        '#A36666'
+      green:      '#90A57D'
+      yellow:     '#D7AF87'
+      blue:       '#7FA5BD'
+      magenta:    '#C79EC4'
+      cyan:       '#8ADBB4'
+      white:      '#D0D0D0'
+    bright:
+      black:      '#4A4845'
+      red:        '#D78787'
+      green:      '#AFBEA2'
+      yellow:     '#E4C9AF'
+      blue:       '#A1BDCE'
+      magenta:    '#D7BEDA'
+      cyan:       '#B1E7DD'
+      white:      '#EFEFEF'
+  journeyman: &journeyman
+    primary:
+      background: '#2F3537'
+      foreground: '#CCCCCC'
+    cursor:
+      cursor:     '#CCCCCC'
+    normal:
+      black:      '#1C1C1C'
+      red:        '#AF5F5F'
+      green:      '#5F875F'
+      yellow:     '#D1A375'
+      blue:       '#5F87AF'
+      magenta:    '#7A6B99'
+      cyan:       '#5F8787'
+      white:      '#BFBFBF'
+    bright:
+      black:      '#444444'
+      red:        '#FF8700'
+      green:      '#87AF87'
+      yellow:     '#DCB48C'
+      blue:       '#8FAFD7'
+      magenta:    '#A699BF'
+      cyan:       '#5FAFAF'
+      white:      '#FFFFFF'
+  master: &master
+    primary:
+      background: '#1E2226'
+      foreground: '#C5C8C6'
+    cursor:
+      cursor:     '#C5C8C6'
+    normal:
+      black:      '#282A2E'
+      red:        '#A66363'
+      green:      '#5f875f'
+      yellow:     '#D1A375'
+      blue:       '#64879E'
+      magenta:    '#85728F'
+      cyan:       '#5E8B8D'
+      white:      '#707880'
+    bright:
+      black:      '#464B53'
+      red:        '#FF8700'
+      green:      '#87af87'
+      yellow:     '#DCB48C'
+      blue:       '#81A2BE'
+      magenta:    '#BA9EBA'
+      cyan:       '#8ABABE'
+      white:      '#C5C8C6'
+  nordish: &nordish
+    primary:
+      background:     '#2e3440'
+      foreground:     '#d8dee9'
+      dim_foreground: '#a5abb6'
+    cursor:
+      text:   '#2e3440'
+      cursor: '#d8dee9'
+    vi_mode_cursor:
+      text:   '#2e3440'
+      cursor: '#d8dee9'
+    selection:
+      text:       CellForeground
+      background: '#4c566a'
+    search:
+      matches:
+        foreground: CellBackground
+        background: '#88c0d0'
+      bar:
+        background: '#434c5e'
+        foreground: '#d8dee9'
+    normal:
+      black:   '#3b4252'
+      red:     '#bf616a'
+      green:   '#a3be8c'
+      yellow:  '#ebcb8b'
+      blue:    '#81a1c1'
+      magenta: '#b48ead'
+      cyan:    '#88c0d0'
+      white:   '#e5e9f0'
+    bright:
+      black:   '#4c566a'
+      red:     '#ff8700'
+      green:   '#b5d39b'
+      yellow:  '#ffdc97'
+      blue:    '#95badf'
+      magenta: '#cba0c3'
+      cyan:    '#a2d4d3'
+      white:   '#eceff4'
+  everforest: &everforest
+    primary:
+      background: '#2f383e'
+      foreground: '#d3c6aa'
+    cursor:
+      text:   '#2f383e'
+      cursor: '#d3c6aa'
+    vi_mode_cursor:
+      text:   '#2f383e'
+      cursor: '#d3c6aa'
+    selection:
+      text:       CellForeground
+      background: '#573e4c'
+    search:
+      matches:
+        foreground: CellBackground
+        background: '#8dce9d'
+      bar:
+        background: '#3c4e59'
+        foreground: '#d3c6aa'
+    normal:
+      black:   '#2f383e'
+      red:     '#e67e80'
+      green:   '#a7c080'
+      yellow:  '#dbbc7f'
+      blue:    '#7fbbb3'
+      magenta: '#d699b6'
+      cyan:    '#83c092'
+      white:   '#d3cec3'
+    bright:
+      black:   '#4a555b'
+      red:     '#ff8700'
+      green:   '#b3ce89'
+      yellow:  '#ebc988'
+      blue:    '#89cac1'
+      magenta: '#e4a3c2'
+      cyan:    '#8dce9d'
+      white:   '#e4ded2'
+  tokyostorm: &tokyostorm
+    primary:
+      background: '#24283b'
+      foreground: '#c0caf5'
+    cursor:
+      text:   '#24283b'
+      cursor: '#c0caf5'
+    vi_mode_cursor:
+      text:   '#24283b'
+      cursor: '#c0caf5'
+    selection:
+      text:       CellForeground
+      background: '#2d4370'
+    search:
+      matches:
+        foreground: CellBackground
+        background: '#abe0ff'
+      bar:
+        background: '#343955'
+        foreground: '#c0caf5'
+    normal:
+      black:   '#000000'
+      red:     '#f7768e'
+      green:   '#9ece6a'
+      yellow:  '#e0af68'
+      blue:    '#7aa2f7'
+      magenta: '#bb9af7'
+      cyan:    '#7dcfff'
+      white:   '#a9b1d6'
+    bright:
+      black:   '#414868'
+      red:     '#ff8700'
+      green:   '#c0dd9f'
+      yellow:  '#eaca9b'
+      blue:    '#abc6ff'
+      magenta: '#d8c2ff'
+      cyan:    '#abe0ff'
+      white:   '#dae1ff'
+    indexed_colors:
+      - { index: 16, color: '#ff9e64' }
+      - { index: 17, color: '#db4b4b' }
+  tokyonight: &tokyonight
+    primary:
+      background: '#1a1b26'
+      foreground: '#a9b1d6'
+    cursor:
+      text:   '#1a1b26'
+      cursor: '#a9b1d6'
+    vi_mode_cursor:
+      text:   '#1a1b26'
+      cursor: '#a9b1d6'
+    selection:
+      text:       CellForeground
+      background: '#2d4370'
+    search:
+      matches:
+        foreground: CellBackground
+        background: '#abe0ff'
+      bar:
+        background: '#343955'
+        foreground: '#a9b1d6'
+    normal:
+      black:   '#32344a'
+      red:     '#f7768e'
+      green:   '#9ece6a'
+      yellow:  '#e0af68'
+      blue:    '#7aa2f7'
+      magenta: '#bb9af7'
+      cyan:    '#7dcfff'
+      white:   '#787c99'
+    bright:
+      black:   '#444b6a'
+      red:     '#ff8700'
+      green:   '#c0dd9f'
+      yellow:  '#eaca9b'
+      blue:    '#abc6ff'
+      magenta: '#d8c2ff'
+      cyan:    '#abe0ff'
+      white:   '#acb0d0'
+    indexed_colors:
+      - { index: 16, color: '#ff9e64' }
+      - { index: 17, color: '#db4b4b' }
+  default: &default
+    primary:
+      background: '0x1d1f21'
+      foreground: '0xc5c8c6'
+    normal:
+      black:   '0x282a2e'
+      red:     '0xa54242'
+      green:   '0x8c9440'
+      yellow:  '0xde935f'
+      blue:    '0x5f819d'
+      magenta: '0x85678f'
+      cyan:    '0x5e8d87'
+      white:   '0x707880'
+    bright:
+      black:   '0x373b41'
+      red:     '0xcc6666'
+      green:   '0xb5bd68'
+      yellow:  '0xf0c674'
+      blue:    '0x81a2be'
+      magenta: '0xb294bb'
+      cyan:    '0x8abeb7'
+      white:   '0xc5c8c6'
 
 colors: *tokyostorm
 
@@ -787,8 +834,8 @@ colors: *tokyostorm
   #   - Linear
   #animation: EaseOutExpo
 
-  # Duration of the visual bell flash. A `duration` of `0` will disable the
-  # visual bell animation.
+  # Duration of the visual bell flash in milliseconds. A `duration` of `0` will
+  # disable the visual bell animation.
   #duration: 0
 
   # Visual bell animation color.
@@ -807,14 +854,9 @@ colors: *tokyostorm
   #
   #command: None
 
-# Background opacity
-#
-# Window opacity as a floating point number from `0.0` to `1.0`.
-# The value `0.0` is completely transparent and `1.0` is opaque.
-background_opacity: 0.95
-
 #selection:
-  # This string contains all characters that are used as separators for "semantic words" in Alacritty.
+  # This string contains all characters that are used as separators for
+  # "semantic words" in Alacritty.
   #semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
 
   # When set to `true`, selected text will be copied to the primary clipboard.
@@ -822,12 +864,23 @@ background_opacity: 0.95
 
 #cursor:
   # Cursor style
-  #
-  # Values for `style`:
-  #   - ▇ Block
-  #   - _ Underline
-  #   - | Beam
-  #style: Block
+  #style:
+    # Cursor shape
+    #
+    # Values for `shape`:
+    #   - ▇ Block
+    #   - _ Underline
+    #   - | Beam
+    #shape: Block
+
+    # Cursor blinking state
+    #
+    # Values for `blinking`:
+    #   - Never: Prevent the cursor from ever blinking
+    #   - Off: Disable blinking by default
+    #   - On: Enable blinking by default
+    #   - Always: Force the cursor to always blink
+    #blinking: Off
 
   # Vi mode cursor style
   #
@@ -836,6 +889,9 @@ background_opacity: 0.95
   #
   # See `cursor.style` for available options.
   #vi_mode_style: None
+
+  # Cursor blinking interval in milliseconds.
+  #blink_interval: 750
 
   # If this is `true`, the cursor will be rendered as a hollow box when the
   # window is not focused.
@@ -850,8 +906,9 @@ background_opacity: 0.95
 
 # Shell
 #
-# You can set `shell.program` to the path of your favorite shell, e.g. `/bin/fish`.
-# Entries in `shell.args` are passed unmodified as arguments to the shell.
+# You can set `shell.program` to the path of your favorite shell, e.g.
+# `/bin/fish`. Entries in `shell.args` are passed unmodified as arguments to the
+# shell.
 #
 # Default:
 #   - (macOS) /bin/bash --login
@@ -868,18 +925,11 @@ background_opacity: 0.95
 # directory of the parent process will be used.
 #working_directory: None
 
-# WinPTY backend (Windows only)
-#
-# Alacritty defaults to using the newer ConPTY backend if it is available,
-# since it resolves a lot of bugs and is quite a bit faster. If it is not
-# available, the WinPTY backend will be used instead.
-#
-# Setting this option to `true` makes Alacritty use the legacy WinPTY backend,
-# even if the ConPTY backend is available.
-#winpty_backend: false
-
 # Send ESC (\x1b) before characters when alt is pressed.
 #alt_send_esc: true
+
+# Offer IPC using `alacritty msg` (unix only)
+#ipc_socket: true
 
 #mouse:
   # Click settings
@@ -893,35 +943,58 @@ background_opacity: 0.95
   # If this is `true`, the cursor is temporarily hidden when typing.
   #hide_when_typing: false
 
-  #url:
-    # URL launcher
-    #
-    # This program is executed when clicking on a text which is recognized as a URL.
-    # The URL is always added to the command as the last parameter.
-    #
-    # When set to `launcher: None`, URL launching will be disabled completely.
-    #
-    # Default:
-    #   - (macOS) open
-    #   - (Linux/BSD) xdg-open
-    #   - (Windows) explorer
-    #launcher:
-    #  program: xdg-open
-    #  args: []
+# Regex hints
+#
+# Terminal hints can be used to find text in the visible part of the terminal
+# and pipe it to other applications.
+#hints:
+  # Keys used for the hint labels.
+  #alphabet: "jfkdls;ahgurieowpq"
 
-    # URL modifiers
-    #
-    # These are the modifiers that need to be held down for opening URLs when clicking
-    # on them. The available modifiers are documented in the key binding section.
-    #modifiers: None
+  # List with all available hints
+  #
+  # Each hint must have a `regex` and either an `action` or a `command` field.
+  # The fields `mouse`, `binding` and `post_processing` are optional.
+  #
+  # The fields `command`, `binding.key`, `binding.mods`, `binding.mode` and
+  # `mouse.mods` accept the same values as they do in the `key_bindings` section.
+  #
+  # The `mouse.enabled` field controls if the hint should be underlined while
+  # the mouse with all `mouse.mods` keys held or the vi mode cursor is above it.
+  #
+  # If the `post_processing` field is set to `true`, heuristics will be used to
+  # shorten the match if there are characters likely not to be part of the hint
+  # (e.g. a trailing `.`). This is most useful for URIs.
+  #
+  # Values for `action`:
+  #   - Copy
+  #       Copy the hint's text to the clipboard.
+  #   - Paste
+  #       Paste the hint's text to the terminal or search.
+  #   - Select
+  #       Select the hint's text.
+  #   - MoveViModeCursor
+  #       Move the vi mode cursor to the beginning of the hint.
+  #enabled:
+  # - regex: "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)\
+  #           [^\u0000-\u001F\u007F-\u009F<>\"\\s{-}\\^⟨⟩`]+"
+  #   command: xdg-open
+  #   post_processing: true
+  #   mouse:
+  #     enabled: true
+  #     mods: None
+  #   binding:
+  #     key: U
+  #     mods: Control|Shift
 
 # Mouse bindings
 #
 # Mouse bindings are specified as a list of objects, much like the key
 # bindings further below.
 #
-# To trigger mouse bindings when an application running within Alacritty captures the mouse, the
-# `Shift` modifier is automatically added as a requirement.
+# To trigger mouse bindings when an application running within Alacritty
+# captures the mouse, the `Shift` modifier is automatically added as a
+# requirement.
 #
 # Each mouse binding will specify a:
 #
@@ -932,13 +1005,20 @@ background_opacity: 0.95
 #   - Right
 #   - Numeric identifier such as `5`
 #
-# - `action` (see key bindings)
+# - `action` (see key bindings for actions not exclusive to mouse mode)
+#
+# - Mouse exclusive actions:
+#
+#   - ExpandSelection
+#       Expand the selection to the current mouse cursor location.
 #
 # And optionally:
 #
 # - `mods` (see key bindings)
 #mouse_bindings:
-#  - { mouse: Middle, action: PasteSelection }
+#  - { mouse: Right,                 action: ExpandSelection }
+#  - { mouse: Right,  mods: Control, action: ExpandSelection }
+#  - { mouse: Middle, mode: ~Vi,     action: PasteSelection  }
 
 # Key bindings
 #
@@ -1007,6 +1087,8 @@ background_opacity: 0.95
 #   - ToggleFullscreen
 #   - SpawnNewInstance
 #       Spawn a new instance of Alacritty.
+#   - CreateNewWindow
+#       Create a new Alacritty window from the current process.
 #   - ClearLogNotice
 #       Clear Alacritty's UI warning and error notice.
 #   - ClearSelection
@@ -1014,67 +1096,89 @@ background_opacity: 0.95
 #   - ReceiveChar
 #   - None
 #
-#   (`mode: Vi` only):
+# - Vi mode exclusive actions:
+#
 #   - Open
-#       Open URLs at the cursor location with the launcher configured in `url.launcher`.
-#   - Up
-#       Move the vi mode cursor up by one line.
-#   - Down
-#       Move the vi mode cursor down by one line.
-#   - Left
-#       Move the vi mode cursor left by one character.
-#   - Right
-#       Move the vi mode cursor right by one character.
-#   - First
-#       Move the vi mode cursor to the start of the line, searching across newlines if it is already at the beginning.
-#   - Last
-#       Move the vi mode cursor to the end of the line, searching across newlines if it is already at the end.
-#   - FirstOccupied
-#       Move the vi mode cursor to the first non-empty cell in this line, searching across newlines if it is already at the first one.
-#   - High
-#       Move the vi mode cursor to the top of the screen.
-#   - Middle
-#       Move the vi mode cursor to the middle of the screen.
-#   - Low
-#       Move the vi mode cursor to the bottom of the screen.
-#   - SemanticLeft
-#       Move the vi mode cursor to the start of the previous semantically separated word.
-#   - SemanticRight
-#       Move the vi mode cursor to the start of the next semantically separated word.
-#   - SemanticLeftEnd
-#       Move the vi mode cursor to the end of the previous semantically separated word.
-#   - SemanticRightEnd
-#       Move the vi mode cursor to the end of the next semantically separated word.
-#   - WordLeft
-#       Move the vi mode cursor to the start of the previous whitespace separated word.
-#   - WordRight
-#       Move the vi mode cursor to the start of the next whitespace separated word.
-#   - WordLeftEnd
-#       Move the vi mode cursor to the end of the previous whitespace separated word.
-#   - WordRightEnd
-#       Move the vi mode cursor to the end of the next whitespace separated word.
-#   - Bracket
-#       Move the vi mode cursor to the next character that matches the bracket at the cursor's
-#       current location.
+#       Perform the action of the first matching hint under the vi mode cursor
+#       with `mouse.enabled` set to `true`.
 #   - ToggleNormalSelection
 #   - ToggleLineSelection
 #   - ToggleBlockSelection
 #   - ToggleSemanticSelection
 #       Toggle semantic selection based on `selection.semantic_escape_chars`.
-#   - SearchNext
-#       Jump to the beginning of the next match.
-#   - SearchPrevious
-#       Jump to the beginning of the previous match.
-#   - SearchStart
-#       Jump to the next start of a match to the left of the vi mode cursor.
-#   - SearchEnd
-#       Jump to the next end of a match to the left of the vi mode cursor.
 #
-#   (macOS only):
+# - Vi mode exclusive cursor motion actions:
+#
+#   - Up
+#       One line up.
+#   - Down
+#       One line down.
+#   - Left
+#       One character left.
+#   - Right
+#       One character right.
+#   - First
+#       First column, or beginning of the line when already at the first column.
+#   - Last
+#       Last column, or beginning of the line when already at the last column.
+#   - FirstOccupied
+#       First non-empty cell in this terminal row, or first non-empty cell of
+#       the line when already at the first cell of the row.
+#   - High
+#       Top of the screen.
+#   - Middle
+#       Center of the screen.
+#   - Low
+#       Bottom of the screen.
+#   - SemanticLeft
+#       Start of the previous semantically separated word.
+#   - SemanticRight
+#       Start of the next semantically separated word.
+#   - SemanticLeftEnd
+#       End of the previous semantically separated word.
+#   - SemanticRightEnd
+#       End of the next semantically separated word.
+#   - WordLeft
+#       Start of the previous whitespace separated word.
+#   - WordRight
+#       Start of the next whitespace separated word.
+#   - WordLeftEnd
+#       End of the previous whitespace separated word.
+#   - WordRightEnd
+#       End of the next whitespace separated word.
+#   - Bracket
+#       Character matching the bracket at the cursor's location.
+#   - SearchNext
+#       Beginning of the next match.
+#   - SearchPrevious
+#       Beginning of the previous match.
+#   - SearchStart
+#       Start of the match to the left of the vi mode cursor.
+#   - SearchEnd
+#       End of the match to the right of the vi mode cursor.
+#
+# - Search mode exclusive actions:
+#   - SearchFocusNext
+#       Move the focus to the next search match.
+#   - SearchFocusPrevious
+#       Move the focus to the previous search match.
+#   - SearchConfirm
+#   - SearchCancel
+#   - SearchClear
+#       Reset the search regex.
+#   - SearchDeleteWord
+#       Delete the last word in the search regex.
+#   - SearchHistoryPrevious
+#       Go to the previous regex in the search history.
+#   - SearchHistoryNext
+#       Go to the next regex in the search history.
+#
+# - macOS exclusive actions:
 #   - ToggleSimpleFullscreen
 #       Enter fullscreen without occupying another space.
 #
-#   (Linux/BSD only):
+# - Linux/BSD exclusive actions:
+#
 #   - CopySelection
 #       Copy from the selection buffer.
 #   - PasteSelection
@@ -1108,6 +1212,7 @@ background_opacity: 0.95
 #
 #    - AppCursor
 #    - AppKeypad
+#    - Search
 #    - Alt
 #    - Vi
 #
@@ -1122,102 +1227,116 @@ background_opacity: 0.95
 # If the same trigger is assigned to multiple actions, all of them are executed
 # in the order they were defined in.
 key_bindings:
-    - { key: Return,   mods: Control|Shift, action: SpawnNewInstance }
-  #- { key: Paste,                                action: Paste          }
-  #- { key: Copy,                                 action: Copy           }
-  #- { key: L,         mods: Control,             action: ClearLogNotice }
-  #- { key: L,         mods: Control, mode: ~Vi,  chars: "\x0c"          }
-  #- { key: PageUp,    mods: Shift,   mode: ~Alt, action: ScrollPageUp,  }
-  #- { key: PageDown,  mods: Shift,   mode: ~Alt, action: ScrollPageDown }
-  #- { key: Home,      mods: Shift,   mode: ~Alt, action: ScrollToTop,   }
-  #- { key: End,       mods: Shift,   mode: ~Alt, action: ScrollToBottom }
+  - { key: Return,    mods: Control|Shift,              action: SpawnNewInstance }
+  #- { key: Paste,                                       action: Paste          }
+  #- { key: Copy,                                        action: Copy           }
+  #- { key: L,         mods: Control,                    action: ClearLogNotice }
+  #- { key: L,         mods: Control, mode: ~Vi|~Search, chars: "\x0c"          }
+  #- { key: PageUp,    mods: Shift,   mode: ~Alt,        action: ScrollPageUp,  }
+  #- { key: PageDown,  mods: Shift,   mode: ~Alt,        action: ScrollPageDown }
+  #- { key: Home,      mods: Shift,   mode: ~Alt,        action: ScrollToTop,   }
+  #- { key: End,       mods: Shift,   mode: ~Alt,        action: ScrollToBottom }
 
   # Vi Mode
-  #- { key: Space,  mods: Shift|Control, mode: Vi, action: ScrollToBottom          }
-  #- { key: Space,  mods: Shift|Control,           action: ToggleViMode            }
-  #- { key: Escape,                      mode: Vi, action: ClearSelection          }
-  #- { key: I,                           mode: Vi, action: ScrollToBottom          }
-  #- { key: I,                           mode: Vi, action: ToggleViMode            }
-  #- { key: C,      mods: Control,       mode: Vi, action: ToggleViMode            }
-  #- { key: Y,      mods: Control,       mode: Vi, action: ScrollLineUp            }
-  #- { key: E,      mods: Control,       mode: Vi, action: ScrollLineDown          }
-  #- { key: G,                           mode: Vi, action: ScrollToTop             }
-  #- { key: G,      mods: Shift,         mode: Vi, action: ScrollToBottom          }
-  #- { key: B,      mods: Control,       mode: Vi, action: ScrollPageUp            }
-  #- { key: F,      mods: Control,       mode: Vi, action: ScrollPageDown          }
-  #- { key: U,      mods: Control,       mode: Vi, action: ScrollHalfPageUp        }
-  #- { key: D,      mods: Control,       mode: Vi, action: ScrollHalfPageDown      }
-  #- { key: Y,                           mode: Vi, action: Copy                    }
-  #- { key: Y,                           mode: Vi, action: ClearSelection          }
-  #- { key: Copy,                        mode: Vi, action: ClearSelection          }
-  #- { key: V,                           mode: Vi, action: ToggleNormalSelection   }
-  #- { key: V,      mods: Shift,         mode: Vi, action: ToggleLineSelection     }
-  #- { key: V,      mods: Control,       mode: Vi, action: ToggleBlockSelection    }
-  #- { key: V,      mods: Alt,           mode: Vi, action: ToggleSemanticSelection }
-  #- { key: Return,                      mode: Vi, action: Open                    }
-  #- { key: K,                           mode: Vi, action: Up                      }
-  #- { key: J,                           mode: Vi, action: Down                    }
-  #- { key: H,                           mode: Vi, action: Left                    }
-  #- { key: L,                           mode: Vi, action: Right                   }
-  #- { key: Up,                          mode: Vi, action: Up                      }
-  #- { key: Down,                        mode: Vi, action: Down                    }
-  #- { key: Left,                        mode: Vi, action: Left                    }
-  #- { key: Right,                       mode: Vi, action: Right                   }
-  #- { key: Key0,                        mode: Vi, action: First                   }
-  #- { key: Key4,   mods: Shift,         mode: Vi, action: Last                    }
-  #- { key: Key6,   mods: Shift,         mode: Vi, action: FirstOccupied           }
-  #- { key: H,      mods: Shift,         mode: Vi, action: High                    }
-  #- { key: M,      mods: Shift,         mode: Vi, action: Middle                  }
-  #- { key: L,      mods: Shift,         mode: Vi, action: Low                     }
-  #- { key: B,                           mode: Vi, action: SemanticLeft            }
-  #- { key: W,                           mode: Vi, action: SemanticRight           }
-  #- { key: E,                           mode: Vi, action: SemanticRightEnd        }
-  #- { key: B,      mods: Shift,         mode: Vi, action: WordLeft                }
-  #- { key: W,      mods: Shift,         mode: Vi, action: WordRight               }
-  #- { key: E,      mods: Shift,         mode: Vi, action: WordRightEnd            }
-  #- { key: Key5,   mods: Shift,         mode: Vi, action: Bracket                 }
-  #- { key: Slash,                       mode: Vi, action: SearchForward           }
-  #- { key: Slash,  mods: Shift,         mode: Vi, action: SearchBackward          }
-  #- { key: N,                           mode: Vi, action: SearchNext              }
-  #- { key: N,      mods: Shift,         mode: Vi, action: SearchPrevious          }
+  #- { key: Space,  mods: Shift|Control, mode: ~Search,    action: ToggleViMode            }
+  #- { key: Space,  mods: Shift|Control, mode: Vi|~Search, action: ScrollToBottom          }
+  #- { key: Escape,                      mode: Vi|~Search, action: ClearSelection          }
+  #- { key: I,                           mode: Vi|~Search, action: ToggleViMode            }
+  #- { key: I,                           mode: Vi|~Search, action: ScrollToBottom          }
+  #- { key: C,      mods: Control,       mode: Vi|~Search, action: ToggleViMode            }
+  #- { key: Y,      mods: Control,       mode: Vi|~Search, action: ScrollLineUp            }
+  #- { key: E,      mods: Control,       mode: Vi|~Search, action: ScrollLineDown          }
+  #- { key: G,                           mode: Vi|~Search, action: ScrollToTop             }
+  #- { key: G,      mods: Shift,         mode: Vi|~Search, action: ScrollToBottom          }
+  #- { key: B,      mods: Control,       mode: Vi|~Search, action: ScrollPageUp            }
+  #- { key: F,      mods: Control,       mode: Vi|~Search, action: ScrollPageDown          }
+  #- { key: U,      mods: Control,       mode: Vi|~Search, action: ScrollHalfPageUp        }
+  #- { key: D,      mods: Control,       mode: Vi|~Search, action: ScrollHalfPageDown      }
+  #- { key: Y,                           mode: Vi|~Search, action: Copy                    }
+  #- { key: Y,                           mode: Vi|~Search, action: ClearSelection          }
+  #- { key: Copy,                        mode: Vi|~Search, action: ClearSelection          }
+  #- { key: V,                           mode: Vi|~Search, action: ToggleNormalSelection   }
+  #- { key: V,      mods: Shift,         mode: Vi|~Search, action: ToggleLineSelection     }
+  #- { key: V,      mods: Control,       mode: Vi|~Search, action: ToggleBlockSelection    }
+  #- { key: V,      mods: Alt,           mode: Vi|~Search, action: ToggleSemanticSelection }
+  #- { key: Return,                      mode: Vi|~Search, action: Open                    }
+  #- { key: K,                           mode: Vi|~Search, action: Up                      }
+  #- { key: J,                           mode: Vi|~Search, action: Down                    }
+  #- { key: H,                           mode: Vi|~Search, action: Left                    }
+  #- { key: L,                           mode: Vi|~Search, action: Right                   }
+  #- { key: Up,                          mode: Vi|~Search, action: Up                      }
+  #- { key: Down,                        mode: Vi|~Search, action: Down                    }
+  #- { key: Left,                        mode: Vi|~Search, action: Left                    }
+  #- { key: Right,                       mode: Vi|~Search, action: Right                   }
+  #- { key: Key0,                        mode: Vi|~Search, action: First                   }
+  #- { key: Key4,   mods: Shift,         mode: Vi|~Search, action: Last                    }
+  #- { key: Key6,   mods: Shift,         mode: Vi|~Search, action: FirstOccupied           }
+  #- { key: H,      mods: Shift,         mode: Vi|~Search, action: High                    }
+  #- { key: M,      mods: Shift,         mode: Vi|~Search, action: Middle                  }
+  #- { key: L,      mods: Shift,         mode: Vi|~Search, action: Low                     }
+  #- { key: B,                           mode: Vi|~Search, action: SemanticLeft            }
+  #- { key: W,                           mode: Vi|~Search, action: SemanticRight           }
+  #- { key: E,                           mode: Vi|~Search, action: SemanticRightEnd        }
+  #- { key: B,      mods: Shift,         mode: Vi|~Search, action: WordLeft                }
+  #- { key: W,      mods: Shift,         mode: Vi|~Search, action: WordRight               }
+  #- { key: E,      mods: Shift,         mode: Vi|~Search, action: WordRightEnd            }
+  #- { key: Key5,   mods: Shift,         mode: Vi|~Search, action: Bracket                 }
+  #- { key: Slash,                       mode: Vi|~Search, action: SearchForward           }
+  #- { key: Slash,  mods: Shift,         mode: Vi|~Search, action: SearchBackward          }
+  #- { key: N,                           mode: Vi|~Search, action: SearchNext              }
+  #- { key: N,      mods: Shift,         mode: Vi|~Search, action: SearchPrevious          }
+
+  # Search Mode
+  #- { key: Return,                mode: Search|Vi,  action: SearchConfirm         }
+  #- { key: Escape,                mode: Search,     action: SearchCancel          }
+  #- { key: C,      mods: Control, mode: Search,     action: SearchCancel          }
+  #- { key: U,      mods: Control, mode: Search,     action: SearchClear           }
+  #- { key: W,      mods: Control, mode: Search,     action: SearchDeleteWord      }
+  #- { key: P,      mods: Control, mode: Search,     action: SearchHistoryPrevious }
+  #- { key: N,      mods: Control, mode: Search,     action: SearchHistoryNext     }
+  #- { key: Up,                    mode: Search,     action: SearchHistoryPrevious }
+  #- { key: Down,                  mode: Search,     action: SearchHistoryNext     }
+  #- { key: Return,                mode: Search|~Vi, action: SearchFocusNext       }
+  #- { key: Return, mods: Shift,   mode: Search|~Vi, action: SearchFocusPrevious   }
 
   # (Windows, Linux, and BSD only)
-  #- { key: V,              mods: Control|Shift,           action: Paste            }
-  #- { key: C,              mods: Control|Shift,           action: Copy             }
-  #- { key: F,              mods: Control|Shift,           action: SearchForward    }
-  #- { key: B,              mods: Control|Shift,           action: SearchBackward   }
-  #- { key: C,              mods: Control|Shift, mode: Vi, action: ClearSelection   }
-  #- { key: Insert,         mods: Shift,                   action: PasteSelection   }
-  #- { key: Key0,           mods: Control,                 action: ResetFontSize    }
-  #- { key: Equals,         mods: Control,                 action: IncreaseFontSize }
-  #- { key: Plus,           mods: Control,                 action: IncreaseFontSize }
-  #- { key: NumpadAdd,      mods: Control,                 action: IncreaseFontSize }
-  #- { key: Minus,          mods: Control,                 action: DecreaseFontSize }
-  #- { key: NumpadSubtract, mods: Control,                 action: DecreaseFontSize }
+  #- { key: V,              mods: Control|Shift, mode: ~Vi,        action: Paste            }
+  #- { key: C,              mods: Control|Shift,                   action: Copy             }
+  #- { key: F,              mods: Control|Shift, mode: ~Search,    action: SearchForward    }
+  #- { key: B,              mods: Control|Shift, mode: ~Search,    action: SearchBackward   }
+  #- { key: C,              mods: Control|Shift, mode: Vi|~Search, action: ClearSelection   }
+  #- { key: Insert,         mods: Shift,                           action: PasteSelection   }
+  #- { key: Key0,           mods: Control,                         action: ResetFontSize    }
+  #- { key: Equals,         mods: Control,                         action: IncreaseFontSize }
+  #- { key: Plus,           mods: Control,                         action: IncreaseFontSize }
+  #- { key: NumpadAdd,      mods: Control,                         action: IncreaseFontSize }
+  #- { key: Minus,          mods: Control,                         action: DecreaseFontSize }
+  #- { key: NumpadSubtract, mods: Control,                         action: DecreaseFontSize }
 
   # (Windows only)
   #- { key: Return,   mods: Alt,           action: ToggleFullscreen }
 
   # (macOS only)
-  #- { key: K,              mods: Command, mode: ~Vi, chars: "\x0c"            }
-  #- { key: Key0,           mods: Command,            action: ResetFontSize    }
-  #- { key: Equals,         mods: Command,            action: IncreaseFontSize }
-  #- { key: Plus,           mods: Command,            action: IncreaseFontSize }
-  #- { key: NumpadAdd,      mods: Command,            action: IncreaseFontSize }
-  #- { key: Minus,          mods: Command,            action: DecreaseFontSize }
-  #- { key: NumpadSubtract, mods: Command,            action: DecreaseFontSize }
-  #- { key: K,              mods: Command,            action: ClearHistory     }
-  #- { key: V,              mods: Command,            action: Paste            }
-  #- { key: C,              mods: Command,            action: Copy             }
-  #- { key: C,              mods: Command, mode: Vi,  action: ClearSelection   }
-  #- { key: H,              mods: Command,            action: Hide             }
-  #- { key: M,              mods: Command,            action: Minimize         }
-  #- { key: Q,              mods: Command,            action: Quit             }
-  #- { key: W,              mods: Command,            action: Quit             }
-  #- { key: N,              mods: Command,            action: SpawnNewInstance }
-  #- { key: F,              mods: Command|Control,    action: ToggleFullscreen }
-  #- { key: F,              mods: Command,            action: SearchForward    }
-  #- { key: B,              mods: Command,            action: SearchBackward   }
+  #- { key: K,              mods: Command, mode: ~Vi|~Search, chars: "\x0c"                 }
+  #- { key: K,              mods: Command, mode: ~Vi|~Search, action: ClearHistory          }
+  #- { key: Key0,           mods: Command,                    action: ResetFontSize         }
+  #- { key: Equals,         mods: Command,                    action: IncreaseFontSize      }
+  #- { key: Plus,           mods: Command,                    action: IncreaseFontSize      }
+  #- { key: NumpadAdd,      mods: Command,                    action: IncreaseFontSize      }
+  #- { key: Minus,          mods: Command,                    action: DecreaseFontSize      }
+  #- { key: NumpadSubtract, mods: Command,                    action: DecreaseFontSize      }
+  #- { key: V,              mods: Command,                    action: Paste                 }
+  #- { key: C,              mods: Command,                    action: Copy                  }
+  #- { key: C,              mods: Command, mode: Vi|~Search,  action: ClearSelection        }
+  #- { key: H,              mods: Command,                    action: Hide                  }
+  #- { key: H,              mods: Command|Alt,                action: HideOtherApplications }
+  #- { key: M,              mods: Command,                    action: Minimize              }
+  #- { key: Q,              mods: Command,                    action: Quit                  }
+  #- { key: W,              mods: Command,                    action: Quit                  }
+  #- { key: N,              mods: Command,                    action: SpawnNewInstance      }
+  #- { key: F,              mods: Command|Control,            action: ToggleFullscreen      }
+  #- { key: F,              mods: Command, mode: ~Search,     action: SearchForward         }
+  #- { key: B,              mods: Command, mode: ~Search,     action: SearchBackward        }
 
 #debug:
   # Display the time it takes to redraw each frame.
@@ -1229,7 +1348,7 @@ key_bindings:
   # Log level
   #
   # Values for `log_level`:
-  #   - None
+  #   - Off
   #   - Error
   #   - Warn
   #   - Info
@@ -1239,3 +1358,6 @@ key_bindings:
 
   # Print all received window events.
   #print_events: false
+
+  # Highlight window damage information.
+  #highlight_damage: false
