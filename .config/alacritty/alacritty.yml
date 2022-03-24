@@ -810,8 +810,84 @@ schemes:
       magenta: '0xb294bb'
       cyan:    '0x8abeb7'
       white:   '0xc5c8c6'
+  tokyo-night: &tokyo-night
+    primary:
+      background: '0x1a1b26'
+      foreground: '0xc9d3ff'
+    cursor:
+      text:   '0x1a1b26'
+      cursor: '0xc9d3ff'
+    vi_mode_cursor:
+      text:   '0x1a1b26'
+      cursor: '0xc9d3ff'
+    selection:
+      text:       CellForeground
+      background: '#2d4370'
+    search:
+      matches:
+        foreground: CellBackground
+        background: '0x0db9d7'
+      bar:
+        background: '#343955'
+        foreground: '0xc9d3ff'
+    normal:
+      black:   '0x32344a'
+      red:     '0xea4e6b'
+      green:   '0x9ece6a'
+      yellow:  '0xff9e64'
+      blue:    '0x7aa2f7'
+      magenta: '0xad8ee6'
+      cyan:    '0x75c1ee'
+      white:   '0xb6b9cc'
+    bright:
+      black:   '0x444b6a'
+      red:     '0xff4266'
+      green:   '0xace173'
+      yellow:  '0xe0af68'
+      blue:    '0x9abaff'
+      magenta: '0xbb9af7'
+      cyan:    '0x7dcfff'
+      white:   '0xcbcff5'
+  tokyo-night-storm: &tokyo-night-storm
+    primary:
+      background: '0x24283b'
+      foreground: '0xc9d3ff'
+    cursor:
+      text:   '0x24283b'
+      cursor: '0xc9d3ff'
+    vi_mode_cursor:
+      text:   '0x24283b'
+      cursor: '0xc9d3ff'
+    selection:
+      text:       CellForeground
+      background: '#2d4370'
+    search:
+      matches:
+        foreground: CellBackground
+        background: '0x0db9d7'
+      bar:
+        background: '#343955'
+        foreground: '0xc9d3ff'
+    normal:
+      black:   '0x32344a'
+      red:     '0xea4e6b'
+      green:   '0x9ece6a'
+      yellow:  '0xff9e64'
+      blue:    '0x7aa2f7'
+      magenta: '0xad8ee6'
+      cyan:    '0x75c1ee'
+      white:   '0xb6b9cc'
+    bright:
+      black:   '0x444b6a'
+      red:     '0xff4266'
+      green:   '0xace173'
+      yellow:  '0xe0af68'
+      blue:    '0x9abaff'
+      magenta: '0xbb9af7'
+      cyan:    '0x7dcfff'
+      white:   '0xcbcff5'
 
-colors: *tokyostorm
+colors: *tokyo-night-storm
 
 # Bell
 #
@@ -1227,7 +1303,7 @@ colors: *tokyostorm
 # If the same trigger is assigned to multiple actions, all of them are executed
 # in the order they were defined in.
 key_bindings:
-  - { key: Return,    mods: Control|Shift,              action: SpawnNewInstance }
+  - { key: Return,    mods: Control|Shift,              action: CreateNewWindow }
   #- { key: Paste,                                       action: Paste          }
   #- { key: Copy,                                        action: Copy           }
   #- { key: L,         mods: Control,                    action: ClearLogNotice }
