@@ -33,7 +33,7 @@ i3lock --nofork --ignore-empty-password \
   --verif-color=ffffffff --wrong-color=ffffffff \
   --time-font="Fira Code" --date-font="Fira Code" --layout-font="Fira Code" \
   --time-align 1 --date-align 1 \
-  --force-clock --time-pos="ix-513:iy+20" --date-pos="ix-503:ty+60" \
+  --force-clock --time-pos="ix-510:iy+20" --date-pos="ix-503:ty+60" \
   --time-color=ffffffff --time-size=135 --time-str="%H:%M" \
   --date-color=ffffffff --date-size=45 --date-str="%a %Y-%m-%d" \
   -i "${HOME}/.lockscreen.png"
