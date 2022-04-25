@@ -24,6 +24,9 @@ export PATH
 fpath=("$ZDOTDIR/functions" "$fpath[@]")
 export FPATH
 
+# Nix
+emulate sh -c '. /home/achuie/.nix-profile/etc/profile.d/nix.sh'
+
 ## Prompt
 autoload -Uz promptinit
 promptinit
