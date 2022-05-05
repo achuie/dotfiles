@@ -108,6 +108,11 @@ highlight FoldColumn ctermfg=black
 
 highlight Comment cterm=italic
 
+set cursorline
+highlight clear CursorLine
+" DarkOrange
+highlight CursorLineNR cterm=NONE ctermfg=208
+
 " Map redraw screen command to also turn off search highlighting until the next
 " search
 nnoremap <C-L> :nohl<CR><C-L>
