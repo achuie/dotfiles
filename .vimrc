@@ -23,7 +23,7 @@ set showcmd
 
 " When there is a previous search pattern, highlight all its matches
 set hlsearch
- 
+
 " Ignore case in search patterns, except for patterns containing upper case
 " characters
 set ignorecase
@@ -51,7 +51,9 @@ if has('mouse')
 endif
 
 " Mouse input mode required by some terminal emulators
-set ttymouse=sgr
+if !has('nvim')
+    set ttymouse=sgr
+endif
 
 " Show absolute line number of current line, and others as distance from
 " current line
@@ -72,18 +74,18 @@ set smarttab
 set shiftwidth=4
 set softtabstop=4
 set tabstop=8
- 
+
 " Show matching bracket on insert, if it is on-screen
 set showmatch
- 
+
 " While typing a search command, immediately show matches as the pattern is
 " typed
 set incsearch
- 
+
 " Maximum width of text that is being inserted. A longer line will be broken
 " after white space to get this width
-set textwidth=79
- 
+set textwidth=100
+
 " c  Auto-wrap comments using textwidth, inserting the current comment leader
 "       automatically.
 " q  Allow formatting of comments with "gq".
@@ -91,27 +93,32 @@ set textwidth=79
 "       Insert mode. 
 " t  Auto-wrap text using textwidth (does not apply to comments)
 set formatoptions=c,q,r,t
- 
+
+" Show tabs and indicate long lines
+set list listchars=tab:›—,extends:→,precedes:←,nbsp:·
+
 " Color preferences
-set background=light
-highlight Statement ctermfg=yellow
-highlight Visual cterm=reverse ctermbg=NONE
-highlight Search ctermfg=black ctermbg=yellow
+if !has('nvim')
+    set background=light
+    highlight Statement ctermfg=yellow
+    highlight Visual cterm=reverse ctermbg=NONE
+    highlight Search ctermfg=black ctermbg=yellow
 
-highlight DiffAdd ctermbg=black ctermfg=green cterm=reverse
-highlight DiffChange ctermbg=black ctermfg=yellow cterm=reverse
-highlight DiffDelete ctermbg=black ctermfg=darkred cterm=reverse
-highlight DiffText ctermbg=black ctermfg=red cterm=reverse
+    highlight DiffAdd ctermbg=black ctermfg=green cterm=reverse
+    highlight DiffChange ctermbg=black ctermfg=yellow cterm=reverse
+    highlight DiffDelete ctermbg=black ctermfg=darkred cterm=reverse
+    highlight DiffText ctermbg=black ctermfg=red cterm=reverse
 
-highlight Folded ctermfg=black
-highlight FoldColumn ctermfg=black
+    highlight Folded ctermfg=black
+    highlight FoldColumn ctermfg=black
 
-highlight Comment cterm=italic
+    highlight Comment cterm=italic
 
-set cursorline
-highlight clear CursorLine
-" DarkOrange
-highlight CursorLineNR cterm=NONE ctermfg=208
+    set cursorline
+    highlight clear CursorLine
+    " DarkOrange
+    highlight CursorLineNR cterm=NONE ctermfg=208
+endif
 
 " Map redraw screen command to also turn off search highlighting until the next
 " search
@@ -178,4 +185,6 @@ highlight IndentGuidesOdd ctermbg=0
 highlight IndentGuidesEven ctermbg=8
 
 " Force Vim to let Dirvish take precedence
-let g:loaded_netrwPlugin = 1
+if !has('nvim')
+    let g:loaded_netrwPlugin = 1
+endif
