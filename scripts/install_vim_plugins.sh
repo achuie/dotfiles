@@ -24,5 +24,13 @@ vim -u NONE -c "helptags ${STARTDIR}/dirvish/doc" -c q
 git clone https://github.com/nathanaelkane/vim-indent-guides.git ${STARTDIR}/indent-guides
 vim -u NONE -c "helptags ${STARTDIR}/indent-guides/doc" -c q
 
+git clone https://github.com/lukas-reineke/indent-blankline.nvim.git ${STARTDIR}/indent-blankline
+nvim -u NONE -c "helptags ${STARTDIR}/indent-blankline/doc" -c q
+
 git clone https://github.com/jeetsukumaran/vim-indentwise.git ${STARTDIR}/indentwise
 vim -u NONE -c "helptags ${STARTDIR}/indentwise/doc" -c q
+
+git clone https://github.com/rebelot/kanagawa.nvim.git ${STARTDIR}/kanagawa
+
+git clone https://github.com/folke/tokyonight.nvim.git ${STARTDIR}/tokyonight
+nvim -u NONE -c "helptags ${STARTDIR}/tokyonight/doc" -c q
