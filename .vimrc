@@ -179,10 +179,16 @@ autocmd FileType c,cpp,objc,h,hpp nnoremap <buffer> <Leader>cf :<C-u>ClangFormat
 autocmd FileType c,cpp,objc,h,hpp vnoremap <buffer> <Leader>cf :ClangFormat<CR>
 
 " Indent guides colors
-let g:indent_guides_auto_colors = 0
-highlight Normal ctermbg=NONE
-highlight IndentGuidesOdd ctermbg=0
-highlight IndentGuidesEven ctermbg=8
+let g:indent_guides_default_mapping = 0
+if !has('nvim')
+    let g:indent_guides_auto_colors = 0
+    highlight Normal ctermbg=NONE
+    highlight IndentGuidesOdd ctermbg=0
+    highlight IndentGuidesEven ctermbg=8
+    nnoremap <silent> <Leader>ig :IndentGuidesToggle<CR>
+else
+    nnoremap <silent> <Leader>ig :IndentBlanklineToggle<CR>
+endif
 
 " Force Vim to let Dirvish take precedence
 if !has('nvim')
