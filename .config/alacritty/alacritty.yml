@@ -810,6 +810,47 @@ schemes:
       magenta: '0xbb9af7'
       cyan:    '0x7dcfff'
       white:   '0xcbcff5'
+  rose-pine: &rose-pine
+    primary:
+      background: "0x191724"
+      foreground: "0xe0def4"
+    cursor:
+      text: "0xe0def4"
+      cursor: "0x524f67"
+    vi_mode_cursor:
+      text: "0xe0def4"
+      cursor: "0x524f67"
+    line_indicator:
+      foreground: None
+      background: None
+    selection:
+      text: "0xe0def4"
+      background: "0x403d52"
+    normal:
+      black: "0x26233a"
+      red: "0xeb6f92"
+      green: "0x9ccfd8"
+      yellow: "0xf6c177"
+      blue: "0x31748f"
+      magenta: "0xc4a7e7"
+      cyan: "0xebbcba"
+      white: "0xe0def4"
+    bright:
+      black: "0x6e6a86"
+      red: "0xf9628c"
+      green: "0xabe2ec"
+      yellow: "0xf6d5a8"
+      blue: "0x4c8aa3"
+      magenta: "0xd7c4ef"
+      cyan: "0xecd1cf"
+      white: "0xf4f3fd"
+    hints:
+      start:
+        foreground: "#908caa"
+        background: "#1f1d2e"
+      end:
+        foreground: "#6e6a86"
+        background: "#1f1d2e"
 
 colors: *tokyo-night-storm
 
