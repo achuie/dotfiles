@@ -2,16 +2,6 @@
 " .vimrc
 set nocompatible
 
-" Filetype-based plugins and indenting
-if has('filetype')
-    filetype plugin indent on
-endif
-
-" Enable syntax highlighting
-if has('syntax')
-    syntax on
-endif
-
 " For hidden modified buffers
 set hidden
 
@@ -74,6 +64,16 @@ set smarttab
 set shiftwidth=4
 set softtabstop=4
 set tabstop=8
+
+" Filetype-based plugins and indenting
+if has('filetype')
+    filetype plugin indent on
+endif
+
+" Enable syntax highlighting
+if has('syntax')
+    syntax on
+endif
 
 " Show matching bracket on insert, if it is on-screen
 set showmatch
