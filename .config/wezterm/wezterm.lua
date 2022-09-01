@@ -7,7 +7,7 @@ return {
     'Fira Code Custom',
     'Iosevka Custom Extended',
   },
-  font_size = 9,
+  font_size = 14,
   font_rules = {
     {
       italic = true,
@@ -20,13 +20,16 @@ return {
     },
   },
 
+  window_background_opacity = 0.95,
+
   color_scheme = 'tokyo-night-storm',
   color_schemes = {
     ['tokyo-night-storm'] = {
       foreground = '#c9d3ff',
-      background = 'rgba(36, 40, 58, 229.5)', -- '#24283b',
-      -- cursor_fg = '#24283b',
-      -- cursor_bg = '#c9d3ff',
+      background = '#24283b',
+      cursor_fg = '#24283b',
+      cursor_bg = '#c9d3ff',
+      cursor_border = '#c9d3ff',
       selection_bg = '#2d4370',
       ansi = {
         '#32344a',
