@@ -3,12 +3,22 @@ local wezterm = require 'wezterm'
 return {
   hide_tab_bar_if_only_one_tab = true,
 
+  use_ime = false,
+
   font = wezterm.font_with_fallback {
-    'Fira Code Custom',
+    {
+      family = 'Fira Code',
+      harfbuzz_features = { 'ss02', 'ss05', 'ss08'}
+    },
     'Iosevka Custom Extended',
   },
-  font_size = 14,
+  font_size = 12,
   font_rules = {
+    {
+      italic = false,
+      intensity = 'Bold',
+      font = wezterm.font('Fira Code', { weight = 'Bold' }),
+    },
     {
       italic = true,
       font = wezterm.font('Iosevka Custom Extended', { italic = true }),
