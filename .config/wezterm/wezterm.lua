@@ -1,5 +1,15 @@
 local wezterm = require 'wezterm'
 
+wezterm.on('toggle-ligature', function(window, pane)
+  local overrides = window:get_config_overrides() or {}
+  if not overrides.harfbuzz_features then
+    overrides.harfbuzz_features = { 'aalt=0', 'calt=0', 'clig=0', 'liga=0' }
+  else
+    overrides.harfbuzz_features = nil
+  end
+  window:set_config_overrides(overrides)
+end)
+
 return {
   hide_tab_bar_if_only_one_tab = true,
 
@@ -8,7 +18,7 @@ return {
   font = wezterm.font_with_fallback {
     {
       family = 'Fira Code',
-      harfbuzz_features = { 'ss02', 'ss05', 'ss08'}
+      harfbuzz_features = { 'ss02', 'ss05', 'ss08' }
     },
     'Iosevka Custom Extended',
   },
@@ -61,6 +71,14 @@ return {
         '#7dcfff',
         '#cbcff5',
       },
+    },
+  },
+
+  keys = {
+    {
+      key = 'E',
+      mods = 'CTRL',
+      action = wezterm.action.EmitEvent 'toggle-ligature',
     },
   },
 }
