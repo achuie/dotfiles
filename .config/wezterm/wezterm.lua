@@ -45,7 +45,7 @@ return {
   color_scheme = 'tokyo-night-storm',
   color_schemes = {
     ['tokyo-night-storm'] = {
-      foreground = '#c9d3ff',
+      foreground = '#d9d9d9',
       background = '#24283b',
       cursor_fg = '#24283b',
       cursor_bg = '#c9d3ff',
