@@ -17,6 +17,7 @@ end
 
 require'indent_blankline'.setup({
   char_blankline = '┊',
+  show_trailing_blankline_indent = false,
   show_current_context = true,
   use_treesitter = true,
   use_treesitter_scope = true,
