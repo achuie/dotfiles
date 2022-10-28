@@ -178,6 +178,9 @@ nnoremap <Leader>t :TagbarToggle<CR>
 autocmd FileType c,cpp,objc,h,hpp nnoremap <buffer> <Leader>cf :<C-u>ClangFormat<CR>
 autocmd FileType c,cpp,objc,h,hpp vnoremap <buffer> <Leader>cf :ClangFormat<CR>
 
+" Recognize Pollen files as racket code
+autocmd BufRead,BufNewFile *.pm set filetype=racket
+
 " Indent guides colors
 let g:indent_guides_default_mapping = 0
 if !has('nvim')
