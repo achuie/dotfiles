@@ -15,6 +15,9 @@ vim -u NONE -c "helptags ${STARTDIR}/tagbar/doc" -c q
 git clone https://github.com/sheerun/vim-polyglot.git ${STARTDIR}/polyglot
 vim -u NONE -c "helptags ${STARTDIR}/polyglot/doc" -c q
 
+git clone https://github.com/nvim-treesitter/nvim-treesitter.git ${STARTDIR}/nvim-treesitter
+nvim -u NONE -c "helptags ${STARTDIR}/nvim-treesitter/doc" -c q
+
 git clone https://github.com/chaoren/vim-wordmotion ${STARTDIR}/wordmotion
 vim -u NONE -c "helptags ${STARTDIR}/wordmotion/doc" -c q
 
