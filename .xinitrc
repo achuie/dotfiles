@@ -2,7 +2,7 @@
 
 xrdb -load .Xresources
 
-picom -b --experimental-backends --config /home/achuie/.config/picom/picom.conf
+picom -b --config /home/achuie/.config/picom/picom.conf
 
 xset -dpms
 xset s off
