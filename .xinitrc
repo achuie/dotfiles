@@ -15,10 +15,11 @@ export TERMINAL=alacritty
 export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
 export XMODIFIERS=@im=fcitx
-fcitx
 
 bash /home/achuie/.screenlayout/default.sh
 bash /home/achuie/.fehbg
+
+fcitx &
 
 dunst &
 
