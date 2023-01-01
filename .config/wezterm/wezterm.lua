@@ -40,7 +40,7 @@ return {
     },
   },
 
-  window_background_opacity = 0.95,
+  window_background_opacity = 0.9,
 
   color_scheme = 'tokyo-night-storm',
   color_schemes = {
@@ -79,6 +79,11 @@ return {
       key = 'E',
       mods = 'CTRL',
       action = wezterm.action.EmitEvent 'toggle-ligature',
+    },
+    {
+      key = 'Enter',
+      mods = 'SHIFT|CTRL',
+      action = wezterm.action.SpawnWindow,
     },
   },
 }
