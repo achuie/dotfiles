@@ -5,17 +5,13 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     npmlock2nix-git = {
       url = "github:nix-community/npmlock2nix";
-      inputs.nixpkgs.follows = "nixpkgs";
       flake = false;
     };
     iosevka = {
       url = "github:be5invis/Iosevka/v15.5.0";
       flake = false;
     };
-    utils = {
-      url = "github:numtide/flake-utils";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    utils.url = "github:numtide/flake-utils";
   };
 
   outputs = { self, nixpkgs, utils, npmlock2nix-git, iosevka }:

@@ -2,39 +2,45 @@
   description = "Customized Fira Code";
 
   inputs = {
-    # Use stable nixpkgs for compatibility with mach-nix.
-    nixpkgs.url = "github:nixos/nixpkgs/21.11";
-    utils = {
-      url = "github:numtide/flake-utils";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    mach-nix = {
-      url = "github:davhau/mach-nix/3.4.0";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.pypi-deps-db.url = "github:davhau/pypi-deps-db";
+    nixpkgs.url = "github:nixos/nixpkgs/22.11";
+    utils.url = "github:numtide/flake-utils";
+    firacode-src = {
+      url = "github:tonsky/firacode/6.2";
+      flake = false;
     };
   };
 
-  outputs = { self, nixpkgs, utils, mach-nix }:
+  outputs = { self, nixpkgs, utils, firacode-src }:
     utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        otfeaturefreezer = mach-nix.lib.${system}.mkPython {
-          requirements = "opentype-feature-freezer";
-        };
+        pythonEnv = pkgs.python3.withPackages (ps: [
+          (pkgs.python3.pkgs.buildPythonPackage rec {
+            pname = "opentype-feature-freezer";
+            version = "1.32.2";
+            src = pkgs.python3.pkgs.fetchPypi {
+              inherit pname;
+              inherit version;
+              sha256 = "0wxmqbf6lrkkjsvg2ck5v304fbyq31b2nvs7ala2ykpfpwh37jfd";
+            };
+            propagatedBuildInputs = [ pkgs.python3.pkgs.fonttools ];
+          })
+      ]);
+
       in {
         defaultPackage = pkgs.stdenv.mkDerivation {
-          name = "fira-code-custom";
-
-          buildInputs = [ pkgs.fira-code otfeaturefreezer ];
+          pname = "fira-code-custom";
+          version = "6.2";
 
           unpackPhase = "true";
-          installPhase = "true";
-          fixupPhase = ''
+          buildPhase = ''
+            ${pythonEnv}/bin/pyftfeatfreeze -f 'ss02,ss05,ss08' -S -U Custom \
+              ${pkgs.fira-code}/share/fonts/truetype/FiraCode-VF.ttf \
+              FiraCode-VF-Custom.ttf
+          '';
+          installPhase = ''
             mkdir -p $out/share/fonts/truetype
-            pyftfeatfreeze -f 'ss05' -S -U Custom \
-            ${pkgs.fira-code}/share/fonts/truetype/FiraCode-VF.ttf \
-            $out/share/fonts/truetype/FiraCode-VF-Custom.ttf
+            cp FiraCode-VF-Custom.ttf $out/share/fonts/truetype
           '';
         };
 
