@@ -17,7 +17,7 @@
       pythonEnv = forAllSystems (system:
         pkgs.${system}.python3.withPackages (ps:
           with ps;
-          [ fonttools skia-pathops pyyaml ] ++ [
+          [ skia-pathops pyyaml ] ++ [
             (pkgs.${system}.python3.pkgs.buildPythonPackage rec {
               pname = "font-v";
               version = "2.1.0";
@@ -26,7 +26,7 @@
                 inherit version;
                 sha256 = "1l5xcs2f6jh1p3zl8knfixyh5qgkchipjb2h6d3g1pd70h3clzaw";
               };
-              buildInputs = with pkgs.${system}.python3.pkgs; [
+              propagatedBuildInputs = with pkgs.${system}.python3.pkgs; [
                 fonttools
                 gitpython
               ];
@@ -49,7 +49,7 @@
                 inherit version;
                 sha256 = "0wxmqbf6lrkkjsvg2ck5v304fbyq31b2nvs7ala2ykpfpwh37jfd";
               };
-              buildInputs = [ pkgs.${system}.python3.pkgs.fonttools ];
+              propagatedBuildInputs = [ pkgs.${system}.python3.pkgs.fonttools ];
             })
           ]));
 
@@ -137,19 +137,18 @@
 
             mkdir nix-output
 
-            ${
-              pythonEnv.${system}
-            }/bin/python scripts/instantiate-code-fonts.py ${italic-config} 
+            ${pythonEnv.${system}}/bin/python \
+              scripts/instantiate-code-fonts.py ${italic-config} 
             cp fonts/RecMonoCustom/*Italic* nix-output
 
-            ${
-              pythonEnv.${system}
-            }/bin/python scripts/instantiate-code-fonts.py ${regular-bold-config}
+            ${pythonEnv.${system}}/bin/python \
+              scripts/instantiate-code-fonts.py ${regular-bold-config}
             cp fonts/RecMonoCustom/*Regular* fonts/RecMonoCustom/*Bold-* nix-output
           '';
 
           installPhase = ''
-            cp -r ./nix-output $out
+            mkdir -p $out/share/fonts/truetype
+            cp ./nix-output/* $out/share/fonts/truetype
           '';
         };
       });
