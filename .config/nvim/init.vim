@@ -51,12 +51,13 @@ require'nvim-treesitter.configs'.setup({
     },
 })
 
-local default_colors = require("kanagawa.colors").setup()
-local overrides = {
-  EndOfBuffer = { fg = default_colors.bg_light2 },
-  CursorLineNr = { fg = default_colors.bg_light3 }
-}
-require'kanagawa'.setup({ statementStyle = { bold = false }, overrides = overrides })
+local overrides = function(colors)
+  return {
+    EndOfBuffer = { fg = colors.bg_light2 },
+    CursorLineNr = { fg = colors.bg_light3 }
+  }
+end
+require'kanagawa'.setup({ statementStyle = { bold = false }, theme = "wave", overrides = overrides })
 EOF
 
 colorscheme kanagawa
