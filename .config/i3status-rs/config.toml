@@ -1,8 +1,10 @@
 [theme]
 theme = "semi-native"
+[theme.overrides]
+idle_fg = "#d9d9d9"
 
 [icons]
-icons = "awesome5"
+icons = "awesome6"
 
 [[block]]
 block = "focused_window"
