@@ -57,7 +57,7 @@ format = " $icon $1m.eng(w:4) "
 
 [[block]]
 block = "sound"
-format = " $icon {$volume.eng(w:3) |} "
+format = " $icon {$volume.eng(w:3) |}"
 
 [[block]]
 block = "battery"
