@@ -3,40 +3,61 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/22.11";
-    utils.url = "github:numtide/flake-utils";
-    firacode-src = {
-      url = "github:tonsky/firacode/6.2";
-      flake = false;
-    };
+    flake-utils.url = "github:numtide/flake-utils";
+
+    mach-nix.url = "github:davhau/mach-nix";
+    mach-nix.inputs.pypi-deps-db.follows = "pypi";
+    pypi.url = "github:davhau/pypi-deps-db";
+    pypi.flake = false;
+
+    sfnt2woff-zopfli-src.url = "github:bramstein/sfnt2woff-zopfli";
+    sfnt2woff-zopfli-src.flake = false;
+    firacode-src.url = "github:tonsky/firacode/6.2";
+    firacode-src.flake = false;
   };
 
-  outputs = { self, nixpkgs, utils, firacode-src }:
-    utils.lib.eachDefaultSystem (system:
+  outputs = { self, nixpkgs, flake-utils, mach-nix, pypi, sfnt2woff-zopfli-src
+    , firacode-src }:
+    flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        pythonEnv = pkgs.python3.withPackages (ps: [
-          (pkgs.python3.pkgs.buildPythonPackage rec {
-            pname = "opentype-feature-freezer";
-            version = "1.32.2";
-            src = pkgs.python3.pkgs.fetchPypi {
-              inherit pname;
-              inherit version;
-              sha256 = "0wxmqbf6lrkkjsvg2ck5v304fbyq31b2nvs7ala2ykpfpwh37jfd";
-            };
-            propagatedBuildInputs = [ pkgs.python3.pkgs.fonttools ];
-          })
-      ]);
+        pythonEnv = mach-nix.lib.${system}.mkPython {
+          requirements = ''
+            pillow
+            idna
+            requests
+            urllib3
+            pycairo
+            gftools
+            fontmake
+            fontbakery
+          '';
+        };
+        sfnt2woff-zopfli = pkgs.stdenv.mkDerivation rec {
+          pname = "sfnt2woff-zopfli";
+          version = "1.3.1";
 
+          src = sfnt2woff-zopfli-src;
+          buildInputs = [ pkgs.zlib ];
+          buildPhase = "make";
+          installPhase = ''
+            mkdir -p $out/bin
+            cp sfnt2woff-zopfli woff2sfnt-zopfli $out/bin
+          '';
+        };
       in {
         defaultPackage = pkgs.stdenv.mkDerivation {
           pname = "fira-code-custom";
           version = "6.2";
 
-          unpackPhase = "true";
+          buildInputs = with pkgs; [
+            ttfautohint
+            woff2
+            pythonEnv
+            sfnt2woff-zopfli
+          ];
           buildPhase = ''
-            ${pythonEnv}/bin/pyftfeatfreeze -f 'ss02,ss05,ss08' -S -U Custom \
-              ${pkgs.fira-code}/share/fonts/truetype/FiraCode-VF.ttf \
-              FiraCode-VF-Custom.ttf
+            ls
           '';
           installPhase = ''
             mkdir -p $out/share/fonts/truetype
