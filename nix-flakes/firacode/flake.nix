@@ -12,7 +12,9 @@
 
     sfnt2woff-zopfli-src.url = "github:bramstein/sfnt2woff-zopfli";
     sfnt2woff-zopfli-src.flake = false;
-    firacode-src.url = "github:tonsky/firacode/6.2";
+    # 6.2 release did not have a build script capable of baking in font features.
+    firacode-src.url =
+      "github:tonsky/firacode/20f11a21e0b7284e0cb40c594d2fa6091d775256";
     firacode-src.flake = false;
   };
 
@@ -22,15 +24,17 @@
       let
         pkgs = nixpkgs.legacyPackages.${system};
         pythonEnv = mach-nix.lib.${system}.mkPython {
+          python = "python38";
+          # Bump pycairo version to nixpkgs-22.11.
           requirements = ''
-            pillow
-            idna
-            requests
-            urllib3
-            pycairo
-            gftools
-            fontmake
-            fontbakery
+            pillow==5.4.1
+            idna==2.8
+            requests==2.21.0
+            urllib3==1.24.1
+            pycairo==1.21.0
+            gftools==0.7.4
+            fontmake==2.4.0
+            fontbakery==0.8.0
           '';
         };
         sfnt2woff-zopfli = pkgs.stdenv.mkDerivation rec {
@@ -50,6 +54,7 @@
           pname = "fira-code-custom";
           version = "6.2";
 
+          src = firacode-src;
           buildInputs = with pkgs; [
             ttfautohint
             woff2
@@ -57,11 +62,14 @@
             sfnt2woff-zopfli
           ];
           buildPhase = ''
-            ls
+            ln -s ${pkgs.bash}/bin/bash /bin/bash
+            ln -s ${pkgs.coreutils}/bin/* /bin
+
+            script/build.sh --features "ss02,ss05,ss08" --family-name "Fira Code Custom"
           '';
           installPhase = ''
-            mkdir -p $out/share/fonts/truetype
-            cp FiraCode-VF-Custom.ttf $out/share/fonts/truetype
+            mkdir -p $out/share/fonts
+            cp -r distr/* $out/share/fonts/
           '';
         };
 
