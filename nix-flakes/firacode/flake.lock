@@ -3,17 +3,17 @@
     "firacode-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1638823965,
-        "narHash": "sha256-guoUW6/nN6RwcuSzfe+b9U9CRrY0zTtOxpbfrELQbYM=",
+        "lastModified": 1678962867,
+        "narHash": "sha256-XjM8FXRtNqf6gcmFeOQHmhuG9gUsXC7TNCJqJVTswS8=",
         "owner": "tonsky",
         "repo": "firacode",
-        "rev": "eee6db993696aba61ff4eef03698e2987d79910c",
+        "rev": "20f11a21e0b7284e0cb40c594d2fa6091d775256",
         "type": "github"
       },
       "original": {
         "owner": "tonsky",
-        "ref": "6.2",
         "repo": "firacode",
+        "rev": "20f11a21e0b7284e0cb40c594d2fa6091d775256",
         "type": "github"
       }
     },
@@ -103,11 +103,11 @@
     "pypi": {
       "flake": false,
       "locked": {
-        "lastModified": 1680772486,
-        "narHash": "sha256-fbsZvbZiNcPcPsCGMJAxBiu7c3WZtsCugV7NfU3jsuE=",
+        "lastModified": 1680818214,
+        "narHash": "sha256-S0XEMY57kngoqpZ01PlLr7MWkjizEAC3pDU7sKpk620=",
         "owner": "davhau",
         "repo": "pypi-deps-db",
-        "rev": "253f3104699db7bbb82f56617c4a7173b8b0148d",
+        "rev": "d1e103df330cedfa57fc28dd7d3fb197a61c8ade",
         "type": "github"
       },
       "original": {
