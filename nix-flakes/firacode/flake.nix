@@ -18,13 +18,12 @@
     firacode-src.flake = false;
   };
 
-  outputs = { self, nixpkgs, flake-utils, mach-nix, pypi, sfnt2woff-zopfli-src
-    , firacode-src }:
+  outputs = { self, nixpkgs, flake-utils, mach-nix, pypi, sfnt2woff-zopfli-src, firacode-src }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        pythonEnv = mach-nix.lib.${system}.mkPython {
-          python = "python38";
+        pythonEnv = mach-nix.lib.${system}.mkPython rec {
+          python = "python39";
           # Bump pycairo version to nixpkgs-22.11.
           requirements = ''
             pillow==5.4.1
@@ -35,6 +34,8 @@
             gftools==0.7.4
             fontmake==2.4.0
             fontbakery==0.8.0
+
+            opentype-feature-freezer==1.32.2
           '';
         };
         sfnt2woff-zopfli = pkgs.stdenv.mkDerivation rec {
@@ -49,8 +50,9 @@
             cp sfnt2woff-zopfli woff2sfnt-zopfli $out/bin
           '';
         };
-      in {
-        defaultPackage = pkgs.stdenv.mkDerivation {
+      in
+      {
+        packages.default = pkgs.stdenv.mkDerivation {
           pname = "fira-code-custom";
           version = "6.2";
 
@@ -65,7 +67,11 @@
             ln -s ${pkgs.bash}/bin/bash /bin/bash
             ln -s ${pkgs.coreutils}/bin/* /bin
 
-            script/build.sh --features "ss02,ss05,ss08" --family-name "Fira Code Custom"
+            script/build.sh --features "ss02,ss08" --family-name "Fira Code Custom"
+
+            echo "Baking in alternate at-symbol..."
+            find distr -type d -name 'Fira Code Custom' -execdir bash -c 'for font in "$1"/*; do
+              pyftfeatfreeze -f "ss05" "$font" "$font"; done' none {} \;
           '';
           installPhase = ''
             mkdir -p $out/share/fonts
@@ -73,6 +79,6 @@
           '';
         };
 
-        formatter = pkgs.nixfmt;
+        formatter = pkgs.nixpkgs-fmt;
       });
 }
