@@ -18,12 +18,15 @@
       }
     },
     "flake-utils": {
+      "inputs": {
+        "systems": "systems"
+      },
       "locked": {
-        "lastModified": 1680776469,
-        "narHash": "sha256-3CXUDK/3q/kieWtdsYpDOBJw3Gw4Af6x+2EiSnIkNQw=",
+        "lastModified": 1681037374,
+        "narHash": "sha256-XL6X3VGbEFJZDUouv2xpKg2Aljzu/etPLv5e1FPt1q0=",
         "owner": "numtide",
         "repo": "flake-utils",
-        "rev": "411e8764155aa9354dbcd6d5faaeb97e9e3dce24",
+        "rev": "033b9f258ca96a10e543d4442071f614dc3f8412",
         "type": "github"
       },
       "original": {
@@ -103,11 +106,11 @@
     "pypi": {
       "flake": false,
       "locked": {
-        "lastModified": 1680818214,
-        "narHash": "sha256-S0XEMY57kngoqpZ01PlLr7MWkjizEAC3pDU7sKpk620=",
+        "lastModified": 1681119243,
+        "narHash": "sha256-Xd38NIprd0McjVS2BgR8sJjMEgb+q9TPLI0mGqxZBGE=",
         "owner": "davhau",
         "repo": "pypi-deps-db",
-        "rev": "d1e103df330cedfa57fc28dd7d3fb197a61c8ade",
+        "rev": "981c1778ec8de707bd0e96df964ea24ba0873031",
         "type": "github"
       },
       "original": {
@@ -139,6 +142,21 @@
       "original": {
         "owner": "bramstein",
         "repo": "sfnt2woff-zopfli",
+        "type": "github"
+      }
+    },
+    "systems": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
         "type": "github"
       }
     }
