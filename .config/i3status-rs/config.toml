@@ -1,7 +1,11 @@
 [theme]
 theme = "semi-native"
 [theme.overrides]
-idle_fg = "#d9d9d9"
+idle_fg = "#d3d7eb"
+info_fg = "#d3d7eb"
+good_fg = "#9ece6a"
+warning_fg = "#e0af68"
+critical_fg = "#ea4e6b"
 
 [icons]
 icons = "awesome6"
@@ -57,14 +61,15 @@ format = " $icon $1m.eng(w:4) "
 
 [[block]]
 block = "sound"
-format = " $icon {$volume.eng(w:3) |}"
+format = " $icon {$volume.eng(w:3) |} "
+[block.theme_overrides]
+idle_fg = "#bb9af7"
 
 [[block]]
 block = "battery"
 driver = "upower"
 [block.format]
 full = " $icon $percentage $time "
-short = " $icon $percentage "
 
 [[block]]
 block = "time"
