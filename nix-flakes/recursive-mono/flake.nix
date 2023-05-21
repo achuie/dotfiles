@@ -60,13 +60,13 @@
           Regular:
             MONO: 1
             CASL: 0
-            wght: 350
+            wght: 380
             slnt: 0
             CRSV: 0
           Italic:
             MONO: 1
             CASL: 0
-            wght: 350
+            wght: 380
             slnt: -10
             CRSV: 1
           Bold:
@@ -94,13 +94,13 @@
           Regular:
             MONO: 1
             CASL: 0.3
-            wght: 350
+            wght: 380
             slnt: 0
             CRSV: 0
           Italic:
             MONO: 1
             CASL: 0
-            wght: 350
+            wght: 380
             slnt: -10
             CRSV: 1
           Bold:
