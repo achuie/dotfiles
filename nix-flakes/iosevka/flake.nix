@@ -3,29 +3,30 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
-    npmlock2nix-git = {
+    npmlock2nix = {
       url = "github:nix-community/npmlock2nix";
       flake = false;
     };
     iosevka = {
-      url = "github:be5invis/Iosevka/v15.5.0";
+      url = "github:be5invis/Iosevka/v23.0.0";
       flake = false;
     };
     utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, utils, npmlock2nix-git, iosevka }:
+  outputs = { self, nixpkgs, utils, npmlock2nix, iosevka }:
     utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        npmlock2nix = pkgs.callPackage npmlock2nix-git {};
-        writeText = nixpkgs.legacyPackages.${system}.writeText;
-        customBuildConf = writeText "private-build-plans.toml" ''
+        npmlock2nix-lib = (pkgs.callPackage npmlock2nix { }).v2;
+        customBuildConf = nixpkgs.legacyPackages.${system}.writeText "private-build-plans.toml" ''
           [buildPlans.iosevka-custom]
           family = "Iosevka Custom"
           spacing = "normal"
           serifs = "sans"
           no-cv-ss = true
+          export-glyph-names = false
+          no-ligation = true
 
           [buildPlans.iosevka-custom.variants.design]
           capital-q = "straight"
@@ -52,8 +53,9 @@
           menu = "italic"
           css = "italic"
         '';
-      in {
-        defaultPackage = npmlock2nix.build {
+      in
+      {
+        defaultPackage = npmlock2nix-lib.build {
           src = iosevka;
 
           buildInputs = [ pkgs.ttfautohint ];
@@ -68,6 +70,6 @@
           '';
         };
 
-        formatter = pkgs.nixfmt;
+        formatter = pkgs.nixpkgs-fmt;
       });
 }
