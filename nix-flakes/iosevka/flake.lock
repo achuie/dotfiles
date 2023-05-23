@@ -3,27 +3,27 @@
     "iosevka": {
       "flake": false,
       "locked": {
-        "lastModified": 1654337169,
-        "narHash": "sha256-uedY9O5ES6Wp4Ukuo6VyAK1Vs60gS7oK82W0jukavIQ=",
+        "lastModified": 1684662076,
+        "narHash": "sha256-j7JE9UHG4xho0a4TqG5rpCJkYyVxgoLxBuRtNMGfkrw=",
         "owner": "be5invis",
         "repo": "Iosevka",
-        "rev": "615039d11217b1fce8395cb5ac3143ba3429d191",
+        "rev": "6e4bcf41976a503105af34ece0fce3c5bcab6f58",
         "type": "github"
       },
       "original": {
         "owner": "be5invis",
-        "ref": "v15.5.0",
+        "ref": "v23.0.0",
         "repo": "Iosevka",
         "type": "github"
       }
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1654398695,
-        "narHash": "sha256-Kw/KeoFXszNsF5mORP45mrxCP+k9Aq03hWcuWCL9sdI=",
+        "lastModified": 1684759798,
+        "narHash": "sha256-Kpbf5yKvKcj/yPqE1zYC6gju4JwTsYxTIZEvOII0jr4=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "c5d810f4c74c824ae0fb788103003c6c9d366a08",
+        "rev": "c7eb65213bd7d95eafb8c5e2e181f04da103d054",
         "type": "github"
       },
       "original": {
@@ -33,14 +33,14 @@
         "type": "github"
       }
     },
-    "npmlock2nix-git": {
+    "npmlock2nix": {
       "flake": false,
       "locked": {
-        "lastModified": 1648735462,
-        "narHash": "sha256-G22WBttdFoWp7E/YvGfePOc+W+ZsQGw+IwpFbAwJNeI=",
+        "lastModified": 1673447413,
+        "narHash": "sha256-sJM82Sj8yfQYs9axEmGZ9Evzdv/kDcI9sddqJ45frrU=",
         "owner": "nix-community",
         "repo": "npmlock2nix",
-        "rev": "dd2897c3a6e404446704a63f40b9a29fa0acf752",
+        "rev": "9197bbf397d76059a76310523d45df10d2e4ca81",
         "type": "github"
       },
       "original": {
@@ -53,23 +53,7 @@
       "inputs": {
         "iosevka": "iosevka",
         "nixpkgs": "nixpkgs",
-        "npmlock2nix-git": "npmlock2nix-git",
-        "utils": "utils"
-      }
-    },
-    "utils": {
-      "locked": {
-        "lastModified": 1653893745,
-        "narHash": "sha256-0jntwV3Z8//YwuOjzhV2sgJJPt+HY6KhU7VZUL0fKZQ=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "1ed9fb1935d260de5fe1c2f7ee0ebaae17ed2fa1",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
+        "npmlock2nix": "npmlock2nix"
       }
     }
   },
