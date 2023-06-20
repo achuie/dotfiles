@@ -28,7 +28,7 @@
           customBuildConf = final.writeText "private-build-plans.toml" ''
             [buildPlans.iosevka-custom]
             family = "Iosevka Custom"
-            spacing = "normal"
+            spacing = "term"
             serifs = "sans"
             no-cv-ss = true
             export-glyph-names = false
