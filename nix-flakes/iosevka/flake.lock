@@ -1,22 +1,5 @@
 {
   "nodes": {
-    "iosevka": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1684662076,
-        "narHash": "sha256-j7JE9UHG4xho0a4TqG5rpCJkYyVxgoLxBuRtNMGfkrw=",
-        "owner": "be5invis",
-        "repo": "Iosevka",
-        "rev": "6e4bcf41976a503105af34ece0fce3c5bcab6f58",
-        "type": "github"
-      },
-      "original": {
-        "owner": "be5invis",
-        "ref": "v23.0.0",
-        "repo": "Iosevka",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1684759798,
@@ -33,27 +16,9 @@
         "type": "github"
       }
     },
-    "npmlock2nix": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1673447413,
-        "narHash": "sha256-sJM82Sj8yfQYs9axEmGZ9Evzdv/kDcI9sddqJ45frrU=",
-        "owner": "nix-community",
-        "repo": "npmlock2nix",
-        "rev": "9197bbf397d76059a76310523d45df10d2e4ca81",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "npmlock2nix",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
-        "iosevka": "iosevka",
-        "nixpkgs": "nixpkgs",
-        "npmlock2nix": "npmlock2nix"
+        "nixpkgs": "nixpkgs"
       }
     }
   },
