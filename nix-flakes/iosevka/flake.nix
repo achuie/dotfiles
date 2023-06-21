@@ -14,13 +14,13 @@
           default = pkgs.iosevka.override {
             privateBuildPlan = {
               family = "Iosevka Custom";
-              spacing = "term";
+              spacing = "fontconfig-mono";
               serifs = "sans";
               no-cv-ss = true;
               export-glyph-names = false;
               variants = {
                 design = {
-                  capital-q = "straight";
+                  capital-q = "detached-bend-tailed";
                   g = "double-storey";
                   l = "tailed-serifed";
                   one = "base";
@@ -46,6 +46,24 @@
                   menu = "italic";
                   css = "italic";
                 };
+              };
+              ligations = {
+                inherits = "default-calt";
+                enables = [ "connected-number-sign" ];
+                disables = [
+                  "arrow-l" "arrow-r"
+                  "counter-arrow-l" "counter-arrow-r"
+                  "eqeqeq" "eqeq"
+                  "lteq" "eqlt" "gteq"
+                  "exeqeqeq" "exeqeq" "eqexeq" "eqexeq-dl" "exeq"
+                  "tildeeq" "slasheq"
+                  "ltgt-ne" "ltgt-diamond" "ltgt-diamond-tag"
+                  "llggeq"
+                  "html-comment"
+                  "colon-greater-as-colon-arrow"
+                  "brace-bar" "brack-bar"
+                  "connected-underscore" "connected-tilde-as-wave" "connected-hyphen"
+                ];
               };
             };
             set = "custom";
