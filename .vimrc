@@ -193,7 +193,7 @@ else
     nnoremap <silent> <Leader>ig :IndentBlanklineToggle<CR>
 endif
 
-" Force Vim to let Dirvish take precedence
-if !has('nvim')
+" Force Vim to let Dirvish take precedence if Dirvish is installed
+if !empty(glob('~/.vim/pack/achuie/start/vim-dirvish'))
     let g:loaded_netrwPlugin = 1
 endif
