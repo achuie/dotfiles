@@ -51,13 +51,21 @@ require'nvim-treesitter.configs'.setup({
     },
 })
 
-local overrides = function(colors)
-  return {
-    EndOfBuffer = { fg = colors.palette.sumiInk6 },
-    CursorLineNr = { fg = colors.palette.springViolet1 }
-  }
-end
-require'kanagawa'.setup({ statementStyle = { bold = false }, theme = "wave", colors = { theme = { all = { ui = { bg_gutter = "none" }}}}, overrides = overrides })
+-- local overrides = function(colors)
+--   return {
+--     EndOfBuffer = { fg = colors.palette.sumiInk6 },
+--     CursorLineNr = { fg = colors.palette.springViolet1 }
+--   }
+-- end
+-- require'kanagawa'.setup({ statementStyle = { bold = false }, theme = "wave", colors = { theme = { all = { ui = { bg_gutter = "none" }}}}, overrides = overrides })
+
+require("tokyonight").setup({
+  style = "moon",
+  on_highlights = function(hl, c)
+    hl.EndOfBuffer = { fg = c.bg_highlight }
+  end
+})
 EOF
 
-colorscheme kanagawa
+" colorscheme kanagawa
+colorscheme tokyonight
