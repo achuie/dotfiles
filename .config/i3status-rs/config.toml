@@ -55,9 +55,12 @@ full = " $icon $barchart $utilization $frequency "
 short = " $icon $utilization "
 
 [[block]]
-block = "load"
+block = "temperature"
 interval = 5
-format = " $icon $1m.eng(w:4) "
+scale = "celsius"
+format = " $icon $average C "
+format_alt = " $icon $min C min, $average C avg, $max C max "
+chip = "*-isa-*"
 
 [[block]]
 block = "sound"
