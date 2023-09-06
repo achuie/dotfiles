@@ -58,8 +58,8 @@ short = " $icon $utilization "
 block = "temperature"
 interval = 5
 scale = "celsius"
-format = " $icon $average C "
-format_alt = " $icon $min C min, $average C avg, $max C max "
+format = " $icon $average "
+format_alt = " $icon $min min, $average avg, $max max "
 chip = "*-isa-*"
 
 [[block]]
