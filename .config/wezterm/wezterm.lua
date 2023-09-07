@@ -40,6 +40,9 @@ return {
     },
   },
 
+  front_end = 'WebGpu',
+  webgpu_power_preference = 'LowPower',
+
   window_background_opacity = 0.9,
 
   color_scheme = 'tokyo-night-storm',
