@@ -13,7 +13,7 @@
       flake = false;
     };
 
-    sfnt2woff-zopfli = {
+    sfnt2woff-zopfli-src = {
       url = "github:bramstein/sfnt2woff-zopfli";
       flake = false;
     };
@@ -24,69 +24,75 @@
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils, mach-nix, pypi, sfnt2woff-zopfli, firacode }:
+  outputs = { self, nixpkgs, mach-nix, pypi, sfnt2woff-zopfli-src, firacode }:
     let
       forAllSystems = f: nixpkgs.lib.genAttrs [ "x86_64-linux" ] (system:
-        f { inherit system; pkgs = nixpkgs.legacyPackages.${system}; this = self.packages.${system};
-      });
-
-      pythonEnv = forAllSystems (pset: mach-nix.lib.${pset.system}.mkPython rec {
-        python = "python39";
-        # Bump pycairo version to nixpkgs-22.11.
-        requirements = ''
-          pillow==5.4.1
-          idna==2.8
-          requests==2.21.0
-          urllib3==1.24.1
-          pycairo==1.21.0
-          gftools==0.7.4
-          fontmake==2.4.0
-          fontbakery==0.8.0
-
-          opentype-feature-freezer==1.32.2
-        '';
-      });
-      sfnt2woff-zopfli-pkg = pkgs.stdenv.mkDerivation rec {
-        pname = "sfnt2woff-zopfli";
-        version = "1.3.1";
-
-        src = sfnt2woff-zopfli;
-        buildInputs = [ pkgs.zlib ];
-        buildPhase = "make";
-        installPhase = ''
-          mkdir -p $out/bin
-          cp sfnt2woff-zopfli woff2sfnt-zopfli $out/bin
-        '';
-      };
+        f {
+          pkgs = nixpkgs.legacyPackages.${system};
+          machNix = mach-nix.lib.${system};
+        });
     in
     {
-      packages.default = pkgs.stdenv.mkDerivation {
-        pname = "fira-code-custom";
-        version = "6.2";
+      packages = forAllSystems (pset: with pset;
+        let
+          pythonEnv = machNix.mkPython rec {
+            python = "python39";
+            # Bump pycairo version to nixpkgs-22.11.
+            requirements = ''
+              pillow==5.4.1
+              idna==2.8
+              requests==2.21.0
+              urllib3==1.24.1
+              pycairo==1.21.0
+              gftools==0.7.4
+              fontmake==2.4.0
+              fontbakery==0.8.0
 
-        src = firacode;
-        buildInputs = with pkgs; [
-          ttfautohint
-          woff2
-          pythonEnv
-          sfnt2woff-zopfli-pkg
-        ];
-        buildPhase = ''
-          ln -s ${pkgs.bash}/bin/bash /bin/bash
-          ln -s ${pkgs.coreutils}/bin/* /bin
+              opentype-feature-freezer==1.32.2
+            '';
+          };
+          sfnt2woff-zopfli = pkgs.stdenv.mkDerivation rec {
+            pname = "sfnt2woff-zopfli";
+            version = "1.3.1";
 
-          script/build.sh --features "ss02,ss08" --family-name "Fira Code Custom"
+            src = sfnt2woff-zopfli-src;
+            buildInputs = [ pkgs.zlib ];
+            buildPhase = "make";
+            installPhase = ''
+              mkdir -p $out/bin
+              cp sfnt2woff-zopfli woff2sfnt-zopfli $out/bin
+            '';
+          };
+        in
+        {
+          default = pkgs.stdenv.mkDerivation {
+            pname = "fira-code-custom";
+            version = "6.2";
 
-          echo "Baking in alternate at-symbol..."
-          find distr -type d -name 'Fira Code Custom' -execdir bash -c 'for font in "$1"/*; do
-            pyftfeatfreeze -f "ss05" "$font" "$font"; done' none {} \;
-        '';
-        installPhase = ''
-          mkdir -p $out/share/fonts
-          cp -r distr/* $out/share/fonts/
-        '';
-      };
+            src = firacode;
+            buildInputs = with pkgs; [
+              ttfautohint
+              woff2
+              pythonEnv
+              sfnt2woff-zopfli
+            ];
+            buildPhase = ''
+              ln -s ${pkgs.bash}/bin/bash /bin/bash
+              ln -s ${pkgs.coreutils}/bin/* /bin
 
-      formatter = pkgs.nixpkgs-fmt;
-    });
+              script/build.sh --features "ss02,ss08" --family-name "Fira Code Custom"
+
+              echo "Baking in alternate at-symbol..."
+              find distr -type d -name 'Fira Code Custom' -execdir bash -c 'for font in "$1"/*; do
+                pyftfeatfreeze -f "ss05" "$font" "$font"; done' none {} \;
+            '';
+            installPhase = ''
+              mkdir -p $out/share/fonts
+              cp -r distr/* $out/share/fonts/
+            '';
+          };
+        });
+
+      formatter = forAllSystems (pset: pset.pkgs.nixpkgs-fmt);
+    };
 }
