@@ -28,21 +28,20 @@ if __name__ == "__main__":
         print(f" Scanning for {lig}...")
         start = None
         try:
-            starting = f"lookup {lig}"
-            start = calt_line.index(starting)
+            starting = f"lookup {lig}" + r" {\012"
+            start = calt_line.index(starting) + len(starting)
         except ValueError as e:
             print(f"Error: could not find start: {e}")
             exit(1)
 
         end = None
         try:
-            ending = lig + r";\012\012"
-            end = calt_line.index(ending) + len(ending)
+            ending = r"\012} " + lig + r";\012\012"
+            end = calt_line.index(ending)
         except ValueError as e:
             try:
-                ending = lig + r';";'
-                # Only include the trailing ';' after the name of the rule.
-                end = calt_line.index(ending) + len(lig) + 1
+                ending = r"\012} " + lig + r';";'
+                end = calt_line.index(ending)
             except ValueError as e:
                 print(f"Error: could not find end: {e}")
                 exit(1)
