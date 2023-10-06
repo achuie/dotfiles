@@ -80,16 +80,19 @@
               ln -s ${pkgs.bash}/bin/bash /bin/bash
               ln -s ${pkgs.coreutils}/bin/* /bin
 
+              echo "Removing specific ligatures from glyphs file..."
               ${pythonEnv}/bin/python ${self}/remove_specific_ligatures.py "bar_bar_bar_greater" \
-              "less_bar_bar_bar" "bar_bar_greater" "less_bar_bar" "bar_greater" "less_bar" \
-              "less_exclam_hyphen_hyphen" "asciitilde_asciitilde_greater" "exclam_equal_equal" \
-              "less_asciitilde_asciitilde" "plus_plus_plus" "asciitilde_asciitilde" \
-              "asciitilde_at" "asciitilde_greater" "asciitilde_hyphen" "bar_braceright" \
-              "bar_bracketright" "braceleft_bar" "bracketleft_bar" "bracketright_numbersign" \
-              "dollar_greater" "exclam_equal" "greater_equal" "hyphen_asciitilde" \
-              "less_asciitilde" "less_dollar" "less_equal" "numbersign_braceleft" \
-              "numbersign_bracketleft" "numbersign_parenleft" "plus_plus" "slash_backslash" \
-              "backslash_slash" "equal_arrows" "hyphen_arrows" "underscores"
+                "less_bar_bar_bar" "bar_bar_greater" "less_bar_bar" "bar_greater" "less_bar" \
+                "less_exclam_hyphen_hyphen" "asciitilde_asciitilde_greater" "exclam_equal_equal" \
+                "less_asciitilde_asciitilde" "plus_plus_plus" "asciitilde_asciitilde" \
+                "asciitilde_at" "asciitilde_greater" "asciitilde_hyphen" "bar_braceright" \
+                "bar_bracketright" "braceleft_bar" "bracketleft_bar" "bracketright_numbersign" \
+                "dollar_greater" "exclam_equal" "greater_equal" "hyphen_asciitilde" \
+                "less_asciitilde" "less_dollar" "less_equal" "numbersign_braceleft" \
+                "numbersign_bracketleft" "numbersign_parenleft" "plus_plus" "slash_backslash" \
+                "backslash_slash" "equal_arrows" "hyphen_arrows" "underscores"
+
+              echo "Running build script..."
               script/build.sh --features "ss08" --family-name "Fira Code Custom"
 
               echo "Baking in alternate at-symbol..."
