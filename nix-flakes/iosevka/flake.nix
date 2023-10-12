@@ -30,7 +30,7 @@
                 italic = {
                   capital-q = "open-swash";
                   g = "single-storey-flat-hook-serifless";
-                  y = "cursive-flat-hook";
+                  y = "cursive-flat-hook-serifless";
                 };
               };
               slopes = {
