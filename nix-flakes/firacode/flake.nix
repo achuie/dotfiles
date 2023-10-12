@@ -77,8 +77,7 @@
               sfnt2woff-zopfli
             ];
             buildPhase = ''
-              ln -s ${pkgs.bash}/bin/bash /bin/bash
-              ln -s ${pkgs.coreutils}/bin/* /bin
+              patchShebangs --build script/*.sh
 
               echo "Removing specific ligatures from glyphs file..."
               ${pythonEnv}/bin/python ${self}/remove_specific_ligatures.py "bar_bar_bar_greater" \
