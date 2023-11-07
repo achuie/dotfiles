@@ -529,16 +529,8 @@ require('mason-lspconfig').setup()
 local servers = {
   -- clangd = {},
   -- gopls = {},
-  pylsp = {
-    pylsp = {
-      plugins = {
-        pycodestyle = { enabled = false },
-        pyflakes = { enabled = false },
-        mccabe = { enabled = false },
-        ruff = { enabled = true },
-      },
-    },
-  },
+  ruff_lsp = {},
+  nil_ls = {},
   -- rust_analyzer = {},
   -- tsserver = {},
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
