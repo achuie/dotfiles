@@ -28,8 +28,20 @@ require('lazy').setup({
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
 
+  -- File browser
+  'justinmk/vim-dirvish',
+
+  -- Tell Vim about common word separators
+  'chaoren/vim-wordmotion',
+
+  -- Navigate by indentation level
+  'jeetsukumaran/vim-indentwise',
+
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
+
+  -- Updated surround
+  { 'kylechui/nvim-surround', opts = {} },
 
   -- LSP plugins
   {
@@ -175,6 +187,9 @@ require('lazy').setup({
 -- Set highlight on search
 vim.o.hlsearch = true
 
+-- Confirm dialog
+vim.o.confirm = true
+
 -- Make relative line numbers default
 vim.wo.number = true
 vim.wo.relativenumber = true
@@ -269,7 +284,7 @@ vim.keymap.set('n', 'tm', ':tabm<Space>')
 vim.keymap.set('n', 'td', ':tabclose<CR>')
 
 -- Search for visually selected text
-vim.keymap.set('n', '//', function() vim.cmd([[y/\V<C-R>=escape(@",'/\')<CR><CR>]]) end)
+vim.keymap.set('v', '//', function() vim.cmd([[y/\V<C-R>=escape(@",'/\')<CR><CR>]]) end)
 
 -- Fold lines not matching previous search; `zr` for more context, `zm` for less
 vim.keymap.set('n', '<Leader>z', function()
@@ -322,8 +337,10 @@ require('telescope').setup {
   defaults = {
     mappings = {
       i = {
-        ['<C-u>'] = false,
-        ['<C-d>'] = false,
+        ['<M-p>'] = require('telescope.actions.layout').toggle_preview,
+      },
+      n = {
+        ['<M-p>'] = require('telescope.actions.layout').toggle_preview,
       },
     },
   },
@@ -505,15 +522,26 @@ require('mason-lspconfig').setup()
     config
 
     Define the property 'filetypes' to override the default filetypes for a language server
+
+  Print actual config for debugging:
+    `:lua print(vim.inspect(vim.lsp.get_active_clients()))`
 ]]
 local servers = {
   -- clangd = {},
   -- gopls = {},
-  pylsp = {},
+  pylsp = {
+    pylsp = {
+      plugins = {
+        pycodestyle = { enabled = false },
+        pyflakes = { enabled = false },
+        mccabe = { enabled = false },
+        ruff = { enabled = true },
+      },
+    },
+  },
   -- rust_analyzer = {},
   -- tsserver = {},
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
-
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
