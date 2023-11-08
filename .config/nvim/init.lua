@@ -284,13 +284,13 @@ vim.keymap.set('n', 'tm', ':tabm<Space>')
 vim.keymap.set('n', 'td', ':tabclose<CR>')
 
 -- Search for visually selected text
-vim.keymap.set('v', '//', function() vim.cmd([[y/\V<C-R>=escape(@",'/\')<CR><CR>]]) end)
+vim.keymap.set('v', '//', [[y/\V<C-R>=escape(@",'/\')<CR><CR>]])
 
 -- Fold lines not matching previous search; `zr` for more context, `zm` for less
 vim.keymap.set('n', '<Leader>z', function()
     vim.cmd([[:setlocal
     \ foldexpr=(getline(v:lnum)=~@/)?0:(getline(v:lnum-1)=~@/)\\|\\|(getline(v:lnum+1)=~@/)?1:2
-    \ foldmethod=expr foldlevel=0 foldcolumn=2<CR>]])
+    \ foldmethod=expr foldlevel=0 foldcolumn=2]])
 end)
 
 -- Toggle error highlighting for overlength lines
@@ -380,6 +380,7 @@ vim.defer_fn(function()
     return vim.api.nvim_buf_line_count(bufnr) > 30000
   end
 
+  ---@diagnostic disable-next-line: missing-fields
   require('nvim-treesitter.configs').setup {
     auto_install = true,
     highlight = {
@@ -536,7 +537,7 @@ local servers = {
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
   lua_ls = {
     Lua = {
-      workspace = { checkThirdParty = false },
+      workspace = { checkThirdParty = "Disable" },
       telemetry = { enable = false },
     },
   },
@@ -575,6 +576,7 @@ local luasnip = require 'luasnip'
 require('luasnip.loaders.from_vscode').lazy_load()
 luasnip.config.setup {}
 
+---@diagnostic disable-next-line: missing-fields
 cmp.setup {
   snippet = {
     expand = function(args)
