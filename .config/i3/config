@@ -234,7 +234,13 @@ mode "music" {
 
 bindsym $mod+m mode "music"
 
-# Window rules
+# Window rules and startup behavior
+for_window [class="firefox"] move --no-auto-back-and-forth container to workspace "1:web"
+for_window [class="wezterm-system"] mark "alpha", move scratchpad
+for_window [class="wezterm-audio"] mark "beta", move scratchpad
+
+exec --no-startup-id wezterm start --class "wezterm-system"
+exec --no-startup-id wezterm start --class "wezterm-audio" -- zsh -is eval 'pulsemixer'
 
 # Handle urgency hints
 client.urgent #2f343a #900000 #ffffff #900000
