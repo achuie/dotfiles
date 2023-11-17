@@ -261,9 +261,9 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 
 -- Use <F11> to toggle Paste Insert mode and numbers
 vim.keymap.set('n', '<F11>', function()
-  vim.bo.number = not vim.bo.number
-  vim.bo.relativenumber = not vim.bo.relativenumber
-  vim.bo.paste = not vim.bo.paste
+  vim.wo.number = not vim.wo.number
+  vim.wo.relativenumber = not vim.wo.relativenumber
+  vim.wo.paste = not vim.wo.paste
 end)
 
 -- Map redraw screen command to also turn off search highlighting until the next search
@@ -320,15 +320,10 @@ vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile', 'BufWritePost' }, {
   command = 'set filetype=racket',
 })
 
--- See `:help vim.highlight.on_yank()`
-local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
-vim.api.nvim_create_autocmd('TextYankPost', {
-  callback = function()
-    vim.highlight.on_yank()
-  end,
-  group = highlight_group,
-  pattern = '*',
-})
+
+--[[ Colorscheme ]]
+
+vim.cmd.colorscheme 'tokyonight'
 
 
 --[[ Configure Telescope ]]
@@ -537,7 +532,7 @@ local servers = {
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
   lua_ls = {
     Lua = {
-      workspace = { checkThirdParty = "Disable" },
+      workspace = { checkThirdParty = false },
       telemetry = { enable = false },
     },
   },
@@ -617,8 +612,3 @@ cmp.setup {
     { name = 'luasnip' },
   },
 }
-
-
---[[ Colorscheme ]]
-
-vim.cmd.colorscheme 'tokyonight'
