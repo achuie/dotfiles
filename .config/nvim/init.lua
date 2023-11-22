@@ -365,6 +365,31 @@ vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
 
+function vim.getVisualSelection()
+  vim.cmd('noau normal! "vy"')
+  local text = vim.fn.getreg('v')
+  vim.fn.setreg('v', {})
+
+  text = string.gsub(text, "\n", "")
+  if #text > 0 then
+    return text
+  else
+    return ''
+  end
+end
+vim.keymap.set('v', '<leader>sg', function()
+  local text = vim.getVisualSelection()
+  require('telescope.builtin').live_grep({ default_text = text })
+end, { desc = '[S]earch by [G]rep for current selection' })
+vim.keymap.set('v', '<leader>/', function()
+  local text = vim.getVisualSelection()
+  require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+    default_text = text,
+    winblend = 10,
+    previewer = false,
+  })
+end, { desc = '[/] Fuzzily search for current selection in current buffer' })
+
 
 --[[ Configure Treesitter ]]
 
