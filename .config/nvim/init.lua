@@ -352,7 +352,7 @@ vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc =
 vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
 vim.keymap.set('n', '<leader>/', function()
   require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-    winblend = 10,
+    winblend = 5,
     previewer = false,
   })
 end, { desc = '[/] Fuzzily search in current buffer' })
@@ -385,10 +385,17 @@ vim.keymap.set('v', '<leader>/', function()
   local text = vim.getVisualSelection()
   require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
     default_text = text,
-    winblend = 10,
+    winblend = 5,
     previewer = false,
   })
 end, { desc = '[/] Fuzzily search for current selection in current buffer' })
+
+vim.keymap.set('n', '<leader>t', function()
+require('telescope.builtin').treesitter(require('telescope.themes').get_dropdown {
+    winblend = 5,
+    previewer = false,
+  })
+end, { desc = 'Search [T]ags' })
 
 
 --[[ Configure Treesitter ]]
@@ -532,6 +539,7 @@ require('which-key').register {
   ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
   ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
 }
+require('which-key').register({ ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' }}, { mode = 'v' })
 
 -- mason-lspconfig requires that these setup functions are called in this order before setting up the servers.
 require('mason').setup()
@@ -557,7 +565,7 @@ local servers = {
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
   lua_ls = {
     Lua = {
-      workspace = { checkThirdParty = false },
+      workspace = { checkThirdParty = "Disable" },
       telemetry = { enable = false },
     },
   },
