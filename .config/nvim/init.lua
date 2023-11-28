@@ -263,7 +263,7 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 vim.keymap.set('n', '<F11>', function()
   vim.wo.number = not vim.wo.number
   vim.wo.relativenumber = not vim.wo.relativenumber
-  vim.wo.paste = not vim.wo.paste
+  vim.go.paste = not vim.go.paste
 end)
 
 -- Map redraw screen command to also turn off search highlighting until the next search
