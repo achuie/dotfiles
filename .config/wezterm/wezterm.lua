@@ -14,6 +14,13 @@ return {
   hide_tab_bar_if_only_one_tab = true,
 
   use_ime = false,
+  
+  quick_select_patterns = {
+    -- Git-status file paths
+    '(?<=\\s{8}|\\s{8}modified:\\s{3})/*[0-9A-Za-z.+_/-]+',
+    -- Git branch names in ()
+    '\\(([0-9A-Za-z_+-]+)\\)',
+  },
 
   font = wezterm.font_with_fallback {
     {
