@@ -249,6 +249,9 @@ vim.opt.listchars = { tab = '›—', extends = '→', precedes = '←', nbsp = 
 vim.o.splitbelow = true
 vim.o.splitright = true
 
+-- Mujin controller access
+vim.g.netrw_scp_cmd = 'scp -q -i ~/.ssh/mujin/id_rsa -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
+
 
 --[[ Keymaps ]]
 
