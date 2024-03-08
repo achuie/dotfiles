@@ -568,7 +568,7 @@ local servers = {
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
   lua_ls = {
     Lua = {
-      workspace = { checkThirdParty = "Disable" },
+      workspace = { checkThirdParty = false },
       telemetry = { enable = false },
     },
   },
