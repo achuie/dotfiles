@@ -14,7 +14,7 @@ return {
   hide_tab_bar_if_only_one_tab = true,
 
   use_ime = false,
-  
+
   quick_select_patterns = {
     -- Git-status file paths
     '(?<=\\s{8}|\\s{8}modified:\\s{3})/*[0-9A-Za-z.+_/-]+',
@@ -23,18 +23,17 @@ return {
   },
 
   font = wezterm.font_with_fallback {
-    {
-      family = 'Fira Code',
-      harfbuzz_features = { 'ss02', 'ss05', 'ss08' }
-    },
+    'Fira Code Custom',
     'Iosevka Custom Extended',
+    'Rec Mono Custom',
+    'Font Awesome 6 Free',
   },
   font_size = 12,
   font_rules = {
     {
       italic = false,
       intensity = 'Bold',
-      font = wezterm.font('Fira Code', { weight = 'Bold' }),
+      font = wezterm.font('Fira Code Custom', { weight = 'Bold' }),
     },
     {
       italic = true,
@@ -46,9 +45,6 @@ return {
       font = wezterm.font('Iosevka Custom Extended', { italic = true }),
     },
   },
-
-  front_end = 'WebGpu',
-  webgpu_power_preference = 'LowPower',
 
   window_background_opacity = 0.9,
 
