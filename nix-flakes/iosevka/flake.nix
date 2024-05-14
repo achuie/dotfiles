@@ -16,7 +16,7 @@
               family = "Iosevka Custom";
               spacing = "fontconfig-mono";
               serifs = "sans";
-              no-cv-ss = true;
+              noCvSs = true;
               export-glyph-names = false;
               variants = {
                 design = {
