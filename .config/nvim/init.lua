@@ -123,6 +123,7 @@ require('lazy').setup({
       on_highlights = function(hl, c)
         -- Show gutter tildes beyond end of file
         hl.EndOfBuffer = { fg = c.bg_highlight }
+        hl.CursorLineNr = { bold = true, fg = c.fg_dark }
       end,
     },
   },
@@ -251,6 +252,8 @@ vim.o.splitright = true
 
 -- Mujin controller access
 vim.g.netrw_scp_cmd = 'scp -q -i ~/.ssh/mujin/id_rsa -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
+
+vim.o.cursorline = true
 
 
 --[[ Keymaps ]]
@@ -536,16 +539,17 @@ local on_attach = function(_, bufnr)
 end
 
 -- Document existing key chains
-require('which-key').register {
-  ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
-  ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
-  ['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
-  ['<leader>h'] = { name = 'More git', _ = 'which_key_ignore' },
-  ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
-  ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
-  ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
+require('which-key').add {
+  { "<leader>c", desc = "[C]ode" },
+  { "<leader>d", desc = "[D]ocument" },
+  { "<leader>g", desc = "[G]it" },
+  { "<leader>h", desc = "More git" },
+  { "<leader>r", desc = "[R]ename" },
+  { "<leader>s", desc = "[S]earch" },
+  { "<leader>w", desc = "[W]orkspace" },
 }
-require('which-key').register({ ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' }}, { mode = 'v' })
+require('which-key').add({{ "<leader>s", desc = "[S]earch", mode = "v" }})
+
 
 -- mason-lspconfig requires that these setup functions are called in this order before setting up the servers.
 require('mason').setup()
