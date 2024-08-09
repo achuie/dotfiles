@@ -68,6 +68,8 @@ end)
 local config = {
   scrollback_lines = 10000,
 
+  audible_bell = "Disabled",
+
   use_ime = false,
 
   quick_select_patterns = {
@@ -85,11 +87,6 @@ local config = {
   },
   font_size = 12,
   font_rules = {
-    {
-      italic = false,
-      intensity = 'Bold',
-      font = wezterm.font('Fira Code Custom', { weight = 'Bold' }),
-    },
     {
       italic = true,
       font = wezterm.font('Iosevka Custom Extended', { italic = true }),
