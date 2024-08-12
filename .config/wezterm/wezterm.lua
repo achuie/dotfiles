@@ -106,8 +106,8 @@ local config = {
       foreground = '#d3d7eb',
       background = '#24283b',
       cursor_fg = '#24283b',
-      cursor_bg = '#c9d3ff',
-      cursor_border = '#c9d3ff',
+      cursor_bg = '#f7bae5',
+      cursor_border = '#f7bae5',
       selection_bg = '#2d4370',
       ansi = {
         '#32344a',
