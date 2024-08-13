@@ -188,8 +188,8 @@ local config = {
       { key = 'b', mods = 'NONE',       action = wact.CopyMode('MoveBackwardWord') },
       { key = 'e', mods = 'NONE',       action = wact.CopyMode('MoveForwardWordEnd') },
       { key = '0', mods = 'NONE',       action = wact.CopyMode('MoveToStartOfLine') },
-      { key = '^', mods = 'NONE',       action = wact.CopyMode('MoveToStartOfLineContent') },
-      { key = '$', mods = 'NONE',       action = wact.CopyMode('MoveToEndOfLineContent') },
+      { key = '^', mods = 'SHIFT',      action = wact.CopyMode('MoveToStartOfLineContent') },
+      { key = '$', mods = 'SHIFT',      action = wact.CopyMode('MoveToEndOfLineContent') },
       { key = 'g', mods = 'NONE',       action = wact.CopyMode('MoveToScrollbackTop') },
       { key = 'g', mods = 'SHIFT',      action = wact.CopyMode('MoveToScrollbackBottom') },
       { key = 'h', mods = 'SHIFT',      action = wact.CopyMode('MoveToViewportTop') },
@@ -204,7 +204,6 @@ local config = {
       { key = 'v', mods = 'SHIFT',      action = wact.CopyMode { SetSelectionMode = 'Line' } },
       { key = 'v', mods = 'CTRL',       action = wact.CopyMode { SetSelectionMode = 'Block' } },
       { key = 'o', mods = 'NONE',       action = wact.CopyMode('MoveToSelectionOtherEnd') },
-      { key = 'o', mods = 'SHIFT',      action = wact.CopyMode('MoveToSelectionOtherEndHoriz') },
 
       -- Copy selection
       { key = 'y', mods = 'NONE',       action = wact.CopyTo('Clipboard') },
@@ -212,7 +211,7 @@ local config = {
 
       -- Search
       { key = '/', mods = 'NONE',       action = wact.Search { CaseInSensitiveString = '' } },
-      { key = '/', mods = 'SHIFT',      action = wact.Search('CurrentSelectionOrEmptyString') },
+      { key = '?', mods = 'SHIFT',      action = wact.Search('CurrentSelectionOrEmptyString') },
       { key = 'f', mods = 'CTRL|SHIFT', action = wact.Search { Regex = '' } },
 
       -- Naviagte search matches
