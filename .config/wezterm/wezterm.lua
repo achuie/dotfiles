@@ -67,9 +67,7 @@ end)
 
 local config = {
   scrollback_lines = 10000,
-
   audible_bell = "Disabled",
-
   use_ime = false,
 
   quick_select_patterns = {
@@ -135,6 +133,7 @@ local config = {
   -- Default: saturation = 0.9, brightness = 0.8
   inactive_pane_hsb = { saturation = 0.9, brightness = 0.6 },
 
+  hide_tab_bar_if_only_one_tab = true,
   use_fancy_tab_bar = false,
   tab_bar_at_bottom = true,
 
@@ -144,7 +143,7 @@ local config = {
   -- Override default table to always confirm
   skip_close_confirmation_for_processes_named = {},
 
-  leader = { key = 'a', mods = 'CTRL', timeout_milliseconds = 1000 },
+  leader = { key = '`', mods = 'CTRL', timeout_milliseconds = 1000 },
   keys = {
     { key = 'e',     mods = 'CTRL|SHIFT',        action = wact.EmitEvent 'toggle-ligature' },
     { key = 'y',     mods = 'CTRL|SHIFT',        action = wact.EmitEvent 'edit-scrollback' },
