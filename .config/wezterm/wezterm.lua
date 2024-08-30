@@ -256,7 +256,7 @@ local dirArrows = { 'LeftArrow', 'DownArrow', 'UpArrow', 'RightArrow' }
 for i = 1, #dirKeys do
   -- Move focus
   table.insert(config.keys, { key = dirKeys[i], mods = 'LEADER', action = wact.ActivatePaneDirection(dirNames[i]) })
-  table.insert(config.keys, { key = dirKeys[i], mods = 'ALT', action = wact.ActivatePaneDirection(dirNames[i]) })
+  -- table.insert(config.keys, { key = dirKeys[i], mods = 'ALT', action = wact.ActivatePaneDirection(dirNames[i]) })
   -- Resize pane
   table.insert(config.keys,
     { key = dirArrows[i], mods = 'LEADER|CTRL', action = wact.AdjustPaneSize { dirNames[i], 5 } })
