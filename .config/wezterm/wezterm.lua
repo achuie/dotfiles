@@ -68,7 +68,7 @@ wezterm.on('format-window-title', function(tab, pane, tabs, panes, config)
   end
 
   local tmux_compat = ''
-  if config.leader.key == '`' then
+  if config.leader.key ~= 'a' then
     tmux_compat = '[T] '
   end
 
