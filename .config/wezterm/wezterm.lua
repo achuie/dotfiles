@@ -31,7 +31,7 @@ wezterm.on('augment-command-palette', function(window, pane)
     },
     {
       brief = 'Toggle tmux compatibility mode',
-      icon = '',
+      icon = 'fa_toggle_on',
       action = wact.EmitEvent 'toggle-tmux-compatibility',
     },
   }
@@ -40,11 +40,10 @@ end)
 wezterm.on('toggle-tmux-compatibility', function(window, pane)
   local overrides = window:get_config_overrides() or {}
   local dirKeys = { 'h', 'j', 'k', 'l' }
-  local dirNames = { 'Left', 'Down', 'Up', 'Right' }
 
   if not overrides.leader then
-    overrides.leader = { key = '`', mods = 'CTRL', timeout_milliseconds = 2000 }
-    overrides.keys = {}
+    overrides.leader = { key = 'a', mods = 'CTRL', timeout_milliseconds = 2000 }
+    overrides.keys = { { key = 'a', mods = 'LEADER|CTRL', action = wact.SendKey { key = 'a', mods = 'CTRL' } } }
     for i = 1, #dirKeys do
       table.insert(overrides.keys, { key = dirKeys[i], mods = 'ALT', action = wact.SendKey { key = dirKeys[i], mods = 'ALT' } })
     end
@@ -53,7 +52,6 @@ wezterm.on('toggle-tmux-compatibility', function(window, pane)
     overrides.keys = nil
   end
   window:set_config_overrides(overrides)
-  wezterm.log_error(string.format('*** %s', overrides.leader.key))
 end)
 
 wezterm.on('format-window-title', function(tab, pane, tabs, panes, config)
@@ -68,8 +66,8 @@ wezterm.on('format-window-title', function(tab, pane, tabs, panes, config)
   end
 
   local tmux_compat = ''
-  if config.leader.key ~= 'a' then
-    tmux_compat = '[T] '
+  if config.leader.key ~= 'mapped:`' then
+    tmux_compat = '[W] '
   end
 
   return zoomed .. tmux_compat .. index .. tab.active_pane.title
@@ -185,13 +183,13 @@ local config = {
   -- Override default table to always confirm
   skip_close_confirmation_for_processes_named = { 'zsh', 'bash' },
 
-  leader = { key = 'a', mods = 'CTRL', timeout_milliseconds = 2000 },
+  leader = { key = '`', mods = 'CTRL', timeout_milliseconds = 2000 },
   keys = {
     { key = 'e',     mods = 'CTRL|SHIFT',        action = wact.EmitEvent 'toggle-ligature' },
     { key = 'y',     mods = 'CTRL|SHIFT',        action = wact.EmitEvent 'edit-scrollback' },
 
-    -- Send "CTRL-A" to the terminal when pressing CTRL-A, CTRL-A
-    { key = 'a',     mods = 'LEADER|CTRL', action = wact.SendKey { key = 'a', mods = 'CTRL' } },
+    -- Send "CTRL-`" to the terminal when pressing CTRL-`, CTRL-`
+    { key = '`',     mods = 'LEADER|CTRL', action = wact.SendKey { key = '`', mods = 'CTRL' } },
     -- Spawn new terminal with the same working directory
     { key = 'Enter', mods = 'SHIFT|CTRL',  action = wact.SpawnWindow, },
 
@@ -298,7 +296,7 @@ local dirArrows = { 'LeftArrow', 'DownArrow', 'UpArrow', 'RightArrow' }
 for i = 1, #dirKeys do
   -- Move focus
   table.insert(config.keys, { key = dirKeys[i], mods = 'LEADER', action = wact.ActivatePaneDirection(dirNames[i]) })
-  table.insert(config.keys, { key = dirKeys[i], mods = 'ALT', action = wact.ActivatePaneDirection(dirNames[i]) })
+  -- table.insert(config.keys, { key = dirKeys[i], mods = 'ALT', action = wact.ActivatePaneDirection(dirNames[i]) })
   -- Resize pane
   table.insert(config.keys,
     { key = dirArrows[i], mods = 'LEADER|CTRL', action = wact.AdjustPaneSize { dirNames[i], 5 } })
