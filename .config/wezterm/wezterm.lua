@@ -3,16 +3,16 @@ local io = require 'io'
 local os = require 'os'
 local wact = wezterm.action
 
-wezterm.on('augment-command-palette', function(_, _)
+wezterm.on('augment-command-palette', function(window, pane)
   return {
     {
       brief = 'Rename tab',
       icon = 'md_rename_box',
       action = wact.PromptInputLine {
         description = 'Enter new name for active tab',
-        action = wezterm.action_callback(function(cwindow, _, line)
+        action = wezterm.action_callback(function(awindow, apane, line)
           if line then
-            cwindow:active_tab():set_title(line)
+            awindow:active_tab():set_title(line)
           end
         end),
       },
@@ -22,17 +22,58 @@ wezterm.on('augment-command-palette', function(_, _)
       icon = 'md_rename_box',
       action = wact.PromptInputLine {
         description = 'Enter new name for active workspace',
-        action = wezterm.action_callback(function(_, _, line)
+        action = wezterm.action_callback(function(bwindow, bpane, line)
           if line then
             wezterm.mux.rename_workspace(wezterm.mux.get_active_workspace(), line)
           end
         end),
       },
     },
+    {
+      brief = 'Toggle tmux compatibility mode',
+      icon = 'fa_toggle_on',
+      action = wact.EmitEvent 'toggle-tmux-compatibility',
+    },
   }
 end)
 
-wezterm.on('update-right-status', function(window, _)
+wezterm.on('toggle-tmux-compatibility', function(window, pane)
+  local overrides = window:get_config_overrides() or {}
+  local dirKeys = { 'h', 'j', 'k', 'l' }
+
+  if not overrides.leader then
+    overrides.leader = { key = 'a', mods = 'CTRL', timeout_milliseconds = 2000 }
+    overrides.keys = { { key = 'a', mods = 'LEADER|CTRL', action = wact.SendKey { key = 'a', mods = 'CTRL' } } }
+    for i = 1, #dirKeys do
+      table.insert(overrides.keys, { key = dirKeys[i], mods = 'ALT', action = wact.SendKey { key = dirKeys[i], mods = 'ALT' } })
+    end
+  else
+    overrides.leader = nil
+    overrides.keys = nil
+  end
+  window:set_config_overrides(overrides)
+end)
+
+wezterm.on('format-window-title', function(tab, pane, tabs, panes, config)
+  local zoomed = ''
+  if tab.active_pane.is_zoomed then
+    zoomed = '[Z] '
+  end
+
+  local index = ''
+  if #tabs > 1 then
+    index = string.format('[%d/%d] ', tab.tab_index + 1, #tabs)
+  end
+
+  local tmux_compat = ''
+  if config.leader.key ~= 'mapped:`' then
+    tmux_compat = '[W] '
+  end
+
+  return zoomed .. tmux_compat .. index .. tab.active_pane.title
+end)
+
+wezterm.on('update-right-status', function(window, pane)
   window:set_right_status(window:active_workspace())
 end)
 
@@ -138,18 +179,17 @@ local config = {
   tab_bar_at_bottom = true,
 
   unix_domains = { { name = 'unix' } },
-  default_gui_startup_args = { 'connect', 'unix' },
 
   -- Override default table to always confirm
-  skip_close_confirmation_for_processes_named = {},
+  skip_close_confirmation_for_processes_named = { 'zsh', 'bash' },
 
-  leader = { key = '`', mods = 'CTRL', timeout_milliseconds = 1000 },
+  leader = { key = '`', mods = 'CTRL', timeout_milliseconds = 2000 },
   keys = {
     { key = 'e',     mods = 'CTRL|SHIFT',        action = wact.EmitEvent 'toggle-ligature' },
     { key = 'y',     mods = 'CTRL|SHIFT',        action = wact.EmitEvent 'edit-scrollback' },
 
-    -- Send "CTRL-A" to the terminal when pressing CTRL-A, CTRL-A
-    { key = 'a',     mods = 'LEADER|CTRL', action = wact.SendKey { key = 'a', mods = 'CTRL' } },
+    -- Send "CTRL-`" to the terminal when pressing CTRL-`, CTRL-`
+    { key = '`',     mods = 'LEADER|CTRL', action = wact.SendKey { key = '`', mods = 'CTRL' } },
     -- Spawn new terminal with the same working directory
     { key = 'Enter', mods = 'SHIFT|CTRL',  action = wact.SpawnWindow, },
 
