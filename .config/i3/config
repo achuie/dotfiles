@@ -236,6 +236,7 @@ bindsym $mod+m mode "music"
 
 # Window rules and startup behavior
 for_window [class="firefox"] move --no-auto-back-and-forth container to workspace "1:web"
+for_window [class="discord"] move --no-auto-back-and-forth container to workspace "10:discord"
 for_window [class="wezterm-system"] mark "alpha", move scratchpad
 for_window [class="wezterm-audio"] mark "beta", move scratchpad
 
