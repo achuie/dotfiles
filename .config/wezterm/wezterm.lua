@@ -115,7 +115,7 @@ local config = {
     -- Git-status file paths
     '(?<=\\s{8}|\\s{8}modified:\\s{3})/*[0-9A-Za-z.+_/-]+',
     -- Git branch names in ()
-    '\\(([0-9A-Za-z_+-]+)\\)',
+    '\\(([0-9A-Za-z.+_/-]+)\\)',
   },
 
   font = wezterm.font_with_fallback {
