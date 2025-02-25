@@ -140,6 +140,7 @@ local config = {
   window_background_opacity = 0.9,
 
   color_scheme = 'tokyo-night-storm',
+  -- color_scheme = 'root-beer-float',
   color_schemes = {
     ['tokyo-night-storm'] = {
       foreground = '#d3d7eb',
@@ -169,6 +170,35 @@ local config = {
         '#cbcff5',
       },
     },
+    ['root-beer-float'] = {
+      foreground = "#f5e8e5",
+      background = "#331b17",
+      cursor_bg = "#e3bcb5",
+      cursor_border = "#fbf5f4",
+      cursor_fg = "#331b17",
+      selection_bg = "#f5e8e5",
+      selection_fg = "#331b17",
+      ansi = {
+        "#522f29",
+        "#f9aac1",
+        "#b7d348",
+        "#f7b37c",
+        "#8eccf8",
+        "#cdb6f9",
+        "#4fdec7",
+        "#e3bcb5"
+      },
+      brights = {
+        "#915a50",
+        "#fbcbd9",
+        "#cde967",
+        "#fbd1af",
+        "#bae0fb",
+        "#e0d2fb",
+        "#76f4dd",
+        "#fbf5f4"
+      },
+    }
   },
 
   -- Default: saturation = 0.9, brightness = 0.8
