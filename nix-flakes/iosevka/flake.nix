@@ -31,6 +31,7 @@
                   capital-q = "open-swash";
                   g = "single-storey-flat-hook-serifless";
                   y = "cursive-flat-hook-serifless";
+                  at = "fourfold-solid-inner-tall";
                 };
               };
               slopes = {
@@ -49,7 +50,7 @@
               };
               ligations = {
                 inherits = "default-calt";
-                enables = [ "connected-number-sign" ];
+                enables = [ "hash-hash" ];
                 disables = [
                   "arrow-l" "arrow-r"
                   "counter-arrow-l" "counter-arrow-r"
@@ -57,12 +58,14 @@
                   "lteq" "eqlt" "gteq"
                   "exeqeqeq" "exeqeq" "eqexeq" "eqexeq-dl" "exeq"
                   "tildeeq" "eqslasheq" "slasheq"
-                  "plusplus"
+                  "plus-plus" "plus-plus-plus"
                   "llggeq"
                   "html-comment"
                   "colon-greater-as-colon-arrow"
                   "brace-bar" "brack-bar"
-                  "connected-underscore" "connected-tilde-as-wave" "connected-hyphen"
+                  "underscore-underscore" "underscore-underscore-underscore"
+                  "tilde-tilde" "tilde-tilde-tilde"
+                  "minus-minus" "minus-minus-minus"
                 ];
               };
             };
