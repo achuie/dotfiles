@@ -26,13 +26,13 @@
               Regular:
                 MONO: 1
                 CASL: 0
-                wght: 380
+                wght: 360
                 slnt: 0
                 CRSV: 0
               Italic:
                 MONO: 1
                 CASL: 0
-                wght: 380
+                wght: 360
                 slnt: -10
                 CRSV: 1
               Bold:
@@ -59,19 +59,19 @@
             Fonts:
               Regular:
                 MONO: 1
-                CASL: 0.3
-                wght: 380
+                CASL: 0
+                wght: 360
                 slnt: 0
                 CRSV: 0
               Italic:
                 MONO: 1
                 CASL: 0
-                wght: 380
+                wght: 360
                 slnt: -10
                 CRSV: 1
               Bold:
                 MONO: 1
-                CASL: 0.3
+                CASL: 0
                 wght: 700
                 slnt: 0
                 CRSV: 0
