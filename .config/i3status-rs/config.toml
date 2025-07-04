@@ -9,6 +9,14 @@ critical_fg = "#ea4e6b"
 
 [icons]
 icons = "awesome6"
+[icons.overrides]
+backlight = [
+    "\U0001f311",
+    "\U0001f318",
+    "\U0001f317",
+    "\U0001f316",
+    "\U0001f315",
+]
 
 [[block]]
 block = "net" 
@@ -76,8 +84,10 @@ cycle = [30, 50, 75]
 [[block]]
 block = "toggle"
 format = " $icon "
-command_on = """(setsid redshift -l $(curl -s "https://location.services.mozilla.com/v1/geolocate?key=geoclue" \
-    | awk 'OFS=":" {print $3,$5}' | tr -d ',}') -t 6500:4000 >/dev/null 2>&1 &)"""
+# command_on = """(setsid redshift -l $(curl -s "https://location.services.mozilla.com/v1/geolocate?key=geoclue" \
+#     | awk 'OFS=":" {print $3,$5}' | tr -d ',}') -t 6500:4000 >/dev/null 2>&1 &)"""
+# Tokyo lat:lon
+command_on = """(setsid redshift -l 35.68:139.65 -t 6500:4000 >/dev/null 2>&1 &)"""
 command_off = "pkill redshift || true"
 command_state = "if [ -z $(pgrep redshift) ]; then exit 0; else; sleep 5; pgrep redshift; fi || true"
 
