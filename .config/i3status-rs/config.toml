@@ -84,16 +84,15 @@ cycle = [30, 50, 75]
 [[block]]
 block = "toggle"
 format = " $icon "
-# command_on = """(setsid redshift -l $(curl -s "https://location.services.mozilla.com/v1/geolocate?key=geoclue" \
-#     | awk 'OFS=":" {print $3,$5}' | tr -d ',}') -t 6500:4000 >/dev/null 2>&1 &)"""
-# Tokyo lat:lon
-command_on = """(setsid redshift -l 35.68:139.65 -t 6500:4000 >/dev/null 2>&1 &)"""
+command_on = """(setsid redshift -l $(curl -s https://ipapi.co/$(curl -s ifconfig.me/ip)/latlong | sed 's/,/:/') -t 6500:4000 >/dev/null 2>&1 &)"""
 command_off = "pkill redshift || true"
+# Sleep in case redshift is fading in
 command_state = "if [ -z $(pgrep redshift) ]; then exit 0; else; sleep 5; pgrep redshift; fi || true"
 
 [[block]]
 block = "time"
 interval = 1
 [block.format]
-full = " $icon $timestamp.datetime(f:'%a %Y-%m-%d %T %Z') " 
-short = " $icon $timestamp.datetime(f:'%Y-%m-%d %T') "
+# Extra spaces are padding for the system tray
+full = " $icon $timestamp.datetime(f:'%a %Y-%m-%d %T %Z')    "
+short = " $icon $timestamp.datetime(f:'%Y-%m-%d %T')    "
