@@ -26,6 +26,8 @@ session = /home/achuie/.rSession
 #schedule = watch_directory,5,5,load_start=./watch/*.torrent
 #schedule = untied_directory,5,5,stop_untied=
 
+pieces.sync.always_safe.set=1
+
 # Close torrents when diskspace is low.
 #schedule = low_diskspace,5,60,close_low_diskspace=100M
 
