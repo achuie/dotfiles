@@ -33,7 +33,7 @@ promptinit
 prompt achuie
 
 ## Aliases
-alias ls='ls --color=auto -N'
+alias ls='ls --color=auto'
 alias git-log='git log --graph --pretty='\''%Cred%h%Creset -%C(auto)%d%Creset %Cgreen(%cr) %C(bold blue)<%an>%Creset %<(50,trunc)%s'\'' --all'
 alias git-vlog='git log --graph --pretty='\''%Cred%h%Creset -%C(auto)%d%Creset %Cgreen%aD%Creset%n''          %C(bold blue)<%an>%Creset %<(80,trunc)%s'\'' --all'
 
