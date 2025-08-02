@@ -20,11 +20,11 @@ backlight = [
 
 [[block]]
 block = "net" 
-format_alt = " $icon {$signal_strength $ssid $frequency|Wired} via $device "
+format_alt = "$icon {$signal_strength $ssid $frequency|Wired} via $device"
 interval = 5
 [block.format]
-full = " $icon {$signal_strength $ssid @$ip|Wired @$ip} $graph_down "
-short = " $icon {$ssid|Wired} "
+full = "$icon {$signal_strength $ssid @$ip|Wired @$ip} $graph_down"
+short = "$icon {$ssid|Wired}"
 
 [[block]]
 block = "memory"
@@ -32,67 +32,72 @@ warning_mem = 80
 warning_swap = 80
 critical_mem = 95
 critical_swap = 95
-format = " $icon $mem_total_used_percents.eng(w:2) "
-format_alt = " $icon_swap $swap_used_percents.eng(w:2) "
+format = "$icon $mem_total_used_percents.eng(w:2)"
+format_alt = "$icon_swap $swap_used_percents.eng(w:2)"
 
 [[block]]
 block = "disk_space"
 path = "/"
 [block.format]
-full = " $icon $path $available "
-short = " $path $available "
+full = "$icon $path $available"
+short = "$path $available"
 
 [[block]]
 block = "disk_space"
 path = "~"
 [block.format]
-full = " $icon ~ $available "
-short = " ~ $available "
+full = "$icon ~ $available"
+short = "~ $available"
 
 [[block]]
 block = "cpu"
 interval = 5
 [block.format]
-full = " $icon $barchart $utilization $frequency "
-short = " $icon $utilization "
+full = "$icon $barchart $utilization $frequency"
+short = "$icon $utilization"
 
 [[block]]
 block = "temperature"
 interval = 5
 scale = "celsius"
-format = " $icon $average "
-format_alt = " $icon $min min, $average avg, $max max "
+format = "$icon $average"
+format_alt = "$icon $min min, $average avg, $max max"
 chip = "*-isa-*"
 
 [[block]]
 block = "sound"
-format = " $icon {$volume.eng(w:3) |} "
+format = "$icon {$volume.eng(w:3) |}"
 [block.theme_overrides]
 idle_fg = "#bb9af7"
 
 [[block]]
 block = "battery"
 driver = "upower"
+full_format = "$icon"
+not_charging_format = "$icon"
 [block.format]
-full = " $icon $percentage $time "
+full = "$icon $percentage $time"
 
 [[block]]
 block = "backlight"
 minimum = 0.1
 cycle = [30, 50, 75]
+[block.format]
+full = "$icon $brightness"
+short = "$icon"
 
 [[block]]
 block = "toggle"
-format = " $icon "
-command_on = """(setsid redshift -l $(curl -s https://ipapi.co/$(curl -s ifconfig.me/ip)/latlong | sed 's/,/:/') -t 6500:4000 >/dev/null 2>&1 &)"""
-command_off = "pkill redshift || true"
-# Sleep in case redshift is fading in
-command_state = "if [ -z $(pgrep redshift) ]; then exit 0; else; sleep 5; pgrep redshift; fi || true"
+format = "$icon"
+command_on = """(setsid gammastep -l $(curl -s https://ipapi.co/$(curl -s ifconfig.me/ip)/latlong | sed 's/,/:/') -t 6500:4000 >/dev/null 2>&1 &)"""
+command_off = "pkill gammastep || true"
+# Sleep in case gammastep is fading in
+command_state = "if [ -z $(pgrep gammastep) ]; then exit 0; else; sleep 5; pgrep gammastep; fi || true"
 
 [[block]]
 block = "time"
 interval = 1
 [block.format]
 # Extra spaces are padding for the system tray
-full = " $icon $timestamp.datetime(f:'%a %Y-%m-%d %T %Z')    "
-short = " $icon $timestamp.datetime(f:'%Y-%m-%d %T')    "
+full = "$icon $timestamp.datetime(f:'%a %Y-%m-%d %T %Z')"
+short = "$icon $timestamp.datetime(f:'%Y-%m-%d %T')"

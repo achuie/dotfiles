@@ -5,13 +5,11 @@
 # this file and re-run i3-config-wizard(1).
 #
 
-output * bg $HOME/images/wallpapers/golden_gate_bridge.jpg fill
-
 set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:Fira Code 8
+font pango:Fira Code Custom 6
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -21,13 +19,13 @@ font pango:Fira Code 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec wezterm
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-set $menu kickoff | xargs swaymsg exec --
+set $menu tofi-run -c $HOME/.config/tofi/tofi_run_theme | xargs swaymsg exec --
 bindsym $mod+d exec --no-startup-id $menu
 
 # change focus
@@ -85,7 +83,7 @@ bindsym $mod+c focus child
 
 # dynamic tagging
 bindsym $mod+x exec --no-startup-id $HOME/.config/sway/dyn_tags.sh
-bindsym $mod+Shift+x exec --no-startup-id $HOME/.config/sway/dyn_tags_mv.sh
+bindsym $mod+Shift+x exec --no-startup-id $HOME/.config/sway/dyn_tags.sh move
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
@@ -178,70 +176,101 @@ shortcut. Do you really want to exit sway? This will end your Wayland session.' 
 'Yes, exit sway' 'swaymsg exit'"
 
 # lock the screen
-bindsym $mod+o exec $HOME/.config/sway/lock.sh
+bindsym $mod+o exec hyprlock
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
+    # These bindings trigger as soon as you enter the resize mode
 
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym h resize shrink width 5 px or 5 ppt
-        bindsym j resize grow height 5 px or 5 ppt
-        bindsym k resize shrink height 5 px or 5 ppt
-        bindsym l resize grow width 5 px or 5 ppt
+    # Pressing left will shrink the window’s width.
+    # Pressing right will grow the window’s width.
+    # Pressing up will shrink the window’s height.
+    # Pressing down will grow the window’s height.
+    bindsym h resize shrink width 5 px or 5 ppt
+    bindsym j resize grow height 5 px or 5 ppt
+    bindsym k resize shrink height 5 px or 5 ppt
+    bindsym l resize grow width 5 px or 5 ppt
 
-        # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 5 px or 5 ppt
-        bindsym Down resize grow height 5 px or 5 ppt
-        bindsym Up resize shrink height 5 px or 5 ppt
-        bindsym Right resize grow width 5 px or 5 ppt
+    # same bindings, but for the arrow keys
+    bindsym Left resize shrink width 5 px or 5 ppt
+    bindsym Down resize grow height 5 px or 5 ppt
+    bindsym Up resize shrink height 5 px or 5 ppt
+    bindsym Right resize grow width 5 px or 5 ppt
 
-        # Resize and move to corner
-        bindsym c floating enable, resize set 20 ppt 20 ppt, \
-        exec --no-startup-id $HOME/.config/i3/move_screen_ppt.sh 79 77
+    # Resize and move to corner
+    bindsym c floating enable, resize set 20 ppt 20 ppt, \
+        exec --no-startup-id $HOME/.config/sway/move_screen_ppt.sh 79 77
 
-        # back to normal: Enter or Escape
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-        bindsym $mod+r mode "default"
+    bindsym s move position center, resize set width 50 ppt height 70 ppt
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym $mod+r mode "default"
 }
 
 bindsym $mod+r mode "resize"
 
 mode "music" {
-        # Bindings to control mpd via mpc
-        bindsym Return       exec mpc play
-        bindsym s            exec mpc stop
-        bindsym p            exec mpc toggle
-        bindsym Shift+period exec mpc next
-        bindsym Shift+comma  exec mpc prev
-        bindsym z            exec mpc random
-        bindsym y            exec mpc single
-        bindsym r            exed mpc repeat
-        bindsym plus         exec mpc volume +5
-        bindsym minus        exec mpc volume -5
+    # Bindings to control mpd via mpc
+    bindsym Return       exec mpc play
+    bindsym s            exec mpc stop
+    bindsym p            exec mpc toggle
+    bindsym Shift+period exec mpc next
+    bindsym Shift+comma  exec mpc prev
+    bindsym z            exec mpc random
+    bindsym y            exec mpc single
+    bindsym r            exec mpc repeat
+    bindsym plus         exec mpc volume +5
+    bindsym minus        exec mpc volume -5
 
-        bindsym Escape mode "default"
+    bindsym Escape mode "default"
 }
 
 bindsym $mod+m mode "music"
 
 # Window rules
+for_window [app_id="firefox"] move --no-auto-back-and-forth window to workspace 1:web
+for_window [app_id="discord"] move --no-auto-back-and-forth window to workspace 10:discord
+for_window [app_id="wezterm-system"] mark "alpha", move scratchpad
+for_window [app_id="wezterm-audio"] mark "beta", move scratchpad
+
+for_window [app_id=".*wezterm.*"] blur enable
+for_window [floating=true] shadows enable
+
+exec --no-startup-id wezterm start --class "wezterm-system"
+exec --no-startup-id wezterm start --class "wezterm-audio" -- zsh -is eval 'pulsemixer'
+
+exec_always --no-startup-id dunst
+exec_always --no-startup-id swayidle -w \
+    timeout 15 'if pgrep -x hyprlock; then swaymsg "output * power off"; fi' \
+    resume 'swaymsg "output * power on"'
 
 # Handle urgency hints
 client.urgent #2f343a #900000 #ffffff #900000
 
+titlebar_padding 2
+
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        font pango:Fira Code, Font Awesome 5 Free 9
-        status_command i3status-rs $HOME/.config/i3status-rs/config.toml
+    font pango:Fira Code Custom, Font Awesome 7 Free 6
+    status_command i3status-rs $HOME/.config/i3status-rs/config.toml
+    status_padding 0
 
-        # Handle urgency hints
-        colors {
-            urgent_workspace   #2f343a #900000 #ffffff
-        }
+    # Handle urgency hints
+    colors {
+        urgent_workspace   #2f343a #900000 #ffffff
+    }
 }
+
+input "1:1:AT_Translated_Set_2_keyboard" xkb_options "ctrl:swapcaps"
+input "2362:628:PIXA3854:00_093A:0274_Touchpad" {
+    tap enabled
+    scroll_factor 0.3
+    dwt disabled
+}
+
+seat * xcursor_theme "Adwaita" 1
+
+output * bg $HOME/.background_image.jpg fill
