@@ -238,6 +238,9 @@ for_window [app_id="wezterm-audio"] mark "beta", move scratchpad
 for_window [app_id=".*wezterm.*"] blur enable
 for_window [floating=true] shadows enable
 
+for_window [shell="xwayland"] title_format "[XWayland] %title"
+
+# Startup services and programs
 exec --no-startup-id wezterm start --class "wezterm-system"
 exec --no-startup-id wezterm start --class "wezterm-audio" -- zsh -is eval 'pulsemixer'
 
@@ -246,7 +249,7 @@ exec_always --no-startup-id swayidle -w \
     timeout 15 'if pgrep -x hyprlock; then swaymsg "output * power off"; fi' \
     resume 'swaymsg "output * power on"'
 
-# Handle urgency hints
+# Styling
 client.urgent #2f343a #900000 #ffffff #900000
 
 titlebar_padding 2
@@ -264,6 +267,7 @@ bar {
     }
 }
 
+# Wayland input
 input "1:1:AT_Translated_Set_2_keyboard" xkb_options "ctrl:swapcaps"
 input "2362:628:PIXA3854:00_093A:0274_Touchpad" {
     tap enabled
@@ -273,4 +277,5 @@ input "2362:628:PIXA3854:00_093A:0274_Touchpad" {
 
 seat * xcursor_theme "Adwaita" 1
 
+# Wallpaper
 output * bg $HOME/.background_image.jpg fill
