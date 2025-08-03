@@ -110,6 +110,7 @@ local config = {
   scrollback_lines = 10000,
   audible_bell = "Disabled",
   use_ime = false,
+  alternate_buffer_wheel_scroll_speed = 1,
 
   quick_select_patterns = {
     -- Git-status file paths
@@ -124,7 +125,7 @@ local config = {
     'Rec Mono Custom',
     'Font Awesome 6 Free',
   },
-  font_size = 12,
+  font_size = 7,
   font_rules = {
     {
       italic = true,
@@ -137,7 +138,7 @@ local config = {
     },
   },
 
-  window_background_opacity = 0.9,
+  window_background_opacity = 0.8,
 
   color_scheme = 'tokyo-night-storm',
   -- color_scheme = 'root-beer-float',
