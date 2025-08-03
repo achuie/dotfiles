@@ -92,7 +92,7 @@ format = "$icon"
 command_on = """(setsid gammastep -l $(curl -s https://ipapi.co/$(curl -s ifconfig.me/ip)/latlong | sed 's/,/:/') -t 6500:4000 >/dev/null 2>&1 &)"""
 command_off = "pkill gammastep || true"
 # Sleep in case gammastep is fading in
-command_state = "if [ -z $(pgrep gammastep) ]; then exit 0; else; sleep 5; pgrep gammastep; fi || true"
+command_state = "if [ -z $(pgrep gammastep) ]; then exit 0; else; sleep 8; pgrep gammastep; fi || true"
 
 [[block]]
 block = "time"
