@@ -24,8 +24,13 @@ export PATH
 fpath=("$ZDOTDIR/functions" "$fpath[@]")
 export FPATH
 
-# Nix
-emulate sh -c '. /home/achuie/.nix-profile/etc/profile.d/nix.sh'
+## Nix
+# emulate sh -c '. /home/achuie/.nix-profile/etc/profile.d/nix.sh'
+
+## Environment
+# For ICC color correction with swaywm
+export WLR_RENDERER=vulkan
+export GDK_BACKEND=wayland
 
 ## Prompt
 autoload -Uz promptinit

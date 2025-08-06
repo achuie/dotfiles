@@ -245,6 +245,7 @@ exec --no-startup-id wezterm start --class "wezterm-system"
 exec --no-startup-id wezterm start --class "wezterm-audio" -- zsh -is eval 'pulsemixer'
 
 exec_always --no-startup-id dunst
+exec_always --no-startup-id fcitx5
 exec_always --no-startup-id swayidle -w \
     timeout 15 'if pgrep -x hyprlock; then swaymsg "output * power off"; fi' \
     resume 'swaymsg "output * power on"'
@@ -276,6 +277,9 @@ input "2362:628:PIXA3854:00_093A:0274_Touchpad" {
 }
 
 seat * xcursor_theme "Adwaita" 1
+
+# ICC color profile; requires vulkan wlr-renderer
+output * color_profile icc $HOME/.config/icc-profiles/framework-13-11thgen/BOE_CQ_______NE135FBM_N41_01.icm
 
 # Wallpaper
 output * bg $HOME/.background_image.jpg fill
