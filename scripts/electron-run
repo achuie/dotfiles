@@ -27,8 +27,8 @@ if [ "$1" == "discord" ]; then
     SANDBOX="--no-sandbox"
 fi
 $@  --ignore-gpu-blocklist \
-    --disable-features=UseOzonePlatform \
-    --enable-features=VaapiVideoDecoder,VaapiVideoEncoder \
+    --ozone-platform-hint=wayland \
+    --enable-features=VaapiVideoDecoder,VaapiVideoEncoder,WebRTCPipeWireCapturer \
     --use-gl=desktop \
     --enable-gpu-rasterization \
     --enable-zero-copy \
