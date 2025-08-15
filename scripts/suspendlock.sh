@@ -1,3 +1,5 @@
 #!/usr/bin/env bash
 
-sudo systemctl suspend && $HOME/.config/i3/lock.sh
+HYPRLOCK=$(command -v hyprlock) || exit 1
+
+$HYPRLOCK >/dev/null & disown && sleep 1; systemctl suspend
