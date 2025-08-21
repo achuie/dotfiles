@@ -138,7 +138,7 @@ local config = {
     },
   },
 
-  window_background_opacity = 0.8,
+  window_background_opacity = 0.99,
 
   color_scheme = 'tokyo-night-storm',
   -- color_scheme = 'root-beer-float',

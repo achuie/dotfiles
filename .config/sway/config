@@ -235,8 +235,8 @@ for_window [app_id="discord"] move --no-auto-back-and-forth window to workspace 
 for_window [app_id="wezterm-system"] mark "alpha", move scratchpad
 for_window [app_id="wezterm-audio"] mark "beta", move scratchpad
 
-for_window [app_id=".*wezterm.*"] blur enable
-for_window [floating=true] shadows enable
+# for_window [app_id=".*wezterm.*"] blur enable
+# for_window [floating=true] shadows enable
 
 for_window [shell="xwayland"] title_format "[XWayland] %title"
 
@@ -279,7 +279,10 @@ input "2362:628:PIXA3854:00_093A:0274_Touchpad" {
 seat * xcursor_theme "Adwaita" 1
 
 # ICC color profile; requires vulkan wlr-renderer
-output * color_profile icc $HOME/.config/icc-profiles/framework-13-11thgen/BOE_CQ_______NE135FBM_N41_01.icm
+output eDP-1 color_profile icc $HOME/.config/icc-profiles/framework-13-11thgen/BOE_CQ_______NE135FBM_N41_01.icm
 
 # Wallpaper
 output * bg $HOME/.background_image.jpg fill
+
+# Use included Arch package config for systemd to start xdg-desktop-portal as needed
+include /etc/sway/config.d/*
