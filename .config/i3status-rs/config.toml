@@ -66,7 +66,7 @@ chip = "*-isa-*"
 
 [[block]]
 block = "sound"
-format = "$icon {$volume.eng(w:3) |}"
+format = "$icon {$volume.eng()|}"
 [block.theme_overrides]
 idle_fg = "#bb9af7"
 
