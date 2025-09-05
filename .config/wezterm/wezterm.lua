@@ -111,6 +111,7 @@ local config = {
   audible_bell = "Disabled",
   use_ime = false,
   alternate_buffer_wheel_scroll_speed = 1,
+  adjust_window_size_when_changing_font_size = false,
 
   quick_select_patterns = {
     -- Git-status file paths
@@ -138,7 +139,7 @@ local config = {
     },
   },
 
-  window_background_opacity = 1,
+  window_background_opacity = 0.99,
 
   color_scheme = 'tokyo-night-storm',
   -- color_scheme = 'root-beer-float',
