@@ -232,8 +232,8 @@ bindsym $mod+m mode "music"
 # Window rules
 for_window [app_id="firefox"] move --no-auto-back-and-forth window to workspace 1:web
 for_window [app_id="discord"] move --no-auto-back-and-forth window to workspace 10:discord
-for_window [app_id="wezterm-system"] mark "alpha", move scratchpad
-for_window [app_id="wezterm-audio"] mark "beta", move scratchpad
+for_window [app_id="foot-system"] mark "alpha", move scratchpad
+for_window [app_id="foot-audio"] mark "beta", move scratchpad
 
 # for_window [app_id=".*wezterm.*"] blur enable
 # for_window [floating=true] shadows enable
@@ -241,8 +241,8 @@ for_window [app_id="wezterm-audio"] mark "beta", move scratchpad
 for_window [shell="xwayland"] title_format "[XWayland] %title"
 
 # Startup services and programs
-exec --no-startup-id wezterm start --class "wezterm-system"
-exec --no-startup-id wezterm start --class "wezterm-audio" -- zsh -is eval 'pulsemixer'
+exec --no-startup-id foot --app-id="foot-system"
+exec --no-startup-id foot --app-id="foot-audio" zsh -is eval 'pulsemixer'
 
 exec_always --no-startup-id dunst
 exec_always --no-startup-id fcitx5
