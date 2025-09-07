@@ -178,6 +178,11 @@ shortcut. Do you really want to exit sway? This will end your Wayland session.' 
 # lock the screen
 bindsym $mod+o exec hyprlock
 
+# screenshot
+bindsym $mod+Shift+s exec grim ~/$(date +'%s_screenshot.png')
+bindsym $mod+Control+s exec swaymsg -t get_tree | jq -j '.. | select(.type?) | select(.focused).rect | "\(.x),\(.y) \(.width)x\(.height)"' | grim -g - ~/$(date +'%s_screenshot.png')
+bindsym $mod+Mod1+s exec grim -g "$(slurp)" - | wl-copy -t image/png
+
 # resize window (you can also use the mouse for that)
 mode "resize" {
     # These bindings trigger as soon as you enter the resize mode
