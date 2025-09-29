@@ -251,6 +251,7 @@ exec --no-startup-id foot --app-id="foot-audio" zsh -is eval 'pulsemixer'
 
 exec_always --no-startup-id dunst
 exec_always --no-startup-id fcitx5
+exec_always --no-startup-id trayscale --hide-window
 exec_always --no-startup-id swayidle -w \
     timeout 15 'if pgrep -x hyprlock; then swaymsg "output * power off"; fi' \
     resume 'swaymsg "output * power on"'
