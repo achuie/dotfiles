@@ -121,8 +121,8 @@ local config = {
   },
 
   font = wezterm.font_with_fallback {
-    'Fira Code Custom',
-    'Iosevka Custom Extended',
+    'Fira Code Kern',
+    'Iosevka Whiteletter Extended',
     'Rec Mono Custom',
     'Font Awesome 6 Free',
   },
@@ -130,12 +130,12 @@ local config = {
   font_rules = {
     {
       italic = true,
-      font = wezterm.font('Iosevka Custom Extended', { italic = true }),
+      font = wezterm.font('Iosevka Whiteletter Extended', { italic = true }),
     },
     {
       italic = true,
       intensity = 'Bold',
-      font = wezterm.font('Iosevka Custom Extended', { italic = true }),
+      font = wezterm.font('Iosevka Whiteletter XBd Ex', { italic = true }),
     },
   },
 

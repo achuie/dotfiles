@@ -9,7 +9,7 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:Fira Code Custom 6
+font pango:Fira Code Kern 6
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -264,7 +264,7 @@ titlebar_padding 2
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-    font pango:Fira Code Custom, Font Awesome 7 Free 6
+    font pango:Fira Code Kern, Font Awesome 7 Free 6
     status_command i3status-rs $HOME/.config/i3status-rs/config.toml
     status_padding 0
 
@@ -280,6 +280,7 @@ bar {
 input "1:1:AT_Translated_Set_2_keyboard" xkb_options "ctrl:swapcaps"
 input "2362:628:PIXA3854:00_093A:0274_Touchpad" {
     tap enabled
+    pointer_accel -0.1
     scroll_factor 0.3
     dwt disabled
 }
