@@ -34,18 +34,35 @@ wezterm.on('augment-command-palette', function(window, pane)
       icon = 'fa_toggle_on',
       action = wact.EmitEvent 'toggle-tmux-compatibility',
     },
+    {
+      brief = 'Toggle light/dark color scheme',
+      icon = 'fa_toggle_on',
+      action = wezterm.action_callback(function(cwindow, cpane, cline)
+        local overrides = cwindow:get_config_overrides() or {}
+
+        if overrides.color_scheme == 'tokyo-night-storm' then
+          overrides.color_scheme = 'tokyo-day-storm'
+        else
+          overrides.color_scheme = 'tokyo-night-storm'
+        end
+
+        cwindow:set_config_overrides(overrides)
+      end),
+    },
   }
 end)
 
 wezterm.on('toggle-tmux-compatibility', function(window, pane)
   local overrides = window:get_config_overrides() or {}
   local dirKeys = { 'h', 'j', 'k', 'l' }
+  local dirNames = { 'Left', 'Down', 'Up', 'Right' }
 
   if not overrides.leader then
     overrides.leader = { key = 'a', mods = 'CTRL', timeout_milliseconds = 2000 }
     overrides.keys = { { key = 'a', mods = 'LEADER|CTRL', action = wact.SendKey { key = 'a', mods = 'CTRL' } } }
     for i = 1, #dirKeys do
-      table.insert(overrides.keys, { key = dirKeys[i], mods = 'ALT', action = wact.SendKey { key = dirKeys[i], mods = 'ALT' } })
+      -- table.insert(overrides.keys, { key = dirKeys[i], mods = 'ALT', action = wact.SendKey { key = dirKeys[i], mods = 'ALT' } })
+      table.insert(overrides.keys, { key = dirKeys[i], mods = 'ALT', action = wact.ActivatePaneDirection(dirNames[i]) })
     end
   else
     overrides.leader = nil
@@ -66,7 +83,7 @@ wezterm.on('format-window-title', function(tab, pane, tabs, panes, config)
   end
 
   local tmux_compat = ''
-  if config.leader.key ~= 'mapped:`' then
+  if config.leader.mods ~= 'SHIFT|CTRL' then
     tmux_compat = '[W] '
   end
 
@@ -106,6 +123,23 @@ wezterm.on('edit-scrollback', function(window, pane)
   os.remove(filename)
 end)
 
+
+function Get_appearance()
+  if wezterm.gui then
+    return wezterm.gui.get_appearance()
+  end
+  return 'Dark'
+end
+
+function Scheme_for_appearance(appearance)
+  if appearance:find 'Dark' then
+    return 'tokyo-night-storm'
+  else
+    return 'tokyo-day-storm'
+  end
+end
+
+
 local config = {
   scrollback_lines = 10000,
   audible_bell = "Disabled",
@@ -141,7 +175,7 @@ local config = {
 
   window_background_opacity = 0.99,
 
-  color_scheme = 'tokyo-night-storm',
+  color_scheme = Scheme_for_appearance(Get_appearance()),
   -- color_scheme = 'root-beer-float',
   color_schemes = {
     ['tokyo-night-storm'] = {
@@ -170,6 +204,33 @@ local config = {
         '#bb9af7',
         '#7dcfff',
         '#cbcff5',
+      },
+    },
+    ['tokyo-day-storm'] = {
+      foreground = "#000e33",
+      background = "#e1e2e7",
+      cursor_fg = "#e1e2e7",
+      cursor_bg = "#803900",
+      selection_bg = "#8fa3cc",
+      ansi = {
+        "#d3d5e6",
+        "#b3243e",
+        "#48800d",
+        "#cc6529",
+        "#4d71bf",
+        "#7a52cc",
+        "#2990cc",
+        "#313d59"
+      },
+      brights = {
+        "#fffdfa",
+        "#cc0025",
+        "#6d993d",
+        "#d99836",
+        "#6c8fd9",
+        "#926cd9",
+        "#57a9d9",
+        "#99a5cc"
       },
     },
     ['root-beer-float'] = {
@@ -212,16 +273,16 @@ local config = {
 
   unix_domains = { { name = 'unix' } },
 
-  -- Override default table to always confirm
+  -- Override default table to confirm for everything besides shells I use
   skip_close_confirmation_for_processes_named = { 'zsh', 'bash' },
 
-  leader = { key = '`', mods = 'CTRL', timeout_milliseconds = 2000 },
+  leader = { key = 'A', mods = 'CTRL|SHIFT', timeout_milliseconds = 2000 },
   keys = {
     { key = 'e',     mods = 'CTRL|SHIFT',        action = wact.EmitEvent 'toggle-ligature' },
     { key = 'y',     mods = 'CTRL|SHIFT',        action = wact.EmitEvent 'edit-scrollback' },
 
-    -- Send "CTRL-`" to the terminal when pressing CTRL-`, CTRL-`
-    { key = '`',     mods = 'LEADER|CTRL', action = wact.SendKey { key = '`', mods = 'CTRL' } },
+    -- Send literal leader when pressed twice
+    { key = 'A',     mods = 'LEADER|CTRL|SHIFT', action = wact.SendKey { key = 'A', mods = 'CTRL|SHIFT' } },
     -- Spawn new terminal with the same working directory
     { key = 'Enter', mods = 'SHIFT|CTRL',  action = wact.SpawnWindow, },
 
