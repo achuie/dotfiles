@@ -3,6 +3,23 @@ local io = require 'io'
 local os = require 'os'
 local wact = wezterm.action
 
+
+function Get_appearance()
+  if wezterm.gui then
+    return wezterm.gui.get_appearance()
+  end
+  return 'Dark'
+end
+
+function Scheme_for_appearance(appearance)
+  if appearance:find 'Dark' then
+    return 'ach-terafox'
+  else
+    return 'ach-dayfox'
+  end
+end
+
+
 wezterm.on('augment-command-palette', function(window, pane)
   return {
     {
@@ -22,9 +39,9 @@ wezterm.on('augment-command-palette', function(window, pane)
       icon = 'md_rename_box',
       action = wact.PromptInputLine {
         description = 'Enter new name for active workspace',
-        action = wezterm.action_callback(function(bwindow, bpane, line)
-          if line then
-            wezterm.mux.rename_workspace(wezterm.mux.get_active_workspace(), line)
+        action = wezterm.action_callback(function(bwindow, bpane, bline)
+          if bline then
+            wezterm.mux.rename_workspace(wezterm.mux.get_active_workspace(), bline)
           end
         end),
       },
@@ -37,17 +54,7 @@ wezterm.on('augment-command-palette', function(window, pane)
     {
       brief = 'Toggle light/dark color scheme',
       icon = 'fa_toggle_on',
-      action = wezterm.action_callback(function(cwindow, cpane, cline)
-        local overrides = cwindow:get_config_overrides() or {}
-
-        if overrides.color_scheme == 'tokyo-night-storm' then
-          overrides.color_scheme = 'tokyo-day-storm'
-        else
-          overrides.color_scheme = 'tokyo-night-storm'
-        end
-
-        cwindow:set_config_overrides(overrides)
-      end),
+      action = wact.EmitEvent 'toggle-colorscheme',
     },
   }
 end)
@@ -68,6 +75,22 @@ wezterm.on('toggle-tmux-compatibility', function(window, pane)
     overrides.leader = nil
     overrides.keys = nil
   end
+  window:set_config_overrides(overrides)
+end)
+
+wezterm.on('toggle-colorscheme', function(window, pane)
+  local overrides = window:get_config_overrides() or {}
+
+  if not overrides.color_scheme then
+    if Get_appearance():find 'Dark' then
+      overrides.color_scheme = Scheme_for_appearance('Light')
+    else
+      overrides.color_scheme = Scheme_for_appearance('Dark')
+    end
+  else
+    overrides.color_scheme = nil
+  end
+
   window:set_config_overrides(overrides)
 end)
 
@@ -124,22 +147,6 @@ wezterm.on('edit-scrollback', function(window, pane)
 end)
 
 
-function Get_appearance()
-  if wezterm.gui then
-    return wezterm.gui.get_appearance()
-  end
-  return 'Dark'
-end
-
-function Scheme_for_appearance(appearance)
-  if appearance:find 'Dark' then
-    return 'tokyo-night-storm'
-  else
-    return 'tokyo-day-storm'
-  end
-end
-
-
 local config = {
   scrollback_lines = 10000,
   audible_bell = "Disabled",
@@ -178,7 +185,171 @@ local config = {
   color_scheme = Scheme_for_appearance(Get_appearance()),
   -- color_scheme = 'root-beer-float',
   color_schemes = {
-    ['tokyo-night-storm'] = {
+    ['ach-terafox'] = {
+      foreground = "#e6eaea";
+      background = "#152528";
+      cursor_bg = '#ffe8d5',
+      cursor_border = '#ffe8d5',
+      cursor_fg = "#152528";
+      compose_cursor = '#ff8349';
+      selection_bg = "#293e40";
+      selection_fg = "#e6eaea";
+      scrollbar_thumb = "#587b7b";
+      split = "#0f1c1e";
+      visual_bell = "#e6eaea";
+      ansi = {
+        "#2f3239",
+        "#e85c51",
+        "#7aa4a1",
+        "#fda47f",
+        "#5a93aa",
+        "#ad5c7c",
+        "#a1cdd8",
+        "#ebebeb",
+      },
+      brights = {
+        "#4e5157",
+        "#eb746b",
+        "#8eb2af",
+        "#fdb292",
+        "#73a3b7",
+        "#b97490",
+        "#afd4de",
+        "#eeeeee",
+      },
+      indexed = {
+        [16] = "#cb7985",
+        [17] = "#ff8349",
+      },
+      tab_bar = {
+        background = "#0f1c1e",
+        inactive_tab_edge = "#0f1c1e",
+        inactive_tab_edge_hover = "#1d3337",
+        active_tab = {
+          bg_color = "#587b7b",
+          fg_color = "#152528",
+          intensity = "Bold",
+          italic = false,
+          strikethrough = false,
+          underline = "None",
+        },
+        inactive_tab = {
+          bg_color = "#1d3337",
+          fg_color = "#cbd9d8",
+          intensity = "Normal",
+          italic = false,
+          strikethrough = false,
+          underline = "None",
+        },
+        inactive_tab_hover = {
+          bg_color = "#254147",
+          fg_color = "#e6eaea",
+          intensity = "Normal",
+          italic = true,
+          strikethrough = false,
+          underline = "None",
+        },
+        new_tab = {
+          bg_color = "#152528",
+          fg_color = "#cbd9d8",
+          intensity = "Normal",
+          italic = false,
+          strikethrough = false,
+          underline = "None",
+        },
+        new_tab_hover = {
+          bg_color = "#254147",
+          fg_color = "#e6eaea",
+          intensity = "Normal",
+          italic = true,
+          strikethrough = false,
+          underline = "None",
+        },
+      },
+    },
+    ['ach-dayfox'] = {
+      foreground = "#3d2b5a",
+      background = "#f6f2ee",
+      cursor_bg = "#4d2200",
+      cursor_border = "#4d2200",
+      cursor_fg = "#f6f2ee",
+      compose_cursor = '#955f61',
+      selection_bg = "#e7d2be",
+      selection_fg = "#3d2b5a",
+      scrollbar_thumb = "#824d5b",
+      split = "#e4dcd4",
+      visual_bell = "#3d2b5a",
+      ansi = {
+        "#f2e9e1",
+        "#a5222f",
+        "#396847",
+        "#ac5402",
+        "#2848a9",
+        "#6e33ce",
+        "#287980",
+        "#352c24"
+      },
+      brights = {
+        "#f4ece6",
+        "#b3434e",
+        "#577f63",
+        "#b86e28",
+        "#4863b6",
+        "#8452d5",
+        "#488d93",
+        "#534c45"
+      },
+      indexed = {
+        [16] = "#a440b5",
+        [17] = "#955f61",
+      },
+      tab_bar = {
+        background = "#e4dcd4",
+        inactive_tab_edge = "#e4dcd4",
+        inactive_tab_edge_hover = "#dbd1dd",
+        active_tab = {
+          bg_color = "#824d5b",
+          fg_color = "#f6f2ee",
+          intensity = "Bold",
+          italic = false,
+          strikethrough = false,
+          underline = "None",
+        },
+        inactive_tab = {
+          bg_color = "#dbd1dd",
+          fg_color = "#643f61",
+          intensity = "Normal",
+          italic = false,
+          strikethrough = false,
+          underline = "None",
+        },
+        inactive_tab_hover = {
+          bg_color = "#d3c7bb",
+          fg_color = "#3d2b5a",
+          intensity = "Normal",
+          italic = true,
+          strikethrough = false,
+          underline = "None",
+        },
+        new_tab = {
+          bg_color = "#f6f2ee",
+          fg_color = "#643f61",
+          intensity = "Normal",
+          italic = false,
+          strikethrough = false,
+          underline = "None",
+        },
+        new_tab_hover = {
+          bg_color = "#d3c7bb",
+          fg_color = "#3d2b5a",
+          intensity = "Normal",
+          italic = true,
+          strikethrough = false,
+          underline = "None",
+        },
+      },
+    },
+    ['ach-tokyonight-storm'] = {
       foreground = '#d3d7eb',
       background = '#24283b',
       cursor_fg = '#24283b',
@@ -206,7 +377,7 @@ local config = {
         '#cbcff5',
       },
     },
-    ['tokyo-day-storm'] = {
+    ['ach-tokyonight-day'] = {
       foreground = "#000e33",
       background = "#e1e2e7",
       cursor_fg = "#e1e2e7",
