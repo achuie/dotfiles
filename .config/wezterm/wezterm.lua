@@ -82,11 +82,7 @@ wezterm.on('toggle-colorscheme', function(window, pane)
   local overrides = window:get_config_overrides() or {}
 
   if not overrides.color_scheme then
-    if Get_appearance():find 'Dark' then
       overrides.color_scheme = Scheme_for_appearance('Light')
-    else
-      overrides.color_scheme = Scheme_for_appearance('Dark')
-    end
   else
     overrides.color_scheme = nil
   end
@@ -182,7 +178,7 @@ local config = {
 
   window_background_opacity = 0.99,
 
-  color_scheme = Scheme_for_appearance(Get_appearance()),
+  color_scheme = Scheme_for_appearance('Dark'),
   -- color_scheme = 'root-beer-float',
   color_schemes = {
     ['ach-terafox'] = {
