@@ -13,7 +13,7 @@ end
 
 function Scheme_for_appearance(appearance)
   if appearance:find 'Dark' then
-    return 'ach-tokyonight-storm'
+    return 'ach-nightfox'
   else
     return 'ach-dayfox'
   end
@@ -82,7 +82,7 @@ wezterm.on('toggle-colorscheme', function(window, pane)
   local overrides = window:get_config_overrides() or {}
 
   if not overrides.color_scheme then
-      overrides.color_scheme = Scheme_for_appearance('Light')
+    overrides.color_scheme = Scheme_for_appearance('Light')
   else
     overrides.color_scheme = nil
   end
@@ -181,83 +181,83 @@ local config = {
   color_scheme = Scheme_for_appearance('Dark'),
   -- color_scheme = 'root-beer-float',
   color_schemes = {
-    ['ach-duskfox'] = {
-      foreground = "#e0def4",
-      background = "#232136",
+    ['ach-nightfox'] = {
+      foreground = "#cdcecf",
+      background = "#192330",
       cursor_bg = '#ffe8d5',
       cursor_border = '#ffe8d5',
-      cursor_fg = "#232136",
-      compose_cursor = '#ea9a97',
-      selection_bg = "#433c59",
-      selection_fg = "#e0def4",
-      scrollbar_thumb = "#6e6a86",
-      split = "#191726",
-      visual_bell = "#e0def4",
+      cursor_fg = "#192330",
+      compose_cursor = '#f4a261',
+      selection_bg = "#2b3b51",
+      selection_fg = "#cdcecf",
+      scrollbar_thumb = "#71839b",
+      split = "#131a24",
+      visual_bell = "#cdcecf",
       ansi = {
-        "#393552",
-        "#eb6f92",
-        "#a3be8c",
-        "#f6c177",
-        "#569fba",
-        "#c4a7e7",
-        "#9ccfd8",
-        "#e0def4",
+        "#393b44",
+        "#c94f6d",
+        '#9ece6a',
+        "#dba474",
+        "#719cd6",
+        "#9d79d6",
+        '#75c1ee',
+        "#dfdfe0"
       },
       brights = {
-        "#47407d",
-        "#f083a2",
-        "#b1d196",
-        "#f9cb8c",
-        "#65b1cd",
-        "#ccb1ed",
-        "#a6dae3",
-        "#e2e0f7",
+        "#575860",
+        "#d16983",
+        '#ace173',
+        "#e0b289",
+        "#86abdc",
+        "#baa1e2",
+        '#7dcfff',
+        "#e4e4e5"
       },
       indexed = {
-        [16] = "#eb98c3",
-        [17] = "#ea9a97",
+        [16] = "#d67ad2",
+        [17] = "#f4a261",
       },
       tab_bar = {
-        background = "#191726",
-        inactive_tab_edge = "#191726",
-        inactive_tab_edge_hover = "#2d2a45",
+        background = "#131a24",
+        inactive_tab_edge = "#131a24",
+        inactive_tab_edge_hover = "#212e3f",
         active_tab = {
-          bg_color = "#6e6a86",
-          fg_color = "#232136",
+          bg_color = "#71839b",
+          fg_color = "#192330",
           intensity = "Normal",
           italic = false,
           strikethrough = false,
           underline = "None",
         },
         inactive_tab = {
-          bg_color = "#2d2a45",
-          fg_color = "#cdcbe0",
+          bg_color = "#212e3f",
+          fg_color = "#aeafb0",
           intensity = "Normal",
           italic = false,
           strikethrough = false,
           underline = "None",
         },
         inactive_tab_hover = {
-          bg_color = "#373354",
-          fg_color = "#e0def4",
+          bg_color = "#29394f",
+          fg_color = "#cdcecf",
           intensity = "Normal",
-          italic = false,
+          italic = true,
           strikethrough = false,
           underline = "None",
         },
         new_tab = {
-          bg_color = "#232136",
-          fg_color = "#cdcbe0",
+          bg_color = "#192330",
+          fg_color = "#aeafb0",
           intensity = "Normal",
           italic = false,
           strikethrough = false,
           underline = "None",
         },
         new_tab_hover = {
-          bg_color = "#373354",
-          fg_color = "#e0def4",
+          bg_color = "#29394f",
+          fg_color = "#cdcecf",
           intensity = "Normal",
-          italic = false,
+          italic = true,
           strikethrough = false,
           underline = "None",
         },
@@ -358,7 +358,7 @@ local config = {
       split = "#e4dcd4",
       visual_bell = "#3d2b5a",
       ansi = {
-        "#f2e9e1",
+        "#ccc4be",
         "#a5222f",
         "#396847",
         "#ac5402",
@@ -368,7 +368,7 @@ local config = {
         "#352c24"
       },
       brights = {
-        "#f4ece6",
+        "#d9d2cc",
         "#b3434e",
         "#577f63",
         "#b86e28",
