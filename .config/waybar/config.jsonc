@@ -1,0 +1,145 @@
+{
+  "layer": "top",
+  "position": "bottom",
+  "spacing": 8,
+  "margin-left": 4,
+  "margin-right": 4,
+
+  "modules-left": [
+    "niri/workspaces"
+  ],
+
+  "modules-right": [
+    "network",
+    "memory",
+    "disk#root",
+    "disk#home",
+    "cpu",
+    "temperature",
+    "pulseaudio",
+    "battery",
+    "backlight",
+    "custom/gammastep",
+    "custom/pomodoro",
+    "clock",
+    "tray"
+  ],
+
+  "network": {
+    "interval": 5,
+    "format-wifi": " {essid}",
+    "format-ethernet": "󰈀 Wired",
+    "format-disconnected": "󰖪",
+    "tooltip-format-wifi": "{signalStrength}% @{ipaddr}",
+    "tooltip-format-ethernet": "Wired @{ipaddr}"
+  },
+
+  "memory": {
+    "format": "󰍛 {}%",
+    "tooltip": true
+  },
+
+  "disk#root": {
+    "path": "/",
+    "format": "󰋊 / {free}"
+  },
+
+  "disk#home": {
+    "path": "/home",
+    "format": "󰋊 ~ {free}"
+  },
+
+  "cpu": {
+    "interval": 5,
+    "format": "󰻠 {usage}%"
+  },
+
+  "temperature": {
+    "interval": 5,
+    "critical-threshold": 95,
+    "format": " {temperatureC}°C"
+  },
+
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-muted": "󰝟",
+    "format-icons": {
+      "default": ["", "", ""]
+    },
+    "smooth-scrolling-threshold": 2.0,
+    "on-click": "pulsemixer --toggle-mute",
+    "on-scroll-up": "pulsemixer --change-volume +5",
+    "on-scroll-down": "pulsemixer --change-volume -5"
+  },
+
+  "battery": {
+    "format": "{icon} {capacity}%",
+    "format-icons": [
+      "",
+      "",
+      "",
+      ""
+    ],
+    "format-charging": " {capacity}%",
+    "format-full": "",
+    "states": {
+      "warning": 20,
+      "critical": 10
+    }
+  },
+
+  "backlight": {
+    "format": "{icon} {percent}%",
+    "format-icons": [
+      "🌑",
+      "🌘",
+      "🌗",
+      "🌖",
+      "🌕"
+    ]
+  },
+
+  "custom/gammastep": {
+    "format": "🌅 {}",
+    "exec": "pgrep gammastep >/dev/null && echo ON || echo OFF",
+    "interval": 5,
+    "on-click": "~/.config/waybar/scripts/toggle-gammastep"
+  },
+
+  "custom/pomodoro": {
+    "exec": "~/.config/waybar/scripts/pomodoro-status",
+    "interval": 1,
+    "on-click": "~/.config/waybar/scripts/pomodoro-toggle",
+    "return-type": "text"
+  },
+
+  "clock": {
+    "interval": 1,
+    "format": "{:%a %Y-%m-%d %H:%M:%S %Z}",
+    "tooltip-format": "{calendar}",
+    "calendar": {
+      "mode": "month",
+      "mode-mon-col": 3,
+      "on-scroll": 1,
+      "weeks-pos": "left",
+      "format": {
+        "months":     "<span color='#ffead3'><b>{}</b></span>",
+        "days":       "<span color='#ecc6d9'><b>{}</b></span>",
+        "weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
+        "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
+        "today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
+      }
+    },
+    "smooth-scrolling-threshold": 2.0,
+    "actions": {
+      "on-click": "mode",
+      "on-click-right": "shift_reset",
+      "on-scroll-up": "shift_up",
+      "on-scroll-down": "shift_down"
+    }
+  },
+
+  "tray": {
+    "spacing": 8
+  }
+}
