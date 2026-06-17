@@ -108,6 +108,11 @@ output "eDP-1" {
     position x=2256 y=0
 }
 
+cursor {
+    xcursor-theme "Adwaita"
+    xcursor-size 24
+}
+
 // Settings that influence how windows are positioned and sized.
 // Find more information on the wiki:
 // https://yalter.github.io/niri/Configuration:-Layout
