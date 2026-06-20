@@ -189,7 +189,9 @@ layout {
         // You can use any CSS linear-gradient tool on the web to set these up.
         // Changing the color space is also supported, check the wiki for more info.
         //
-        active-gradient from="#80edff" to="#00bfff" angle=45
+        // active-gradient from="#80edff" to="#00bfff" angle=45
+        // active-gradient from="#00bfff" to="#80edff" angle=45
+        active-gradient from="#0086b3" to="#00bfff" angle=45
 
         // You can also color the gradient relative to the entire view
         // of the workspace, rather than relative to just the window itself.
@@ -298,9 +300,6 @@ layer-rule {
     shadow {
         off
     }
-
-    geometry-corner-radius 12
-    place-within-backdrop true
 
     background-effect {
         xray true

@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+
+render() {
+  local windows
+  local focused_workspace
+  local focused_col
+  local cols
+  local out
+
+  windows="$(niri msg --json windows)"
+
+  focused_workspace=$(
+    jq '
+    .[]
+    | select(.is_focused)
+    | .workspace_id
+    ' <<<"$windows"
+  )
+
+  focused_col=$(
+jq --argjson ws "$focused_workspace" '
+.[]
+| select(.workspace_id == $ws and .is_focused)
+| .layout.pos_in_scrolling_layout[0]
+' <<<"$windows"
+)
+
+  cols=$(
+    jq -r --argjson ws "$focused_workspace" '
+    .[]
+    | select(.workspace_id == $ws)
+    | .layout.pos_in_scrolling_layout[0]
+    ' <<<"$windows" |
+      sort -n |
+      uniq
+  )
+
+    out=""
+
+    while read -r col
+    do
+      if [[ "$col" == "$focused_col" ]]
+      then
+        out+="● "
+      else
+        out+="◦ "
+      fi
+    done <<<"$cols"
+
+    printf '{"text":"%s"}\n' "${out% }"
+}
+
+render
+
+niri msg event-stream |
+while read -r _
+do
+  render
+done

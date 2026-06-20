@@ -6,7 +6,8 @@
   "margin-right": 4,
 
   "modules-left": [
-    "niri/workspaces"
+    "niri/workspaces",
+    "custom/niri-minimap"
   ],
 
   "modules-right": [
@@ -20,10 +21,19 @@
     "battery",
     "backlight",
     "custom/gammastep",
-    "custom/pomodoro",
     "clock",
     "tray"
   ],
+
+  "niri/workspaces": {
+    "disable-markup": true,
+    "hide-empty": true
+  },
+
+  "custom/niri-minimap": {
+    "exec": "~/.config/waybar/scripts/niri-minimap",
+    "return-type": "json"
+  },
 
   "network": {
     "interval": 5,
@@ -96,7 +106,13 @@
       "🌗",
       "🌖",
       "🌕"
-    ]
+    ],
+    "smooth-scrolling-threshold": 2.0,
+    "on-scroll-up": "brightnessctl set +5%",
+    "on-scroll-down": "brightnessctl set 5%-",
+    "on-click": "brightnessctl set 50%",
+    "on-click-right": "brightnessctl set 25%",
+    "on-click-middle": "brightnessctl set 75%"
   },
 
   "custom/gammastep": {
@@ -104,13 +120,6 @@
     "exec": "pgrep gammastep >/dev/null && echo ON || echo OFF",
     "interval": 5,
     "on-click": "~/.config/waybar/scripts/toggle-gammastep"
-  },
-
-  "custom/pomodoro": {
-    "exec": "~/.config/waybar/scripts/pomodoro-status",
-    "interval": 1,
-    "on-click": "~/.config/waybar/scripts/pomodoro-toggle",
-    "return-type": "text"
   },
 
   "clock": {
