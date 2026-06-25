@@ -280,7 +280,8 @@ input "1:1:AT_Translated_Set_2_keyboard" xkb_options "ctrl:swapcaps"
 input "2362:628:PIXA3854:00_093A:0274_Touchpad" {
     tap enabled
     pointer_accel 0.1
-    scroll_factor 0.3
+    accel_profile adaptive
+    scroll_factor 0.8
     dwt disabled
 }
 
