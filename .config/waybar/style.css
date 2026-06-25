@@ -6,7 +6,7 @@
 window#waybar {
     background-color: rgba(0, 0, 0, 0.3);
     /* border-bottom: 3px solid rgba(100, 114, 125, 0.5); */
-    color: #f5f5f5;
+    color: #ffffff;
     transition-property: background-color;
     transition-duration: .5s;
 }
@@ -20,11 +20,11 @@ window#waybar {
 }
 
 #battery.critical {
-    color: #ea4e6b;
+    color: #900000;
 }
 
 #temperature.critical {
-    color: #ea4e6b;
+    color: #900000;
 }
 
 #memory.warning,
@@ -34,7 +34,7 @@ window#waybar {
 
 #memory.critical,
 #cpu.critical {
-    color: #ea4e6b;
+    color: #900000;
 }
 
 #workspaces button,
@@ -44,24 +44,25 @@ window#waybar {
 #workspaces button.urgent {
     border-radius: 0;
     padding: 0 4px;
-    color: white;
+    color: #888888;
     transition: none;
     border: none;
     box-shadow: none;
 }
 
 #workspaces button {
-    background: #333333;
+    background: #292d2e;
 }
 
 #workspaces button.visible {
-    background: #505050;
+    background: #292d2e;
 }
 #workspaces button:hover {
-    background: #505050;
+    background: #333333;
 }
 
 
 #workspaces button.focused {
-    background: #0086b3;
+    background: #2e92f4;
+    color: #ffffff;
 }
