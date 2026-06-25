@@ -5,9 +5,6 @@
 SWAYMSG=$(command -v swaymsg) || exit 1
 JQ=$(command -v jq) || exit 2
 
-$SWAYMSG workspace $($SWAYMSG -t get_workspaces | $JQ -M '.[] | .name' \
-    | tr -d '"' | sort -u | dmenu)
-
 MOVE=""
 MENUPROMPT="switch:"
 if [ $1 = "move" ]; then
