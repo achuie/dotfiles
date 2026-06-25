@@ -14,4 +14,4 @@ fi
 
 $SWAYMSG $MOVE workspace $($SWAYMSG -t get_workspaces | $JQ -M '.[] | .name' \
     | tr -d '"' | sort -u | tofi -c $HOME/.config/tofi/tofi_run_theme --anchor=bottom \
-    --prompt-text=" $MENUPROMPT " --margin-bottom=18)
+    --prompt-text=" $MENUPROMPT " --margin-bottom=24)
