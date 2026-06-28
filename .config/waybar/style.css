@@ -4,11 +4,15 @@
 }
 
 window#waybar {
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.6);
     /* border-bottom: 3px solid rgba(100, 114, 125, 0.5); */
     color: #ffffff;
     transition-property: background-color;
     transition-duration: .5s;
+}
+
+#network.disconnected {
+    color: #900000;
 }
 
 #pulseaudio {
@@ -46,23 +50,31 @@ window#waybar {
     padding: 0 4px;
     color: #888888;
     transition: none;
-    border: none;
     box-shadow: none;
+    text-shadow: none;
 }
 
 #workspaces button {
-    background: #292d2e;
+    background: #222222;
+    border: 0.1em solid #333333;
 }
 
 #workspaces button.visible {
-    background: #292d2e;
+    background: #222222;
 }
 #workspaces button:hover {
     background: #333333;
+    border: 0.1em solid #5f676a;
 }
 
-
 #workspaces button.focused {
-    background: #2e92f4;
+    background: #285577;
     color: #ffffff;
+    border: 0.1em solid #4c7899;
+}
+
+#workspaces button.urgent {
+    background: #900000;
+    color: #ffffff;
+    border: 0.1em solid #f00000;
 }
