@@ -10,6 +10,7 @@ cleanup() {
         .[]
         | select(
             .name != null and
+            (.name | startswith("@") | not) and
             .active_window_id == null and
             .is_focused == false
         )

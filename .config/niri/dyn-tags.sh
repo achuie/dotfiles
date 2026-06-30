@@ -34,10 +34,11 @@ if $NIRI msg --json workspaces | $JQ -e --arg name "$NAME" '.[] | select(.name =
     fi
 else
     $NIRI msg action focus-workspace $($NIRI msg --json workspaces | $JQ -M '. | length')
-    $NIRI msg action set-workspace-name "$NAME"
+    $NIRI msg action set-workspace-name "@$NAME"
 
     if [[ "$MODE" == "move" ]]; then
         $NIRI msg action focus-window --id $CURRENT
-        niri msg action move-window-to-workspace "$NAME"
+        $NIRI msg action move-window-to-workspace "@$NAME"
+        $NIRI msg action set-workspace-name "$NAME"
     fi
 fi
