@@ -276,6 +276,7 @@ layout {
 // See the binds section below for more spawn examples.
 
 // spawn-at-startup "qs" "-c" "noctalia-shell"
+spawn-at-startup "~/.config/niri/workspace-gc.sh"
 
 // Set the overview wallpaper on the backdrop.
 overview {
@@ -434,8 +435,8 @@ binds {
     Mod+D hotkey-overlay-title="Run an Application: tabi" { spawn-sh "tofi-run -c $HOME/.config/tofi/tofi_run_theme | xargs niri msg action spawn --"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: hyprlock" { spawn "hyprlock"; }
     // Super+Alt+L hotkey-overlay-title="Lock the Screen: noctalia lock" { spawn-sh "qs -c noctalia-shell ipc call lockScreen lock"; }
-    Mod+X { spawn "~/.config/niri/dyn_tags.sh"; }
-    Mod+Shift+X { spawn "~/.config/niri/dyn_tags.sh" "move"; }
+    Mod+X { spawn "~/.config/niri/dyn-tags.sh"; }
+    Mod+Shift+X { spawn "~/.config/niri/dyn-tags.sh" "move"; }
 
     // Use spawn-sh to run a shell command. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument. It's passed verbatim to `sh -c`.
@@ -640,12 +641,12 @@ binds {
     // * adjust width as a percentage of screen width: "-10%" or "+10%"
     // Pixel sizes use logical, or scaled, pixels. I.e. on an output with scale 2.0,
     // set-column-width "100" will make the column occupy 200 physical screen pixels.
-    Mod+Minus { set-column-width "-10%"; }
-    Mod+Equal { set-column-width "+10%"; }
+    Mod+Minus { set-column-width "-5%"; }
+    Mod+Equal { set-column-width "+5%"; }
 
     // Finer height adjustments when in column with other windows.
-    Mod+Ctrl+Minus { set-window-height "-10%"; }
-    Mod+Ctrl+Equal { set-window-height "+10%"; }
+    Mod+Ctrl+Minus { set-window-height "-5%"; }
+    Mod+Ctrl+Equal { set-window-height "+5%"; }
 
     // Move the focused window between the floating and the tiling layout.
     Mod+Shift+Space { toggle-window-floating; }
