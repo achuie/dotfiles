@@ -2,6 +2,8 @@
   "layer": "top",
   "position": "bottom",
   "spacing": 8,
+  // Fix for 1px offset below bar, probably from rounding error with fractional scaling?
+  "height": 28,
 
   "modules-left": [
     "niri/workspaces",
