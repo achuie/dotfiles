@@ -17,7 +17,7 @@ NAME="$(
   $TOFI \
     -c "$HOME/.config/tofi/tofi_run_theme" \
     --anchor=bottom \
-    --margin-bottom=26 \
+    --margin-bottom=28 \
     --prompt-text=" ${MODE}: "
 )"
 
