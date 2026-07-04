@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+if pgrep -x gammastep >/dev/null; then
+    pkill -x gammastep
+else
+    setsid gammastep \
+        -l "$(
+            curl -s "https://ipapi.co/latlong" | sed 's/,/:/'
+        )" \
+        -t 6500:4000 \
+        >/dev/null 2>&1 &
+fi
