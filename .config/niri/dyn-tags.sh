@@ -12,7 +12,7 @@ MODE="${1:-switch}"
 
 NAME="$(
   $NIRI msg --json workspaces |
-      $JQ -r '.[] | select(.active_window_id != null) | (.name // (.idx | tostring))' |
+  $JQ -r '.[] | select(.active_window_id != null) | (.name // (.idx | tostring))' |
   sort -u |
   $TOFI \
     -c "$HOME/.config/tofi/tofi_run_theme" \
@@ -26,7 +26,8 @@ NAME="$(
 CURRENT="$($NIRI msg --json windows | $JQ -M '.[] | select(.is_focused) | .id')"
 
 # Existence test
-if $NIRI msg --json workspaces | $JQ -e --arg name "$NAME" '.[] | select(.name == $name)' >/dev/null; then
+if $NIRI msg --json workspaces |
+    $JQ -e --arg name "$NAME" '.[] | select(.name == $name or (.idx | tostring) == $name)' >/dev/null; then
     if [[ "$MODE" == "move" ]]; then
         $NIRI msg action move-window-to-workspace "$NAME"
     else
