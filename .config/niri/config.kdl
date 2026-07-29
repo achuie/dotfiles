@@ -371,7 +371,7 @@ window-rule {
 }
 
 window-rule {
-    match app-id=r#"^org\.wezfurlong\.wezterm$"#
+    match app-id=r#"^org\.wezfurlong\.wezterm$|^com.mitchellh.ghostty$"#
     draw-border-with-background false
     background-effect {
         xray true

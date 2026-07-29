@@ -1,0 +1,32 @@
+font-family = Fira Code Kern
+font-family-italic = Iosevka Whiteletter Extended
+font-family-bold-italic = Iosevka Whiteletter Extended
+font-size = 12
+
+cursor-style = block
+shell-integration-features = no-cursor
+
+background-opacity = 0.8
+
+scrollback-limit = 10000000
+
+theme = Nightfox
+cursor-color = #ffe8d5
+foreground = #cdcecf
+background = #192330
+palette = 0=#393b44
+palette = 1=#c94f6d
+palette = 2=#9ece6a
+palette = 3=#dba474
+palette = 4=#719cd6
+palette = 5=#9d79d6
+palette = 6=#75c1ee
+palette = 7=#dfdfe0
+palette = 8=#575860
+palette = 9=#d16983
+palette = 10=#ace173
+palette = 11=#e0b289
+palette = 12=#86abdc
+palette = 13=#baa1e2
+palette = 14=#7dcfff
+palette = 15=#e4e4e5
