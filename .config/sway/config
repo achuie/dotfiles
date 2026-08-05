@@ -176,7 +176,7 @@ shortcut. Do you really want to exit sway? This will end your Wayland session.' 
 'Yes, exit sway' 'swaymsg exit'"
 
 # lock the screen
-bindsym $mod+o exec hyprlock
+bindsym $mod+Mod1+l exec hyprlock
 
 # screenshot
 bindsym $mod+Shift+s exec grim ~/$(date +'%s_screenshot.png')
