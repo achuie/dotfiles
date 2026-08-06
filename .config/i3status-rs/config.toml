@@ -89,7 +89,7 @@ short = "$icon"
 [[block]]
 block = "toggle"
 format = "🌅 $icon"
-command_on = """(setsid gammastep -l $(curl -s https://ipapi.co/$(curl -s ifconfig.me/ip)/latlong | sed 's/,/:/') -t 6500:4000 >/dev/null 2>&1 &)"""
+command_on = ''' (setsid gammastep -l $(curl -s "http://ip-api.com/json/$(curl -s ifconfig.me/ip)?fields=lat,lon"|jq -r '. | "\(.lat):\(.lon)"') -t 6500:4000 >/dev/null 2>&1 &) '''
 command_off = "pkill gammastep || true"
 command_state = "pgrep gammastep"
 
