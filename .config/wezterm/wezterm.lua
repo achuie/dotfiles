@@ -151,6 +151,7 @@ local config = {
   adjust_window_size_when_changing_font_size = false,
 
   initial_cols = 240,
+  initial_rows = 240,
 
   quick_select_patterns = {
     -- Git-status file paths
