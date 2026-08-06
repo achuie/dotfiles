@@ -144,11 +144,13 @@ end)
 
 
 local config = {
-  scrollback_lines = 10000,
+  scrollback_lines = 100000,
   audible_bell = "Disabled",
   use_ime = false,
   alternate_buffer_wheel_scroll_speed = 1,
   adjust_window_size_when_changing_font_size = false,
+
+  initial_cols = 240,
 
   quick_select_patterns = {
     -- Git-status file paths
@@ -176,7 +178,7 @@ local config = {
     },
   },
 
-  window_background_opacity = 0.8,
+  window_background_opacity = 0.99,
 
   color_scheme = Scheme_for_appearance('Dark'),
   -- color_scheme = 'root-beer-float',
