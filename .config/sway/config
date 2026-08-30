@@ -170,10 +170,14 @@ workspace_auto_back_and_forth yes
 # reload the configuration file
 bindsym $mod+Shift+c reload
 
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "swaynag -t warning -m 'You pressed the exit \
-shortcut. Do you really want to exit sway? This will end your Wayland session.' -b \
-'Yes, exit sway' 'swaymsg exit'"
+# exit sway
+# bindsym $mod+Shift+e exec "swaynag -t warning -m 'You pressed the exit \
+# shortcut. Do you really want to exit sway? This will end your Wayland session.' -b \
+# 'Yes, exit sway' 'swaymsg exit'"
+bindsym $mod+Shift+e exec sh -c 'printf "No\nYes" \
+    | tofi -c $HOME/.config/tofi/tofi_run_theme --prompt-text "Exit Sway? " \
+    | grep -qx Yes \
+    && swaymsg exit'
 
 # lock the screen
 bindsym $mod+Mod1+l exec hyprlock
