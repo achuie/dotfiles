@@ -186,6 +186,7 @@ bindsym $mod+Mod1+l exec hyprlock
 bindsym $mod+Shift+s exec grim ~/$(date +'%s_screenshot.png')
 bindsym $mod+Control+s exec swaymsg -t get_tree | jq -j '.. | select(.type?) | select(.focused).rect | "\(.x),\(.y) \(.width)x\(.height)"' | grim -g - ~/$(date +'%s_screenshot.png')
 bindsym $mod+Mod1+s exec grim -g "$(slurp)" - | wl-copy -t image/png
+bindsym $mod+Mod1+Control+s exec grim -g "$(slurp -p)" -t ppm - | convert - -format '%[pixel:p{0,0}]' txt:- | tail -n 1 | cut -d ' ' -f 4 | wl-copy
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
