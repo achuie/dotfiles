@@ -240,7 +240,6 @@ mode "music" {
 bindsym $mod+m mode "music"
 
 # Window rules
-for_window [app_id="firefox"] move --no-auto-back-and-forth window to workspace 1:web
 for_window [app_id="discord"] move --no-auto-back-and-forth window to workspace 10:discord
 for_window [app_id="wezterm-system"] mark "alpha", move scratchpad
 for_window [app_id="wezterm-audio"] mark "beta", move scratchpad
